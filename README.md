@@ -1,8 +1,9 @@
 <div align="center">
 <img src="https://gitlab.com/exmserver/hardplus/-/raw/main/.etc/hardplus_info.png">
-<h1>HardPlus</h1>
-<b>HardPlus adds extra difficulty to Paper server</b>
 </div>
+
+# HardPlus
+**HardPlus adds extra difficulty to Paper server**
 
 ## Introduction
 Many skilled Minecraft players think that Hard, the highest level of difficulty in Minecraft, is also easy.  
