@@ -1,13 +1,16 @@
-package xyz.tetratheta.hardplus;
+package xyz.tetratheta.commonlib;
 
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.event.HandlerList;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.scheduler.BukkitTask;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.logging.Logger;
 
 /**
@@ -19,18 +22,36 @@ public abstract class BaseConfig {
   private final JavaPlugin plugin;
   private FileConfiguration config;
 
+  public final Set<BukkitTask> tasks;
+
   public BaseConfig(JavaPlugin provided) {
     plugin = provided;
     plugin.reloadConfig();
     logger = plugin.getLogger();
     config = plugin.getConfig();
     configPath = new File(plugin.getDataFolder(), "config.yml");
+    tasks = new HashSet<>();
+  }
+
+  /**
+   * Initialize configurations. This will involve registering event listeners, creating new tasks etc.
+   */
+  public abstract void initialize();
+
+  /**
+   * Terminate configurations. This will unregister all registered event listeners, cancel all tasks registered.
+   */
+  public void terminate() {
+    unregisterAllListeners();
+    for (BukkitTask task : tasks) {
+      task.cancel();
+    }
   }
 
   /**
    * Call this at {@code onDisable()}
    */
-  protected void saveConfig() {
+  public void saveConfig() {
     try {
       config.save(configPath);
       config = plugin.getConfig();

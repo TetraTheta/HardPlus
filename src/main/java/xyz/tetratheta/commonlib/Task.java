@@ -1,7 +1,7 @@
-package xyz.tetratheta.hardplus;
+package xyz.tetratheta.commonlib;
 
 import org.bukkit.scheduler.BukkitRunnable;
 
 public interface Task {
-  public BukkitRunnable getTask();
+  BukkitRunnable getTask();
 }
