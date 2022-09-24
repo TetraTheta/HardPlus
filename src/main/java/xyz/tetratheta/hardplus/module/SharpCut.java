@@ -12,14 +12,14 @@ import xyz.tetratheta.hardplus.util.HPPlayer;
 import java.util.Set;
 
 public class SharpCut implements Listener {
-  Set<Material> sword = Set.of(
+  final Set<Material> sword = Set.of(
       Material.WOODEN_SWORD,
       Material.STONE_SWORD,
       Material.IRON_SWORD,
       Material.DIAMOND_SWORD,
       Material.NETHERITE_SWORD
   );
-  Set<Material> axe = Set.of(
+  final Set<Material> axe = Set.of(
       Material.WOODEN_AXE,
       Material.STONE_AXE,
       Material.IRON_AXE,
@@ -27,11 +27,11 @@ public class SharpCut implements Listener {
       Material.NETHERITE_AXE
   );
 
-  boolean checkJump;
-  boolean checkRun;
-  boolean checkSword;
-  boolean checkAxe;
-  boolean checkShear;
+  final boolean checkJump;
+  final boolean checkRun;
+  final boolean checkSword;
+  final boolean checkAxe;
+  final boolean checkShear;
 
   public SharpCut(boolean checkJump, boolean checkRun, boolean checkSword, boolean checkAxe, boolean checkShear) {
     this.checkJump = checkJump;

@@ -13,8 +13,8 @@ import org.bukkit.event.player.PlayerBucketEmptyEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.scheduler.BukkitRunnable;
+import xyz.tetratheta.commonlib.Task;
 import xyz.tetratheta.hardplus.Hardplus;
-import xyz.tetratheta.hardplus.Task;
 import xyz.tetratheta.hardplus.util.HPPerm;
 import xyz.tetratheta.hardplus.util.HPPlayer;
 
@@ -23,14 +23,14 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class NoWater implements Listener, Task {
-  Set<Biome> netherBiomes = EnumSet.of(
+  final Set<Biome> netherBiomes = EnumSet.of(
       Biome.NETHER_WASTES,
       Biome.CRIMSON_FOREST,
       Biome.WARPED_FOREST,
       Biome.SOUL_SAND_VALLEY,
       Biome.BASALT_DELTAS
   );
-  Set<Biome> theEndBiomes = EnumSet.of(
+  final Set<Biome> theEndBiomes = EnumSet.of(
       Biome.THE_END,
       Biome.SMALL_END_ISLANDS,
       Biome.END_MIDLANDS,
@@ -38,9 +38,9 @@ public class NoWater implements Listener, Task {
       Biome.END_BARRENS
   );
 
-  Set<Block> cauldrons = new HashSet<>();
+  final Set<Block> cauldrons = new HashSet<>();
 
-  Hardplus plugin;
+  final Hardplus plugin;
 
   public NoWater(Hardplus hardplus) {
     this.plugin = hardplus;

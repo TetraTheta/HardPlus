@@ -5,13 +5,13 @@ import org.bukkit.entity.Creeper;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
-import xyz.tetratheta.hardplus.Task;
+import xyz.tetratheta.commonlib.Task;
 import xyz.tetratheta.hardplus.util.HPPerm;
 import xyz.tetratheta.hardplus.util.HPPlayer;
 
 public class CreeperExplode implements Task {
 
-  double radius;
+  final double radius;
 
   public CreeperExplode(double radius) {
     this.radius = radius;

@@ -11,8 +11,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class FastAir implements Listener {
-  int modifier;
-  Map<Player, Integer> previousValue = new HashMap<>();
+  final int modifier;
+  final Map<Player, Integer> previousValue = new HashMap<>();
 
   public FastAir(int modifier) {
     this.modifier = modifier;

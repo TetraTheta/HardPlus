@@ -12,7 +12,7 @@ import xyz.tetratheta.hardplus.util.HPPlayer;
 import java.util.Set;
 
 public class UncookedPoison implements Listener {
-  Set<Material> uncookedFood = Set.of(
+  final Set<Material> uncookedFood = Set.of(
       Material.POTATO,
       Material.BEEF,
       Material.CHICKEN,
@@ -23,7 +23,7 @@ public class UncookedPoison implements Listener {
       Material.SALMON
   );
 
-  int duration;
+  final int duration;
 
   public UncookedPoison(int duration) {
     // Duration is in second

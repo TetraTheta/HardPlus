@@ -1,32 +1,28 @@
 package xyz.tetratheta.hardplus;
 
-import org.bukkit.scheduler.BukkitTask;
+import xyz.tetratheta.commonlib.BaseConfig;
 import xyz.tetratheta.hardplus.module.*;
 
-import java.util.HashSet;
-import java.util.Set;
-
 public class HardplusConfig extends BaseConfig {
-  Hardplus plugin;
-  Set<BukkitTask> tasks = new HashSet<>();
+  final Hardplus plugin;
 
-  String strColdDamage = "module.cold-damage.";
-  String strCreeperCharge = "module.creeper-charge.";
-  String strCreeperExplode = "module.creeper-explode.";
-  String strDamageCritical = "module.damage-critical.";
-  String strDamageGive = "module.damage-give.";
-  String strDamageTake = "module.damage-take.";
-  String strFastAir = "module.fast-air.";
-  String strFireForever = "module.fire-forever.";
-  String strHungerDebuff = "module.hunger-debuff.";
-  String strLavaDeath = "module.lava-death.";
-  String strMobTarget = "module.mob-target.";
-  String strNoFireResistance = "module.no-fire-resistance.";
-  String strNoSweep = "module.no-sweep.";
-  String strNoWater = "module.no-water.";
-  String strSharpCut = "module.sharp-cut.";
-  String strUncookedPoison = "module.uncooked-poison.";
-  String strWitherSkeletonBow = "module.wither-skeleton-bow.";
+  final String strColdDamage = "module.cold-damage.";
+  final String strCreeperCharge = "module.creeper-charge.";
+  final String strCreeperExplode = "module.creeper-explode.";
+  final String strDamageCritical = "module.damage-critical.";
+  final String strDamageGive = "module.damage-give.";
+  final String strDamageTake = "module.damage-take.";
+  final String strFastAir = "module.fast-air.";
+  final String strFireForever = "module.fire-forever.";
+  final String strHungerDebuff = "module.hunger-debuff.";
+  final String strLavaDeath = "module.lava-death.";
+  final String strMobTarget = "module.mob-target.";
+  final String strNoFireResistance = "module.no-fire-resistance.";
+  final String strNoSweep = "module.no-sweep.";
+  final String strNoWater = "module.no-water.";
+  final String strSharpCut = "module.sharp-cut.";
+  final String strUncookedPoison = "module.uncooked-poison.";
+  final String strWitherSkeletonBow = "module.wither-skeleton-bow.";
 
   public HardplusConfig(Hardplus provided) {
     super(provided);
@@ -165,18 +161,9 @@ public class HardplusConfig extends BaseConfig {
       int bowDamageLevel = getInt(strWitherSkeletonBow + "bow.damage-level", 3);
       int bowKnockbackLevel = getInt(strWitherSkeletonBow + "bow.knockback-level", 2);
       int arrowWitherLevel = getInt(strWitherSkeletonBow + "arrow.wither-level", 0);
-      float arrowSpeedMultiplier = (float) getDouble(strWitherSkeletonBow + "arrow.speed-multiplier", 1, 0, 10);
-      float arrowSpread = (float) getDouble(strWitherSkeletonBow + "arrow.spread", 0);
 
       registerListeners(new WitherSkeletonBow(bowChance, bowDamageLevel, bowKnockbackLevel,
-          arrowWitherLevel, arrowSpeedMultiplier, arrowSpread));
-    }
-  }
-
-  public void terminate() {
-    unregisterAllListeners();
-    for (BukkitTask task : tasks) {
-      task.cancel();
+          arrowWitherLevel));
     }
   }
 }

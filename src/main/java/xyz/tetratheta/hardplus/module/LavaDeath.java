@@ -10,7 +10,7 @@ import xyz.tetratheta.hardplus.util.HPPerm;
 import xyz.tetratheta.hardplus.util.HPPlayer;
 
 public class LavaDeath implements Listener {
-  Hardplus plugin;
+  final Hardplus plugin;
 
   public LavaDeath(Hardplus hardplus) {
     this.plugin = hardplus;
@@ -22,9 +22,7 @@ public class LavaDeath implements Listener {
     if (!HPPlayer.checkPermGameMode(p, HPPerm.LAVA_DEATH.value)) return;
 
     if (e.getCause().equals(EntityDamageEvent.DamageCause.LAVA)) {
-      Bukkit.getScheduler().runTask(plugin, () -> {
-        p.setNoDamageTicks(0);
-      });
+      Bukkit.getScheduler().runTask(plugin, () -> p.setNoDamageTicks(0));
     }
   }
 }

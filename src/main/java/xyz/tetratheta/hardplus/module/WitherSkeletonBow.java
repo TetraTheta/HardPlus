@@ -17,21 +17,19 @@ import org.bukkit.potion.PotionEffectType;
 import java.util.Random;
 
 public class WitherSkeletonBow implements Listener {
-  double bowWSSpawnChance;
-  int bowDamageLevel, bowKnockbackLevel;
-  int arrowWitherLevel;
-  float arrowSpeedMultiplier, arrowSpread;
-  Random random = new Random();
+  final double bowWSSpawnChance;
+  final int bowDamageLevel;
+  final int bowKnockbackLevel;
+  final int arrowWitherLevel;
+  final Random random = new Random();
 
   public WitherSkeletonBow(double bowSpawnChance, int arrowDamageLevel, int arrowKnockbackLevel,
-                           int arrowWitherLevel, float arrowSpeedMultiplier, float arrowSpread) {
+                           int arrowWitherLevel) {
     this.bowWSSpawnChance = bowSpawnChance;
     this.bowDamageLevel = arrowDamageLevel;
     this.bowKnockbackLevel = arrowKnockbackLevel;
 
     this.arrowWitherLevel = arrowWitherLevel;
-    this.arrowSpeedMultiplier = arrowSpeedMultiplier;
-    this.arrowSpread = arrowSpread;
   }
 
   @EventHandler

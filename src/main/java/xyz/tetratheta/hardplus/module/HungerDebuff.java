@@ -10,7 +10,7 @@ import xyz.tetratheta.hardplus.util.HPPerm;
 import xyz.tetratheta.hardplus.util.HPPlayer;
 
 public class HungerDebuff implements Listener {
-  int foodLevel;
+  final int foodLevel;
 
   public HungerDebuff(int foodLevel) {
     this.foodLevel = foodLevel;

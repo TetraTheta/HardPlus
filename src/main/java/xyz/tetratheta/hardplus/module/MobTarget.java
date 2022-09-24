@@ -6,12 +6,12 @@ import org.bukkit.entity.Monster;
 import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
-import xyz.tetratheta.hardplus.Task;
+import xyz.tetratheta.commonlib.Task;
 import xyz.tetratheta.hardplus.util.HPPerm;
 import xyz.tetratheta.hardplus.util.HPPlayer;
 
 public class MobTarget implements Task {
-  double range;
+  final double range;
 
   public MobTarget(double range) {
     this.range = range;

@@ -11,10 +11,10 @@ import xyz.tetratheta.hardplus.util.HPPerm;
 import xyz.tetratheta.hardplus.util.HPPlayer;
 
 public class DamageTake implements Listener {
-  double defModifier; double playerModifier; double rangedModifier;
-  double fallModifier; double magicModifier; double envModifier;
-  double passiveMobModifier; double hostileMobDefModifier; double zombieModifier;
-  double skeletonModifier; double endermanModifier;
+  final double defModifier; final double playerModifier; final double rangedModifier;
+  final double fallModifier; final double magicModifier; final double envModifier;
+  final double passiveMobModifier; final double hostileMobDefModifier; final double zombieModifier;
+  final double skeletonModifier; final double endermanModifier;
 
   public DamageTake(
       double defModifier, double playerModifier, double rangedModifier,

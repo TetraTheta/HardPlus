@@ -9,7 +9,7 @@ import xyz.tetratheta.hardplus.util.HPPerm;
 import xyz.tetratheta.hardplus.util.HPPlayer;
 
 public class DamageGive implements Listener {
-  double modifier;
+  final double modifier;
 
   public DamageGive(double modifier) { this.modifier = modifier; }
 
