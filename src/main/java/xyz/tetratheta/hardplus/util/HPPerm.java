@@ -16,7 +16,8 @@ public enum HPPerm {
   NO_SWEEP("hardplus.no-sweep"),
   NO_WATER("hardplus.no-water"),
   SHARP_CUT("hardplus.sharp-cut"),
-  UNCOOKED_POISON("hardplus.uncooked-poison");
+  UNCOOKED_POISON("hardplus.uncooked-poison"),
+  WITHER_SKELETON_BOW("hardplus.wither-skeleton-bow");
   public final String value;
 
   HPPerm(String value) {

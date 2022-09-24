@@ -1,19 +1,25 @@
 package xyz.tetratheta.hardplus.module;
 
 import org.bukkit.Material;
+import org.bukkit.NamespacedKey;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Arrow;
+import org.bukkit.entity.Player;
 import org.bukkit.entity.WitherSkeleton;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.CreatureSpawnEvent;
+import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityShootBowEvent;
 import org.bukkit.inventory.EntityEquipment;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
+import xyz.tetratheta.hardplus.util.HPPerm;
 
+import java.util.Objects;
 import java.util.Random;
 
 public class WitherSkeletonBow implements Listener {
@@ -22,6 +28,8 @@ public class WitherSkeletonBow implements Listener {
   final int bowKnockbackLevel;
   final int arrowWitherLevel;
   final Random random = new Random();
+
+  NamespacedKey key = new NamespacedKey("hardplus", "wither-skeleton-arrow");
 
   public WitherSkeletonBow(double bowSpawnChance, int arrowDamageLevel, int arrowKnockbackLevel,
                            int arrowWitherLevel) {
@@ -55,6 +63,26 @@ public class WitherSkeletonBow implements Listener {
     if (!(e.getProjectile() instanceof Arrow arrow)) return;
 
     arrow.addCustomEffect(new PotionEffect(PotionEffectType.WITHER, 800, arrowWitherLevel), true);
+    arrow.getPersistentDataContainer().set(key, PersistentDataType.BYTE, (byte) 1);
     e.setProjectile(arrow);
+  }
+
+  @EventHandler
+  public void onNonHPPlayerHit(EntityDamageByEntityEvent e) {
+    // We can't use HPPlayer#checkPermGameMode here
+    if (!(e.getDamager() instanceof Arrow arrow)) return;
+    if (e.getEntity() instanceof Player player && !player.hasPermission(HPPerm.WITHER_SKELETON_BOW.value)) {
+      Byte value = arrow.getPersistentDataContainer().get(key, PersistentDataType.BYTE);
+      if (Objects.isNull(value)) return;
+      if (value.equals((byte) 1)) {
+        // Remove Wither effect
+        arrow.clearCustomEffects();
+        // Decrease increased damage with Power
+        double originalDamage = e.getDamage();
+        double newDamage = originalDamage - (originalDamage * 0.25 * (bowDamageLevel + 1));
+        e.setDamage(newDamage);
+        // Since Wither Skeleton shoots flamed arrow, we do not catch fire of non-HP player.
+      }
+    }
   }
 }

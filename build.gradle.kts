@@ -12,7 +12,7 @@ plugins {
 }
 
 group = "xyz.tetratheta"
-version = "2.0.0-beta1"
+version = "2.1.0-beta"
 
 repositories {
   mavenCentral()
@@ -54,7 +54,8 @@ bukkit {
           "hardplus.no-sweep",
           "hardplus.no-water",
           "hardplus.sharp-cut",
-          "hardplus.uncooked-poison")
+          "hardplus.uncooked-poison",
+          "hardplus.wither-skeleton-bow")
       childrenMap = children!!.associateWith { true }
     }
     register("hardplus.cold-damage") {
@@ -119,6 +120,10 @@ bukkit {
     }
     register("hardplus.uncooked-poison") {
       description = "Enable Uncooked Poison module of HardPlus"
+      default = BukkitPluginDescription.Permission.Default.FALSE
+    }
+    register("hardplus.wither-skeleton-bow") {
+      description = "Enable Wither Skeleton Bow module of HardPlus"
       default = BukkitPluginDescription.Permission.Default.FALSE
     }
   }
