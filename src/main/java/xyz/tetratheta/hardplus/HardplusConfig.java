@@ -26,6 +26,7 @@ public class HardplusConfig extends BaseConfig {
   String strNoWater = "module.no-water.";
   String strSharpCut = "module.sharp-cut.";
   String strUncookedPoison = "module.uncooked-poison.";
+  String strWitherSkeletonBow = "module.wither-skeleton-bow.";
 
   public HardplusConfig(Hardplus provided) {
     super(provided);
@@ -157,6 +158,18 @@ public class HardplusConfig extends BaseConfig {
       int duration = getInt(strUncookedPoison + "duration", 30);
 
       registerListeners(new UncookedPoison(duration));
+    }
+    // Wither Skeleton Bow
+    if (getBoolean(strWitherSkeletonBow + "enable", true)) {
+      double bowChance = getDouble(strWitherSkeletonBow + "spawn-chance", 50);
+      int bowDamageLevel = getInt(strWitherSkeletonBow + "bow.damage-level", 3);
+      int bowKnockbackLevel = getInt(strWitherSkeletonBow + "bow.knockback-level", 2);
+      int arrowWitherLevel = getInt(strWitherSkeletonBow + "arrow.wither-level", 0);
+      float arrowSpeedMultiplier = (float) getDouble(strWitherSkeletonBow + "arrow.speed-multiplier", 1, 0, 10);
+      float arrowSpread = (float) getDouble(strWitherSkeletonBow + "arrow.spread", 0);
+
+      registerListeners(new WitherSkeletonBow(bowChance, bowDamageLevel, bowKnockbackLevel,
+          arrowWitherLevel, arrowSpeedMultiplier, arrowSpread));
     }
   }
 
