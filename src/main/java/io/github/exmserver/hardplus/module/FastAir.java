@@ -1,7 +1,7 @@
 package io.github.exmserver.hardplus.module;
 
-import io.github.exmserver.hardplus.util.HPPerm;
-import io.github.exmserver.hardplus.util.HPPlayer;
+import io.github.exmserver.hardplus.util.Perm;
+import io.github.exmserver.hardplus.util.PlayerUtil;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -22,7 +22,7 @@ public class FastAir implements Listener {
   @EventHandler
   public void onPlayerAirDrops(EntityAirChangeEvent e) {
     if (!(e.getEntity() instanceof Player p)) return;
-    if (!HPPlayer.checkPermGameMode(p, HPPerm.FAST_AIR.value)) return;
+    if (!PlayerUtil.checkPermGameMode(p, Perm.FAST_AIR.value)) return;
 
     if (previousValue.get(p) != null) {
       if (e.getAmount() < previousValue.get(p)) {

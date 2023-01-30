@@ -1,8 +1,9 @@
 package io.github.exmserver.hardplus.module;
 
 import com.destroystokyo.paper.event.player.PlayerJumpEvent;
-import io.github.exmserver.hardplus.util.HPPerm;
-import io.github.exmserver.hardplus.util.HPPlayer;
+import io.github.exmserver.hardplus.util.Perm;
+import io.github.exmserver.hardplus.util.NMSPlayer;
+import io.github.exmserver.hardplus.util.PlayerUtil;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -45,7 +46,7 @@ public class SharpCut implements Listener {
   @EventHandler
   public void onPlayerJump(PlayerJumpEvent e) {
     if (!checkJump) return;
-    if (!HPPlayer.checkPermGameMode(e.getPlayer(), HPPerm.SHARP_CUT.value)) return;
+    if (!PlayerUtil.checkPermGameMode(e.getPlayer(), Perm.SHARP_CUT.value)) return;
 
     runCheck(e.getPlayer());
   }
@@ -53,7 +54,7 @@ public class SharpCut implements Listener {
   @EventHandler
   public void onPlayerRun(PlayerToggleSprintEvent e) {
     if (!checkRun || !e.isSprinting()) return;
-    if (!HPPlayer.checkPermGameMode(e.getPlayer(), HPPerm.SHARP_CUT.value)) return;
+    if (!PlayerUtil.checkPermGameMode(e.getPlayer(), Perm.SHARP_CUT.value)) return;
 
     runCheck(e.getPlayer());
   }
@@ -64,17 +65,17 @@ public class SharpCut implements Listener {
 
     if (checkSword) {
       if (sword.contains(mainHand) || sword.contains(offHand)) {
-        HPPlayer.hurtCactus(p, 1);
+        NMSPlayer.hurtCactus(p, 1);
       }
     }
     if (checkAxe) {
       if (axe.contains(mainHand) || axe.contains(offHand)) {
-        HPPlayer.hurtCactus(p, 1);
+        NMSPlayer.hurtCactus(p, 1);
       }
     }
     if (checkShear) {
       if (mainHand.equals(Material.SHEARS) || offHand.equals(Material.SHEARS)) {
-        HPPlayer.hurtCactus(p, 1);
+        NMSPlayer.hurtCactus(p, 1);
       }
     }
   }

@@ -1,7 +1,8 @@
 package io.github.exmserver.hardplus.module;
 
-import io.github.exmserver.hardplus.util.HPPerm;
-import io.github.exmserver.hardplus.util.HPPlayer;
+import io.github.exmserver.hardplus.util.Perm;
+import io.github.exmserver.hardplus.util.NMSPlayer;
+import io.github.exmserver.hardplus.util.PlayerUtil;
 import io.github.exmserver.mol.util.Task;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -38,8 +39,8 @@ public class ColdDamage implements Listener, Task {
       @Override
       public void run() {
         for (Player p : Bukkit.getOnlinePlayers()) {
-          if (HPPlayer.checkPermGameMode(p, HPPerm.COLD_DAMAGE.value) && hasItem(p)) {
-            HPPlayer.hurtFreeze(p, 1);
+          if (PlayerUtil.checkPermGameMode(p, Perm.COLD_DAMAGE.value) && hasItem(p)) {
+            NMSPlayer.hurtFreeze(p, 1);
           }
         }
       }

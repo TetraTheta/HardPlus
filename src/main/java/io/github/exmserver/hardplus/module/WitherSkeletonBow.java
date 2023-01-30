@@ -1,6 +1,6 @@
 package io.github.exmserver.hardplus.module;
 
-import io.github.exmserver.hardplus.util.HPPerm;
+import io.github.exmserver.hardplus.util.Perm;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.enchantments.Enchantment;
@@ -72,7 +72,7 @@ public class WitherSkeletonBow implements Listener {
   public void onNonHPPlayerHit(EntityDamageByEntityEvent e) {
     // We can't use HPPlayer#checkPermGameMode here
     if (!(e.getDamager() instanceof Arrow arrow)) return;
-    if (e.getEntity() instanceof Player player && !player.hasPermission(HPPerm.WITHER_SKELETON_BOW.value)) {
+    if (e.getEntity() instanceof Player player && !player.hasPermission(Perm.WITHER_SKELETON_BOW.value)) {
       Byte value = arrow.getPersistentDataContainer().get(key, PersistentDataType.BYTE);
       if (Objects.isNull(value)) return;
       if (value.equals((byte) 1)) {

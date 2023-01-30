@@ -1,8 +1,8 @@
 package io.github.exmserver.hardplus.module;
 
 import io.github.exmserver.hardplus.Hardplus;
-import io.github.exmserver.hardplus.util.HPPerm;
-import io.github.exmserver.hardplus.util.HPPlayer;
+import io.github.exmserver.hardplus.util.Perm;
+import io.github.exmserver.hardplus.util.PlayerUtil;
 import io.github.exmserver.mol.util.Task;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -51,7 +51,7 @@ public class NoWater implements Listener, Task {
   public void onPlayerEmptyBucketInTheNether(CauldronLevelChangeEvent e) {
     // The Nether
     if (!(e.getEntity() instanceof Player p)) return;
-    if (!HPPlayer.checkPermGameMode(p, HPPerm.NO_WATER.value)) return;
+    if (!PlayerUtil.checkPermGameMode(p, Perm.NO_WATER.value)) return;
     if (!e.getReason().equals(CauldronLevelChangeEvent.ChangeReason.BUCKET_EMPTY)) return;
 
     if (netherBiomes.contains(e.getBlock().getBiome())) {
@@ -65,7 +65,7 @@ public class NoWater implements Listener, Task {
   @EventHandler
   public void onPlayerEmptyBucketInTheEnd(PlayerBucketEmptyEvent e) {
     // The End
-    if (!HPPlayer.checkPermGameMode(e.getPlayer(), HPPerm.NO_WATER.value)) return;
+    if (!PlayerUtil.checkPermGameMode(e.getPlayer(), Perm.NO_WATER.value)) return;
     if (theEndBiomes.contains(e.getBlockClicked().getBiome())) {
       Bukkit.getScheduler().runTask(plugin, () -> {
         PlayerInventory inventory = e.getPlayer().getInventory();

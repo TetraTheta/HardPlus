@@ -28,7 +28,7 @@ dependencies {
 }
 
 bukkit {
-  main = "xyz.tetratheta.hardplus.Hardplus"
+  main = "io.github.exmserver.hardplus.Hardplus"
   apiVersion = versionAPI
   load = BukkitPluginDescription.PluginLoadOrder.POSTWORLD
   prefix = "HardPlus"
@@ -44,6 +44,7 @@ bukkit {
           "hardplus.damage-critical",
           "hardplus.damage-give",
           "hardplus.damage-take",
+          "hardplus.dangerous-nether-chest",
           "hardplus.fast-air",
           "hardplus.fire-forever",
           "hardplus.hunger-debuff",
@@ -79,6 +80,10 @@ bukkit {
     }
     register("hardplus.damage-take") {
       description = "Enable Damage Take module of HardPlus"
+      default = BukkitPluginDescription.Permission.Default.FALSE
+    }
+    register("hardplus.dangerous-nether-chest") {
+      description = "Enable Dangerous Nether Chest module of HardPlus"
       default = BukkitPluginDescription.Permission.Default.FALSE
     }
     register("hardplus.fast-air") {

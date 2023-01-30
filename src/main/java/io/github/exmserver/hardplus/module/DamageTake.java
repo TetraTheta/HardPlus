@@ -1,7 +1,7 @@
 package io.github.exmserver.hardplus.module;
 
-import io.github.exmserver.hardplus.util.HPPerm;
-import io.github.exmserver.hardplus.util.HPPlayer;
+import io.github.exmserver.hardplus.util.Perm;
+import io.github.exmserver.hardplus.util.PlayerUtil;
 import org.bukkit.block.Block;
 import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
@@ -45,7 +45,7 @@ public class DamageTake implements Listener {
   @EventHandler
   public void onPlayerTakeDamage(EntityDamageEvent e) {
     if (!(e.getEntity() instanceof Player p)) return;
-    if (!HPPlayer.checkPermGameMode(p, HPPerm.DAMAGE_TAKE.value)) return;
+    if (!PlayerUtil.checkPermGameMode(p, Perm.DAMAGE_TAKE.value)) return;
     // Start a hell of if else
     if (e instanceof EntityDamageByEntityEvent ee) {
       // Attacker is entity

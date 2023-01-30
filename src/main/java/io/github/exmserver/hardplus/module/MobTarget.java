@@ -1,7 +1,7 @@
 package io.github.exmserver.hardplus.module;
 
-import io.github.exmserver.hardplus.util.HPPerm;
-import io.github.exmserver.hardplus.util.HPPlayer;
+import io.github.exmserver.hardplus.util.Perm;
+import io.github.exmserver.hardplus.util.PlayerUtil;
 import io.github.exmserver.mol.util.Task;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Entity;
@@ -24,10 +24,13 @@ public class MobTarget implements Task {
       @Override
       public void run() {
         for (Player p : Bukkit.getOnlinePlayers()) {
-          if (!HPPlayer.checkPermGameMode(p, HPPerm.MOB_TARGET.value)) return;
+          if (!PlayerUtil.checkPermGameMode(p, Perm.MOB_TARGET.value)) return;
           if (canBypass(p)) return;
           for (Entity e : p.getNearbyEntities(range, range, range)) {
-            if (e instanceof Monster monster) monster.setTarget(p);
+            if (e instanceof Monster monster) {
+              monster.setTarget(p);
+              monster.getPathfinder().moveTo(p);
+            }
           }
         }
       }

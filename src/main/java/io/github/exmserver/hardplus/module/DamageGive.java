@@ -1,7 +1,7 @@
 package io.github.exmserver.hardplus.module;
 
-import io.github.exmserver.hardplus.util.HPPerm;
-import io.github.exmserver.hardplus.util.HPPlayer;
+import io.github.exmserver.hardplus.util.Perm;
+import io.github.exmserver.hardplus.util.PlayerUtil;
 import org.bukkit.entity.AbstractArrow;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -20,10 +20,10 @@ public class DamageGive implements Listener {
   public void onPlayerInflictDamage(EntityDamageByEntityEvent e) {
     if (e.getDamager() instanceof AbstractArrow arrow) {
       if (!(arrow.getShooter() instanceof Player p)) return;
-      if (!HPPlayer.checkPermGameMode(p, HPPerm.DAMAGE_GIVE.value)) return;
+      if (!PlayerUtil.checkPermGameMode(p, Perm.DAMAGE_GIVE.value)) return;
       e.setDamage(e.getDamage() * modifier);
     } else if (e.getDamager() instanceof Player p) {
-      if (!HPPlayer.checkPermGameMode(p, HPPerm.DAMAGE_GIVE.value)) return;
+      if (!PlayerUtil.checkPermGameMode(p, Perm.DAMAGE_GIVE.value)) return;
       e.setDamage(e.getDamage() * modifier);
     }
   }

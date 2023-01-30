@@ -1,8 +1,8 @@
 package io.github.exmserver.hardplus.module;
 
 import io.github.exmserver.hardplus.Hardplus;
-import io.github.exmserver.hardplus.util.HPPerm;
-import io.github.exmserver.hardplus.util.HPPlayer;
+import io.github.exmserver.hardplus.util.Perm;
+import io.github.exmserver.hardplus.util.PlayerUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -20,7 +20,7 @@ public class LavaDeath implements Listener {
   @EventHandler
   public void onLava(EntityDamageEvent e) {
     if (!(e.getEntity() instanceof Player p)) return;
-    if (!HPPlayer.checkPermGameMode(p, HPPerm.LAVA_DEATH.value)) return;
+    if (!PlayerUtil.checkPermGameMode(p, Perm.LAVA_DEATH.value)) return;
 
     if (e.getCause().equals(EntityDamageEvent.DamageCause.LAVA)) {
       Bukkit.getScheduler().runTask(plugin, () -> p.setNoDamageTicks(0));

@@ -1,7 +1,7 @@
 package io.github.exmserver.hardplus.module;
 
-import io.github.exmserver.hardplus.util.HPPerm;
-import io.github.exmserver.hardplus.util.HPPlayer;
+import io.github.exmserver.hardplus.util.Perm;
+import io.github.exmserver.hardplus.util.PlayerUtil;
 import org.bukkit.Material;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -33,7 +33,7 @@ public class UncookedPoison implements Listener {
 
   @EventHandler
   public void onPlayerEat(PlayerItemConsumeEvent e) {
-    if (!HPPlayer.checkPermGameMode(e.getPlayer(), HPPerm.UNCOOKED_POISON.value)) return;
+    if (!PlayerUtil.checkPermGameMode(e.getPlayer(), Perm.UNCOOKED_POISON.value)) return;
 
     if (uncookedFood.contains(e.getItem().getType())) {
       PotionEffect effect = new PotionEffect(PotionEffectType.POISON, duration, 0, true, false);

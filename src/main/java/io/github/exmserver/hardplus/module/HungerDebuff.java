@@ -1,7 +1,7 @@
 package io.github.exmserver.hardplus.module;
 
-import io.github.exmserver.hardplus.util.HPPerm;
-import io.github.exmserver.hardplus.util.HPPlayer;
+import io.github.exmserver.hardplus.util.Perm;
+import io.github.exmserver.hardplus.util.PlayerUtil;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -20,7 +20,7 @@ public class HungerDebuff implements Listener {
   @EventHandler
   public void onFoodLevelChange(FoodLevelChangeEvent e) {
     if (!(e.getEntity() instanceof Player p)) return;
-    if (!HPPlayer.checkPermGameMode(p, HPPerm.HUNGER_DEBUFF.value)) return;
+    if (!PlayerUtil.checkPermGameMode(p, Perm.HUNGER_DEBUFF.value)) return;
 
     if (e.getFoodLevel() < foodLevel) {
       PotionEffect slowness = new PotionEffect(PotionEffectType.SLOW, 3600, 0, true, false);

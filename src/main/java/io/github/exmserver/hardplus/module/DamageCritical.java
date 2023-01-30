@@ -1,7 +1,7 @@
 package io.github.exmserver.hardplus.module;
 
-import io.github.exmserver.hardplus.util.HPPerm;
-import io.github.exmserver.hardplus.util.HPPlayer;
+import io.github.exmserver.hardplus.util.Perm;
+import io.github.exmserver.hardplus.util.PlayerUtil;
 import org.bukkit.entity.AbstractArrow;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -14,10 +14,10 @@ public class DamageCritical implements Listener {
   public void onPlayerInflictCriticalDamage(EntityDamageByEntityEvent e) {
     if (e.getDamager() instanceof AbstractArrow arrow) {
       if (!(arrow.getShooter() instanceof Player p)) return;
-      if (!HPPlayer.checkPermGameMode(p, HPPerm.DAMAGE_CRITICAL.value)) return;
+      if (!PlayerUtil.checkPermGameMode(p, Perm.DAMAGE_CRITICAL.value)) return;
       arrow.setCritical(false);
     } else if (e.getDamager() instanceof Player p) {
-      if (!HPPlayer.checkPermGameMode(p, HPPerm.DAMAGE_CRITICAL.value)) return;
+      if (!PlayerUtil.checkPermGameMode(p, Perm.DAMAGE_CRITICAL.value)) return;
       e.setDamage(e.getDamage() / 3 * 2);
     }
   }
