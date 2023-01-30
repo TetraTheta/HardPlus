@@ -2,8 +2,6 @@ package io.github.exmserver.hardplus.module;
 
 import io.github.exmserver.hardplus.util.Perm;
 import io.github.exmserver.hardplus.util.PlayerUtil;
-import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer;
-import org.bukkit.Bukkit;
 import org.bukkit.block.Barrel;
 import org.bukkit.block.Biome;
 import org.bukkit.block.Chest;
@@ -38,37 +36,31 @@ public class DangerousNetherChest implements Listener {
     if (!PlayerUtil.checkPermGameMode(p, Perm.DANGEROUS_NETHER_CHEST.value)) return; // Return if no permission
     InventoryHolder holder = e.getInventory().getHolder();
     if (!(holder instanceof Chest) && !(holder instanceof Barrel)) return; // Return if not is Chest or Barrel
-    if (!netherBiomes.contains(((BlockInventoryHolder) holder).getBlock().getBiome())) return; // Return if not in The Nether biomes
+    if (!netherBiomes.contains(((BlockInventoryHolder) holder).getBlock().getBiome()))
+      return; // Return if not in The Nether biomes
 
     for (Entity entity : p.getNearbyEntities(radius, radius, radius)) {
       // I know this is dumb, but multiple instanceof or didn't work
-      if (entity instanceof Piglin piglin) {
-        Bukkit.getLogger().info("Piglin is angry at " + PlainTextComponentSerializer.plainText().serialize(p.displayName()));
-        piglin.setTarget(p); // Piglin
+      if (entity instanceof Piglin piglin) { // Piglin
+        piglin.setTarget(p);
         piglin.getPathfinder().moveTo(p);
-      } else if (entity instanceof PiglinBrute piglinBrute) {
-        Bukkit.getLogger().info("Piglin Brute is angry at " + PlainTextComponentSerializer.plainText().serialize(p.displayName()));
-        piglinBrute.setTarget(p); // Piglin Brute
+      } else if (entity instanceof PiglinBrute piglinBrute) { // Piglin Brute
+        piglinBrute.setTarget(p);
         piglinBrute.getPathfinder().moveTo(p);
-      } else if (entity instanceof PigZombie pigZombie) {
-        Bukkit.getLogger().info("Zombified Piglin is angry at " + PlainTextComponentSerializer.plainText().serialize(p.displayName()));
-        pigZombie.setTarget(p); // Zombified Piglin
+      } else if (entity instanceof PigZombie pigZombie) { // Zombified Piglin
+        pigZombie.setTarget(p);
         pigZombie.getPathfinder().moveTo(p);
-      } else if (entity instanceof Hoglin hoglin) {
-        Bukkit.getLogger().info("Hoglin is angry at " + PlainTextComponentSerializer.plainText().serialize(p.displayName()));
-        hoglin.setTarget(p); // Hoglin
+      } else if (entity instanceof Hoglin hoglin) { // Hoglin
+        hoglin.setTarget(p);
         hoglin.getPathfinder().moveTo(p);
-      } else if (entity instanceof Zoglin zoglin) {
-        Bukkit.getLogger().info("Zoglin is angry at " + PlainTextComponentSerializer.plainText().serialize(p.displayName()));
-        zoglin.setTarget(p); // Zoglin
+      } else if (entity instanceof Zoglin zoglin) { // Zoglin
+        zoglin.setTarget(p);
         zoglin.getPathfinder().moveTo(p);
-      } else if (entity instanceof Enderman enderman) {
-        Bukkit.getLogger().info("Enderman is angry at " + PlainTextComponentSerializer.plainText().serialize(p.displayName()));
-        enderman.setTarget(p); // Enderman
+      } else if (entity instanceof Enderman enderman) { // Enderman
+        enderman.setTarget(p);
         enderman.getPathfinder().moveTo(p);
-      } else if (entity instanceof Skeleton skeleton) {
-        Bukkit.getLogger().info("Skeleton is angry at " + PlainTextComponentSerializer.plainText().serialize(p.displayName()));
-        skeleton.setTarget(p); // Skeleton
+      } else if (entity instanceof Skeleton skeleton) { // Skeleton
+        skeleton.setTarget(p);
         skeleton.getPathfinder().moveTo(p);
       }
     }
