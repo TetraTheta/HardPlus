@@ -12,6 +12,7 @@ public class HardplusConfig extends BaseConfig {
   final String strDamageCritical = "module.damage-critical.";
   final String strDamageGive = "module.damage-give.";
   final String strDamageTake = "module.damage-take.";
+  final String strDangerousNetherChest = "module.dangerous-nether-chest.";
   final String strFastAir = "module.fast-air.";
   final String strFireForever = "module.fire-forever.";
   final String strHungerDebuff = "module.hunger-debuff.";
@@ -93,6 +94,12 @@ public class HardplusConfig extends BaseConfig {
           zombieModifier,
           skeletonModifier,
           endermanModifier));
+    }
+    // Dangerous Nether Chest
+    if (getBoolean(strDangerousNetherChest + "enable", true)) {
+      double radius = getDouble(strDangerousNetherChest + "radius", 32);
+
+      registerListeners(new DangerousNetherChest(radius));
     }
     // Fast Air
     if (getBoolean(strFastAir + "enable", true)) {
