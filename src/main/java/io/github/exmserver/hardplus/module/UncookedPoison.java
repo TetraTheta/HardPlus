@@ -1,16 +1,17 @@
-package xyz.tetratheta.hardplus.module;
+package io.github.exmserver.hardplus.module;
 
+import io.github.exmserver.hardplus.util.HPPerm;
+import io.github.exmserver.hardplus.util.HPPlayer;
 import org.bukkit.Material;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerItemConsumeEvent;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
-import xyz.tetratheta.hardplus.util.HPPerm;
-import xyz.tetratheta.hardplus.util.HPPlayer;
 
 import java.util.Set;
 
+@SuppressWarnings("unused")
 public class UncookedPoison implements Listener {
   final Set<Material> uncookedFood = Set.of(
       Material.POTATO,

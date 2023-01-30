@@ -1,5 +1,7 @@
-package xyz.tetratheta.hardplus.module;
+package io.github.exmserver.hardplus.module;
 
+import io.github.exmserver.hardplus.util.HPPerm;
+import io.github.exmserver.hardplus.util.HPPlayer;
 import org.bukkit.block.Block;
 import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
@@ -7,14 +9,20 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByBlockEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
-import xyz.tetratheta.hardplus.util.HPPerm;
-import xyz.tetratheta.hardplus.util.HPPlayer;
 
+@SuppressWarnings("unused")
 public class DamageTake implements Listener {
-  final double defModifier; final double playerModifier; final double rangedModifier;
-  final double fallModifier; final double magicModifier; final double envModifier;
-  final double passiveMobModifier; final double hostileMobDefModifier; final double zombieModifier;
-  final double skeletonModifier; final double endermanModifier;
+  final double defModifier;
+  final double playerModifier;
+  final double rangedModifier;
+  final double fallModifier;
+  final double magicModifier;
+  final double envModifier;
+  final double passiveMobModifier;
+  final double hostileMobDefModifier;
+  final double zombieModifier;
+  final double skeletonModifier;
+  final double endermanModifier;
 
   public DamageTake(
       double defModifier, double playerModifier, double rangedModifier,
@@ -73,9 +81,9 @@ public class DamageTake implements Listener {
       // UNAVAILABLE: POWDER_SNOW, FIRE, FALLING_STALACTITES, FALLING_ANVIL
       Block block = eb.getDamager();
       if (block != null) {
-        e.setDamage(e.getDamage()  * envModifier);
+        e.setDamage(e.getDamage() * envModifier);
       } else {
-        e.setDamage(e.getDamage()  * envModifier);
+        e.setDamage(e.getDamage() * envModifier);
       }
     } else if (e.getCause().equals(EntityDamageEvent.DamageCause.FALL)) {
       e.setDamage(e.getDamage() * fallModifier);

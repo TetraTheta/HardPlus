@@ -1,5 +1,9 @@
-package xyz.tetratheta.hardplus.module;
+package io.github.exmserver.hardplus.module;
 
+import io.github.exmserver.hardplus.Hardplus;
+import io.github.exmserver.hardplus.util.HPPerm;
+import io.github.exmserver.hardplus.util.HPPlayer;
+import io.github.exmserver.mol.util.Task;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.block.Biome;
@@ -13,15 +17,12 @@ import org.bukkit.event.player.PlayerBucketEmptyEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.scheduler.BukkitRunnable;
-import xyz.tetratheta.commonlib.Task;
-import xyz.tetratheta.hardplus.Hardplus;
-import xyz.tetratheta.hardplus.util.HPPerm;
-import xyz.tetratheta.hardplus.util.HPPlayer;
 
 import java.util.EnumSet;
 import java.util.HashSet;
 import java.util.Set;
 
+@SuppressWarnings("unused")
 public class NoWater implements Listener, Task {
   final Set<Biome> netherBiomes = EnumSet.of(
       Biome.NETHER_WASTES,

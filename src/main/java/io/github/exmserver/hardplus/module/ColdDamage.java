@@ -1,16 +1,17 @@
-package xyz.tetratheta.hardplus.module;
+package io.github.exmserver.hardplus.module;
 
+import io.github.exmserver.hardplus.util.HPPerm;
+import io.github.exmserver.hardplus.util.HPPlayer;
+import io.github.exmserver.mol.util.Task;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 import org.bukkit.scheduler.BukkitRunnable;
-import xyz.tetratheta.commonlib.Task;
-import xyz.tetratheta.hardplus.util.HPPerm;
-import xyz.tetratheta.hardplus.util.HPPlayer;
 
 import java.util.Set;
 
+@SuppressWarnings("unused")
 public class ColdDamage implements Listener, Task {
   final Set<Material> coldItemSet = Set.of(
       Material.ICE,

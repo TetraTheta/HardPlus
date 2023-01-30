@@ -1,16 +1,17 @@
-package xyz.tetratheta.hardplus.module;
+package io.github.exmserver.hardplus.module;
 
 import com.destroystokyo.paper.event.player.PlayerJumpEvent;
+import io.github.exmserver.hardplus.util.HPPerm;
+import io.github.exmserver.hardplus.util.HPPlayer;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerToggleSprintEvent;
-import xyz.tetratheta.hardplus.util.HPPerm;
-import xyz.tetratheta.hardplus.util.HPPlayer;
 
 import java.util.Set;
 
+@SuppressWarnings("unused")
 public class SharpCut implements Listener {
   final Set<Material> sword = Set.of(
       Material.WOODEN_SWORD,
@@ -38,7 +39,7 @@ public class SharpCut implements Listener {
     this.checkRun = checkRun;
     this.checkSword = checkSword;
     this.checkAxe = checkAxe;
-    this.checkShear  = checkShear;
+    this.checkShear = checkShear;
   }
 
   @EventHandler

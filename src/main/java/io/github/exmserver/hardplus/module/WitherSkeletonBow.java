@@ -1,5 +1,6 @@
-package xyz.tetratheta.hardplus.module;
+package io.github.exmserver.hardplus.module;
 
+import io.github.exmserver.hardplus.util.HPPerm;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.enchantments.Enchantment;
@@ -17,11 +18,11 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
-import xyz.tetratheta.hardplus.util.HPPerm;
 
 import java.util.Objects;
 import java.util.Random;
 
+@SuppressWarnings("unused")
 public class WitherSkeletonBow implements Listener {
   final double bowWSSpawnChance;
   final int bowDamageLevel;
@@ -29,7 +30,7 @@ public class WitherSkeletonBow implements Listener {
   final int arrowWitherLevel;
   final Random random = new Random();
 
-  NamespacedKey key = new NamespacedKey("hardplus", "wither-skeleton-arrow");
+  final NamespacedKey key = new NamespacedKey("hardplus", "wither-skeleton-arrow");
 
   public WitherSkeletonBow(double bowSpawnChance, int arrowDamageLevel, int arrowKnockbackLevel,
                            int arrowWitherLevel) {

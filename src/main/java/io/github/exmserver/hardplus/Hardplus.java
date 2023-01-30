@@ -1,4 +1,4 @@
-package xyz.tetratheta.hardplus;
+package io.github.exmserver.hardplus;
 
 import org.bukkit.plugin.java.JavaPlugin;
 

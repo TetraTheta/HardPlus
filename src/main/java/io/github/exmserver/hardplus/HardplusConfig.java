@@ -1,7 +1,7 @@
-package xyz.tetratheta.hardplus;
+package io.github.exmserver.hardplus;
 
-import xyz.tetratheta.commonlib.BaseConfig;
-import xyz.tetratheta.hardplus.module.*;
+import io.github.exmserver.hardplus.module.*;
+import io.github.exmserver.mol.util.BaseConfig;
 
 public class HardplusConfig extends BaseConfig {
   final Hardplus plugin;

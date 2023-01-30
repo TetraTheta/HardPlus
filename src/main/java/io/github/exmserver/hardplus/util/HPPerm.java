@@ -1,4 +1,4 @@
-package xyz.tetratheta.hardplus.util;
+package io.github.exmserver.hardplus.util;
 
 public enum HPPerm {
   COLD_DAMAGE("hardplus.cold-damage"),

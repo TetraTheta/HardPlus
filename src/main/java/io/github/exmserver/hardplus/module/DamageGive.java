@@ -1,17 +1,20 @@
-package xyz.tetratheta.hardplus.module;
+package io.github.exmserver.hardplus.module;
 
+import io.github.exmserver.hardplus.util.HPPerm;
+import io.github.exmserver.hardplus.util.HPPlayer;
 import org.bukkit.entity.AbstractArrow;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
-import xyz.tetratheta.hardplus.util.HPPerm;
-import xyz.tetratheta.hardplus.util.HPPlayer;
 
+@SuppressWarnings("unused")
 public class DamageGive implements Listener {
   final double modifier;
 
-  public DamageGive(double modifier) { this.modifier = modifier; }
+  public DamageGive(double modifier) {
+    this.modifier = modifier;
+  }
 
   @EventHandler
   public void onPlayerInflictDamage(EntityDamageByEntityEvent e) {

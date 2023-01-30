@@ -1,4 +1,4 @@
-package xyz.tetratheta.hardplus.util;
+package io.github.exmserver.hardplus.util;
 
 import net.minecraft.world.damagesource.DamageSource;
 import org.bukkit.GameMode;
@@ -11,7 +11,7 @@ public class HPPlayer {
 
   public static void hurtCactus(Player player, float amount) {
     // Change this when version changes
-    org.bukkit.craftbukkit.v1_19_R1.event.CraftEventFactory.blockDamage = player.getWorld().getBlockAt(0, 0, 0);
+    org.bukkit.craftbukkit.v1_19_R2.event.CraftEventFactory.blockDamage = player.getWorld().getBlockAt(0, 0, 0);
     getNMSPlayer(player).hurt(DamageSource.CACTUS, amount);
   }
 
@@ -22,6 +22,6 @@ public class HPPlayer {
 
   private static net.minecraft.world.entity.player.Player getNMSPlayer(Player player) {
     // Change this when version changes
-    return ((org.bukkit.craftbukkit.v1_19_R1.entity.CraftPlayer) player).getHandle();
+    return ((org.bukkit.craftbukkit.v1_19_R2.entity.CraftPlayer) player).getHandle();
   }
 }
