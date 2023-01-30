@@ -4,15 +4,14 @@ import net.minecrell.pluginyml.bukkit.BukkitPluginDescription
 
 plugins {
   `java-library`
-  id("io.papermc.paperweight.userdev") version "1.3.8"
+  id("io.papermc.paperweight.userdev") version "1.4.0"
   id("net.minecrell.plugin-yml.bukkit") version "0.5.2"
-  id("xyz.jpenilla.run-paper") version "1.0.6"
   id("co.uzzu.dotenv.gradle") version "2.0.0"
   id("com.modrinth.minotaur") version "2.+"
 }
 
 group = "xyz.tetratheta"
-version = "2.1.0-beta"
+version = "2.2.0-beta"
 
 repositories {
   mavenCentral()
@@ -20,9 +19,9 @@ repositories {
   maven("https://oss.sonatype.org/content/groups/public/")
 }
 
-val versionMinecraft = "1.19.2" // Minecraft (run-paper)
+val versionMinecraft = "1.19.3" // Minecraft (Modrinth)
 val versionAPI = "1.19" // API (plugin-yml)
-val versionPaper = "1.19.2-R0.1-SNAPSHOT" // Paper (Paper)
+val versionPaper = "1.19.3-R0.1-SNAPSHOT" // Paper (Paper)
 
 dependencies {
   paperDevBundle(versionPaper) // Paper API + userdev
@@ -156,9 +155,5 @@ tasks {
 
   withType<JavaCompile> {
     options.encoding = Charsets.UTF_8.name()
-  }
-
-  runServer {
-    minecraftVersion(versionMinecraft)
   }
 }
