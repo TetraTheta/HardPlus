@@ -4,14 +4,14 @@ import net.minecrell.pluginyml.bukkit.BukkitPluginDescription
 
 plugins {
   `java-library`
-  id("io.papermc.paperweight.userdev") version "1.5.0"
-  id("net.minecrell.plugin-yml.bukkit") version "0.5.2"
+  id("io.papermc.paperweight.userdev") version "1.5.3"
+  id("net.minecrell.plugin-yml.bukkit") version "0.5.3"
   id("co.uzzu.dotenv.gradle") version "2.0.0"
   id("com.modrinth.minotaur") version "2.+"
 }
 
 group = "xyz.tetratheta"
-version = "2.2.0-beta"
+version = "2.3.0"
 
 repositories {
   mavenCentral()
@@ -19,12 +19,12 @@ repositories {
   maven("https://oss.sonatype.org/content/groups/public/")
 }
 
-val versionMinecraft = "1.19.3" // Minecraft (Modrinth)
+val versionMinecraft = "1.19.4" // Minecraft (Modrinth)
 val versionAPI = "1.19" // API (plugin-yml)
-val versionPaper = "1.19.3-R0.1-SNAPSHOT" // Paper (Paper)
+val versionPaper = "1.19.4-R0.1-SNAPSHOT" // Paper (Paper)
 
 dependencies {
-  paperDevBundle(versionPaper) // Paper API + userdev
+  paperweight.paperDevBundle(versionPaper) // Paper API + userdev
 }
 
 bukkit {
@@ -136,8 +136,8 @@ bukkit {
 modrinth {
   token.set(env.MODRINTH_TOKEN.value)
   projectId.set("hardplus")
-  versionType.set("beta")
-  uploadFile.set(tasks.jar.get())
+  versionType.set("release")
+  uploadFile.set(tasks.build.get())
   gameVersions.add(versionMinecraft)
   loaders.add("paper")
   syncBodyFrom.set(rootProject.file("README.md").readText(Charsets.UTF_8))
