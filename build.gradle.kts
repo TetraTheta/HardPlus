@@ -4,13 +4,13 @@ import net.minecrell.pluginyml.bukkit.BukkitPluginDescription
 
 plugins {
   `java-library`
-  id("io.papermc.paperweight.userdev") version "1.5.3"
+  id("io.papermc.paperweight.userdev") version "1.5.4"
   id("net.minecrell.plugin-yml.bukkit") version "0.5.3"
-  id("co.uzzu.dotenv.gradle") version "2.0.0"
+  id("co.uzzu.dotenv.gradle") version "2.+"
   id("com.modrinth.minotaur") version "2.+"
 }
 
-group = "xyz.tetratheta"
+group = "io.github.tetratheta"
 version = "2.3.0"
 
 repositories {
@@ -27,8 +27,12 @@ dependencies {
   paperweight.paperDevBundle(versionPaper) // Paper API + userdev
 }
 
+configurations.paperweightDevelopmentBundle {
+  resolutionStrategy.cacheChangingModulesFor(7, "days")
+}
+
 bukkit {
-  main = "io.github.exmserver.hardplus.Hardplus"
+  main = "io.github.tetratheta.hardplus.Hardplus"
   apiVersion = versionAPI
   load = BukkitPluginDescription.PluginLoadOrder.POSTWORLD
   prefix = "HardPlus"
