@@ -1,5 +1,5 @@
 <div align="center">
-<img src="https://gitlab.com/exmserver/hardplus/-/raw/main/.etc/hardplus_info.png">
+<img src="https://raw.githubusercontent.com/TetraTheta/HardPlus/main/.etc/hardplus_info.png">
 </div>
 
 # HardPlus
