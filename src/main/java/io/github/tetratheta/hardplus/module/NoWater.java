@@ -71,12 +71,14 @@ public class NoWater implements Listener, Task {
         PlayerInventory inventory = e.getPlayer().getInventory();
         ItemStack mainHand = inventory.getItemInMainHand();
         ItemStack offHand = inventory.getItemInOffHand();
-        if (mainHand.getType().equals(Material.WATER_BUCKET))
+        if (mainHand.getType().equals(Material.WATER_BUCKET)) {
           inventory.setItemInMainHand(new ItemStack(Material.BUCKET));
-        else if (offHand.getType().equals(Material.WATER_BUCKET))
+          e.setCancelled(true);
+        } else if (offHand.getType().equals(Material.WATER_BUCKET)) {
           inventory.setItemInOffHand(new ItemStack(Material.BUCKET));
+          e.setCancelled(true);
+        }
       });
-      e.setCancelled(true);
     }
   }
 
