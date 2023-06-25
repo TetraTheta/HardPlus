@@ -11,7 +11,7 @@ plugins {
 }
 
 group = "io.github.tetratheta"
-version = "2.3.1-1.20.1"
+version = "2.4.0-1.20.1-SNAPSHOT"
 
 repositories {
   mavenCentral()
