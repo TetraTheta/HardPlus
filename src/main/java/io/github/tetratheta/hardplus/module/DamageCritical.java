@@ -18,6 +18,7 @@ public class DamageCritical implements Listener {
       arrow.setCritical(false);
     } else if (e.getDamager() instanceof Player p) {
       if (!PlayerUtil.checkPermGameMode(p, Perm.DAMAGE_CRITICAL.value)) return;
+      // Can't cancel critical, so reduce damage instead
       e.setDamage(e.getDamage() / 3 * 2);
     }
   }

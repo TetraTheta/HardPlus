@@ -5,6 +5,7 @@ import io.github.tetratheta.hardplus.util.PlayerUtil;
 import org.bukkit.block.Block;
 import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByBlockEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
@@ -12,17 +13,8 @@ import org.bukkit.event.entity.EntityDamageEvent;
 
 @SuppressWarnings("unused")
 public class DamageTake implements Listener {
-  final double defModifier;
-  final double playerModifier;
-  final double rangedModifier;
-  final double fallModifier;
-  final double magicModifier;
-  final double envModifier;
-  final double passiveMobModifier;
-  final double hostileMobDefModifier;
-  final double zombieModifier;
-  final double skeletonModifier;
-  final double endermanModifier;
+  final double defModifier, playerModifier, rangedModifier, fallModifier, magicModifier, envModifier,
+      passiveMobModifier, hostileMobDefModifier, zombieModifier, skeletonModifier, endermanModifier;
 
   public DamageTake(
       double defModifier, double playerModifier, double rangedModifier,
@@ -42,6 +34,7 @@ public class DamageTake implements Listener {
     this.endermanModifier = endermanModifier;
   }
 
+  // TODO: Ensure HardPlus player will loss 1 health
   @EventHandler
   public void onPlayerTakeDamage(EntityDamageEvent e) {
     if (!(e.getEntity() instanceof Player p)) return;

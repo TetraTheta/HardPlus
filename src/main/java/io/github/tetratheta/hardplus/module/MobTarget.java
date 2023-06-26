@@ -14,9 +14,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 public class MobTarget implements Task {
   final double range;
 
-  public MobTarget(double range) {
-    this.range = range;
-  }
+  public MobTarget(double range) { this.range = range; }
 
   @Override
   public BukkitRunnable getTask() {
@@ -24,8 +22,8 @@ public class MobTarget implements Task {
       @Override
       public void run() {
         for (Player p : Bukkit.getOnlinePlayers()) {
-          if (!PlayerUtil.checkPermGameMode(p, Perm.MOB_TARGET.value)) return;
-          if (canBypass(p)) return;
+          if (!PlayerUtil.checkPermGameMode(p, Perm.MOB_TARGET.value)) continue;
+          if (canBypass(p)) continue;
           for (Entity e : p.getNearbyEntities(range, range, range)) {
             if (e instanceof Monster monster) {
               monster.setTarget(p);
@@ -37,9 +35,7 @@ public class MobTarget implements Task {
     };
   }
 
-  private boolean canBypass(Player p) {
-    return p.hasPotionEffect(PotionEffectType.INVISIBILITY) && !hasArmor(p);
-  }
+  private boolean canBypass(Player p) { return p.hasPotionEffect(PotionEffectType.INVISIBILITY) && !hasArmor(p); }
 
   private boolean hasArmor(Player p) {
     return !(p.getInventory().getHelmet() == null &&

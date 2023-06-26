@@ -13,9 +13,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 public class CreeperCharge implements Task {
   final double radius;
 
-  public CreeperCharge(double radius) {
-    this.radius = radius;
-  }
+  public CreeperCharge(double radius) { this.radius = radius; }
 
   @Override
   public BukkitRunnable getTask() {
@@ -23,10 +21,13 @@ public class CreeperCharge implements Task {
       @Override
       public void run() {
         for (Player p : Bukkit.getOnlinePlayers()) {
-          if (!PlayerUtil.checkPermGameMode(p, Perm.CREEPER_CHARGE.value)) return;
+          if (!PlayerUtil.checkPermGameMode(p, Perm.CREEPER_CHARGE.value)) continue;
           for (Entity e : p.getNearbyEntities(radius, radius, radius)) {
             if (e instanceof Creeper creeper) {
-              creeper.setPowered(true);
+              if (creeper.getTarget() == null) continue;
+              if (creeper.getTarget().hasPermission(Perm.CREEPER_CHARGE.value)) {
+                creeper.setPowered(true);
+              }
             }
           }
         }

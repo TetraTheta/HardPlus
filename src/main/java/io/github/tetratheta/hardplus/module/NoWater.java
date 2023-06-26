@@ -43,9 +43,7 @@ public class NoWater implements Listener, Task {
 
   final Hardplus plugin;
 
-  public NoWater(Hardplus hardplus) {
-    this.plugin = hardplus;
-  }
+  public NoWater(Hardplus hardplus) { this.plugin = hardplus; }
 
   @EventHandler
   public void onPlayerEmptyBucketInTheNether(CauldronLevelChangeEvent e) {
@@ -98,7 +96,9 @@ public class NoWater implements Listener, Task {
             levelled.setLevel(newLevel);
             b.setBlockData(levelled);
           }
-          if (b.getType().equals(Material.CAULDRON)) cauldrons.remove(b);
+          if (b.getType().equals(Material.CAULDRON)) {
+            cauldrons.remove(b);
+          }
         }
       }
     };

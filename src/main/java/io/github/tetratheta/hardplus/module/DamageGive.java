@@ -12,9 +12,7 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 public class DamageGive implements Listener {
   final double modifier;
 
-  public DamageGive(double modifier) {
-    this.modifier = modifier;
-  }
+  public DamageGive(double modifier) { this.modifier = modifier; }
 
   @EventHandler
   public void onPlayerInflictDamage(EntityDamageByEntityEvent e) {
