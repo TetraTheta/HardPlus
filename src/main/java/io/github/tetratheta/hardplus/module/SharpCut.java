@@ -48,7 +48,8 @@ public class SharpCut implements Listener {
     if (!checkJump) return;
     if (!PlayerUtil.checkPermGameMode(e.getPlayer(), Perm.SHARP_CUT.value)) return;
 
-    runCheck(e.getPlayer());
+    checkPlayer(e.getPlayer());
+    e.setCancelled(true);
   }
 
   @EventHandler
@@ -56,10 +57,11 @@ public class SharpCut implements Listener {
     if (!checkRun || !e.isSprinting()) return;
     if (!PlayerUtil.checkPermGameMode(e.getPlayer(), Perm.SHARP_CUT.value)) return;
 
-    runCheck(e.getPlayer());
+    checkPlayer(e.getPlayer());
+    e.setCancelled(true);
   }
 
-  private void runCheck(Player p) {
+  private void checkPlayer(Player p) {
     Material mainHand = p.getInventory().getItemInMainHand().getType();
     Material offHand = p.getInventory().getItemInOffHand().getType();
 
