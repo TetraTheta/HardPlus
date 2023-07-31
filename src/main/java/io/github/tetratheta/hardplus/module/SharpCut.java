@@ -48,8 +48,9 @@ public class SharpCut implements Listener {
     if (!checkJump) return;
     if (!PlayerUtil.checkPermGameMode(e.getPlayer(), Perm.SHARP_CUT.value)) return;
 
-    checkPlayer(e.getPlayer());
-    e.setCancelled(true);
+    if (checkPlayer(e.getPlayer())) {
+      e.setCancelled(true);
+    }
   }
 
   @EventHandler
@@ -57,28 +58,33 @@ public class SharpCut implements Listener {
     if (!checkRun || !e.isSprinting()) return;
     if (!PlayerUtil.checkPermGameMode(e.getPlayer(), Perm.SHARP_CUT.value)) return;
 
-    checkPlayer(e.getPlayer());
-    e.setCancelled(true);
+    if (checkPlayer(e.getPlayer())) {
+      e.setCancelled(true);
+    }
   }
 
-  private void checkPlayer(Player p) {
+  private boolean checkPlayer(Player p) {
     Material mainHand = p.getInventory().getItemInMainHand().getType();
     Material offHand = p.getInventory().getItemInOffHand().getType();
 
     if (checkSword) {
       if (sword.contains(mainHand) || sword.contains(offHand)) {
         NMSPlayer.hurtCactus(p, 1);
+        return true;
       }
     }
     if (checkAxe) {
       if (axe.contains(mainHand) || axe.contains(offHand)) {
         NMSPlayer.hurtCactus(p, 1);
+        return true;
       }
     }
     if (checkShear) {
       if (mainHand.equals(Material.SHEARS) || offHand.equals(Material.SHEARS)) {
         NMSPlayer.hurtCactus(p, 1);
+        return true;
       }
     }
+    return false;
   }
 }
