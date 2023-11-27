@@ -4,7 +4,7 @@ import net.minecrell.pluginyml.bukkit.BukkitPluginDescription
 
 plugins {
   `java-library`
-  id("io.papermc.paperweight.userdev") version "1.5.6"
+  id("io.papermc.paperweight.userdev") version "1.5.10"
   id("net.minecrell.plugin-yml.bukkit") version "0.6.0"
   id("co.uzzu.dotenv.gradle") version "2.+"
   id("com.modrinth.minotaur") version "2.+"
