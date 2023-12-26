@@ -6,7 +6,7 @@ plugins {
   `java-library`
   id("io.papermc.paperweight.userdev") version "1.5.11"
   id("net.minecrell.plugin-yml.bukkit") version "0.6.0"
-  id("co.uzzu.dotenv.gradle") version "3.+"
+  id("co.uzzu.dotenv.gradle") version "4.+"
   id("com.modrinth.minotaur") version "2.+"
 }
 
