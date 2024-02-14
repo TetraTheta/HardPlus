@@ -136,7 +136,7 @@ modrinth {
   token.set(env.MODRINTH_TOKEN.value)
   projectId.set("hardplus")
   versionType.set("release")
-  uploadFile.set(tasks.build)
+  uploadFile.set(tasks.jar)
   gameVersions.add(verMC)
   loaders.add("paper")
   syncBodyFrom.set(rootProject.file("README.md").readText(Charsets.UTF_8))
