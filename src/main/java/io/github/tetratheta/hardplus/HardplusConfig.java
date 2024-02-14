@@ -1,6 +1,7 @@
 package io.github.tetratheta.hardplus;
 
 import io.github.tetratheta.hardplus.module.*;
+import io.github.tetratheta.hardplus.util.DmgMod;
 import io.github.tetratheta.mol.util.BaseConfig;
 
 public class HardplusConfig extends BaseConfig {
@@ -59,7 +60,7 @@ public class HardplusConfig extends BaseConfig {
     }
     // Damage Critical
     if (getBoolean(strDamageCritical + "enable", true)) {
-      registerListeners(new DamageCritical());
+      registerListeners(new DamageCritical(plugin));
     }
     // Damage Give
     if (getBoolean(strDamageGive + "enable", true)) {
@@ -70,30 +71,20 @@ public class HardplusConfig extends BaseConfig {
     // Damage Take
     if (getBoolean(strDamageTake + "enable", true)) {
       // this is pure pain :(
-      double defModifier = getDouble(strDamageTake + "modifier.default", 2.5, 1, 100);
-      double playerModifier = getDouble(strDamageTake + "modifier.player", defModifier, 1, 100);
-      double rangedModifier = getDouble(strDamageTake + "modifier.melee", defModifier, 1, 100);
-      double fallModifier = getDouble(strDamageTake + "modifier.fall", defModifier, 1, 100);
-      double magicModifier = getDouble(strDamageTake + "modifier.magic", defModifier, 1, 100);
-      double envModifier = getDouble(strDamageTake + "modifier.environment", defModifier, 1, 100);
-      double passiveMobModifier = getDouble(strDamageTake + "modifier.mob.passive", defModifier, 1, 100);
-      double hostileMobDefModifier = getDouble(strDamageTake + "modifier.mob.hostile.default", defModifier, 1, 100);
-      double zombieModifier = getDouble(strDamageTake + "modifier.mob.hostile.zombie", defModifier, 1, 100);
-      double skeletonModifier = getDouble(strDamageTake + "modifier.mob.hostile.skeleton", defModifier, 1, 100);
-      double endermanModifier = getDouble(strDamageTake + "modifier.mob.hostile.enderman", defModifier, 1, 100);
+      DmgMod dmgMod = new DmgMod();
+      dmgMod.DEFAULT = getDouble(strDamageTake + "modifier.default", 2.5, 1, 100);
+      dmgMod.PLAYER = getDouble(strDamageTake + "modifier.player", dmgMod.DEFAULT, 1, 100);
+      dmgMod.MELEE = getDouble(strDamageTake + "modifier.melee", dmgMod.DEFAULT, 1, 100);
+      dmgMod.FALL = getDouble(strDamageTake + "modifier.fall", dmgMod.DEFAULT, 1, 100);
+      dmgMod.MAGIC = getDouble(strDamageTake + "modifier.magic", dmgMod.DEFAULT, 1, 100);
+      dmgMod.ENVIRONMENT = getDouble(strDamageTake + "modifier.environment", dmgMod.DEFAULT, 1, 100);
+      dmgMod.MOB_PASSIVE = getDouble(strDamageTake + "modifier.mob.passive", dmgMod.DEFAULT, 1, 100);
+      dmgMod.MOB_HOSTILE = getDouble(strDamageTake + "modifier.mob.hostile.default", dmgMod.DEFAULT, 1, 100);
+      dmgMod.ZOMBIE = getDouble(strDamageTake + "modifier.mob.hostile.zombie", dmgMod.DEFAULT, 1, 100);
+      dmgMod.SKELETON = getDouble(strDamageTake + "modifier.mob.hostile.skeleton", dmgMod.DEFAULT, 1, 100);
+      dmgMod.ENDERMAN = getDouble(strDamageTake + "modifier.mob.hostile.enderman", dmgMod.DEFAULT, 1, 100);
 
-      registerListeners(new DamageTake(
-          defModifier,
-          playerModifier,
-          rangedModifier,
-          fallModifier,
-          magicModifier,
-          envModifier,
-          passiveMobModifier,
-          hostileMobDefModifier,
-          zombieModifier,
-          skeletonModifier,
-          endermanModifier));
+      registerListeners(new DamageTake(dmgMod));
     }
     // Dangerous Nether Chest
     if (getBoolean(strDangerousNetherChest + "enable", true)) {

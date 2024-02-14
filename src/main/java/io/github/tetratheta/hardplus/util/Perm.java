@@ -21,5 +21,7 @@ public enum Perm {
   WITHER_SKELETON_BOW("hardplus.wither-skeleton-bow");
   public final String value;
 
-  Perm(String value) { this.value = value; }
+  Perm(String value) {
+    this.value = value;
+  }
 }

@@ -14,7 +14,9 @@ import org.bukkit.scheduler.BukkitRunnable;
 public class MobTarget implements Task {
   final double range;
 
-  public MobTarget(double range) { this.range = range; }
+  public MobTarget(double range) {
+    this.range = range;
+  }
 
   @Override
   public BukkitRunnable getTask() {
@@ -35,7 +37,9 @@ public class MobTarget implements Task {
     };
   }
 
-  private boolean canBypass(Player p) { return p.hasPotionEffect(PotionEffectType.INVISIBILITY) && !hasArmor(p); }
+  private boolean canBypass(Player p) {
+    return p.hasPotionEffect(PotionEffectType.INVISIBILITY) && !hasArmor(p);
+  }
 
   private boolean hasArmor(Player p) {
     return !(p.getInventory().getHelmet() == null &&

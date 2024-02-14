@@ -15,7 +15,9 @@ public class FastAir implements Listener {
   final int modifier;
   final Map<Player, Integer> previousValue = new HashMap<>();
 
-  public FastAir(int modifier) { this.modifier = modifier; }
+  public FastAir(int modifier) {
+    this.modifier = modifier;
+  }
 
   @EventHandler
   public void onPlayerAirDrops(EntityAirChangeEvent e) {

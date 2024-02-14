@@ -13,7 +13,9 @@ import org.bukkit.potion.PotionEffectType;
 public class HungerDebuff implements Listener {
   final int foodLevel;
 
-  public HungerDebuff(int foodLevel) { this.foodLevel = foodLevel; }
+  public HungerDebuff(int foodLevel) {
+    this.foodLevel = foodLevel;
+  }
 
   @EventHandler
   public void onFoodLevelChange(FoodLevelChangeEvent e) {

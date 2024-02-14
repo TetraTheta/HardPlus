@@ -13,7 +13,9 @@ import org.bukkit.event.entity.EntityDamageEvent;
 public class LavaDeath implements Listener {
   final Hardplus plugin;
 
-  public LavaDeath(Hardplus hardplus) { this.plugin = hardplus; }
+  public LavaDeath(Hardplus hardplus) {
+    this.plugin = hardplus;
+  }
 
   @EventHandler
   public void onLava(EntityDamageEvent e) {

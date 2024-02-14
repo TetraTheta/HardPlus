@@ -2,9 +2,10 @@ package io.github.tetratheta.hardplus.module;
 
 import com.destroystokyo.paper.event.player.PlayerJumpEvent;
 import io.github.tetratheta.hardplus.util.Perm;
-import io.github.tetratheta.hardplus.util.NMSPlayer;
 import io.github.tetratheta.hardplus.util.PlayerUtil;
 import org.bukkit.Material;
+import org.bukkit.damage.DamageSource;
+import org.bukkit.damage.DamageType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -63,25 +64,28 @@ public class SharpCut implements Listener {
     }
   }
 
+  @SuppressWarnings("UnstableApiUsage")
   private boolean checkPlayer(Player p) {
     Material mainHand = p.getInventory().getItemInMainHand().getType();
     Material offHand = p.getInventory().getItemInOffHand().getType();
 
+    DamageSource source = DamageSource.builder(DamageType.CACTUS).build();
+
     if (checkSword) {
       if (sword.contains(mainHand) || sword.contains(offHand)) {
-        NMSPlayer.hurtCactus(p, 1);
+        p.damage(1, source);
         return true;
       }
     }
     if (checkAxe) {
       if (axe.contains(mainHand) || axe.contains(offHand)) {
-        NMSPlayer.hurtCactus(p, 1);
+        p.damage(1, source);
         return true;
       }
     }
     if (checkShear) {
       if (mainHand.equals(Material.SHEARS) || offHand.equals(Material.SHEARS)) {
-        NMSPlayer.hurtCactus(p, 1);
+        p.damage(1, source);
         return true;
       }
     }

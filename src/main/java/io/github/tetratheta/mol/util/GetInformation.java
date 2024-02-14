@@ -13,13 +13,14 @@ import java.util.List;
 @SuppressWarnings("unused")
 public final class GetInformation {
   /**
-   * Returns current Bukkit API version. This would be something like {@code v1_19_R2}.
+   * Returns current Bukkit API version. This would be something like {@code 1.20.1-R0.1-SNAPSHOT}.
    *
    * @return Current Bukkit API version
+   * @deprecated For {@code 1.20.1-R0.1-SNAPSHOT}-like result, Use {@code Bukkit.getServer().getBukkitVersion()}. Use {@code Bukkit.getServer().getMinecraftVersion()} for {@code 1.20.1}-like result.
    */
+  @Deprecated
   public static @NotNull String serverVersion() {
-    String packageName = Bukkit.getServer().getClass().getPackage().getName();
-    return packageName.substring(packageName.lastIndexOf('.') + 1);
+    return Bukkit.getServer().getBukkitVersion();
   }
 
   /**

@@ -13,7 +13,9 @@ import org.bukkit.scheduler.BukkitRunnable;
 public class CreeperCharge implements Task {
   final double radius;
 
-  public CreeperCharge(double radius) { this.radius = radius; }
+  public CreeperCharge(double radius) {
+    this.radius = radius;
+  }
 
   @Override
   public BukkitRunnable getTask() {

@@ -43,7 +43,9 @@ public class NoWater implements Listener, Task {
 
   final Hardplus plugin;
 
-  public NoWater(Hardplus hardplus) { this.plugin = hardplus; }
+  public NoWater(Hardplus hardplus) {
+    this.plugin = hardplus;
+  }
 
   @EventHandler
   public void onPlayerEmptyBucketInTheNether(CauldronLevelChangeEvent e) {

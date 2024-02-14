@@ -4,14 +4,13 @@ import net.minecrell.pluginyml.bukkit.BukkitPluginDescription
 
 plugins {
   `java-library`
-  id("io.papermc.paperweight.userdev") version "1.5.11"
   id("net.minecrell.plugin-yml.bukkit") version "0.6.0"
-  id("co.uzzu.dotenv.gradle") version "4.+"
+  id("co.uzzu.dotenv.gradle") version "4.0.0"
   id("com.modrinth.minotaur") version "2.+"
 }
 
 group = "io.github.tetratheta"
-version = "2.4.0-1.20.1-SNAPSHOT"
+version = "2.5.1"
 
 repositories {
   mavenCentral()
@@ -19,21 +18,17 @@ repositories {
   maven("https://oss.sonatype.org/content/groups/public/")
 }
 
-val versionMinecraft = "1.20.1" // Minecraft (Modrinth)
-val versionAPI = "1.20" // API (plugin-yml)
-val versionPaper = "1.20.1-R0.1-SNAPSHOT" // Paper (Paper)
+val verMC = "1.20.4" // Minecraft (Modrinth)
+val verAPI = "1.20" // API (plugin-yml)
+val verPaper = "1.20.4-R0.1-SNAPSHOT" // Paper (Paper)
 
 dependencies {
-  paperweight.paperDevBundle(versionPaper) // Paper API + userdev
-}
-
-configurations.paperweightDevelopmentBundle {
-  resolutionStrategy.cacheChangingModulesFor(7, "days")
+  compileOnly("io.papermc.paper:paper-api:$verPaper")
 }
 
 bukkit {
   main = "io.github.tetratheta.hardplus.Hardplus"
-  apiVersion = versionAPI
+  apiVersion = verAPI
   load = BukkitPluginDescription.PluginLoadOrder.POSTWORLD
   prefix = "HardPlus"
   author = "TetraTheta"
@@ -141,17 +136,13 @@ modrinth {
   token.set(env.MODRINTH_TOKEN.value)
   projectId.set("hardplus")
   versionType.set("release")
-  uploadFile.set(tasks.reobfJar.get().outputJar)
-  gameVersions.add(versionMinecraft)
+  uploadFile.set(tasks.build)
+  gameVersions.add(verMC)
   loaders.add("paper")
   syncBodyFrom.set(rootProject.file("README.md").readText(Charsets.UTF_8))
 }
 
 tasks {
-  assemble {
-    dependsOn(reobfJar)
-  }
-
   compileJava {
     options.encoding = Charsets.UTF_8.name()
     options.release.set(17)

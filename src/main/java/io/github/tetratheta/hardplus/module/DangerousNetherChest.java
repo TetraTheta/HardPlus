@@ -26,7 +26,9 @@ public class DangerousNetherChest implements Listener {
   );
   final double radius;
 
-  public DangerousNetherChest(double radius) { this.radius = radius; }
+  public DangerousNetherChest(double radius) {
+    this.radius = radius;
+  }
 
   @EventHandler
   public void onPlayerOpenChest(InventoryOpenEvent e) {
