@@ -20,7 +20,7 @@ repositories {
 
 val verMC = "1.20.4" // Minecraft (Modrinth)
 val verAPI = "1.20" // API (plugin-yml)
-val verPaper = "1.20.4-R0.1-SNAPSHOT" // Paper (Paper)
+val verPaper = "1.20.5-R0.1-SNAPSHOT" // Paper (Paper)
 
 dependencies {
   compileOnly("io.papermc.paper:paper-api:$verPaper")
