@@ -10,7 +10,7 @@ plugins {
 }
 
 group = "io.github.tetratheta"
-version = "2.5.1"
+version = "2.5.2"
 
 repositories {
   mavenCentral()
@@ -18,9 +18,9 @@ repositories {
   maven("https://oss.sonatype.org/content/groups/public/")
 }
 
-val verMC = "1.20.4" // Minecraft (Modrinth)
+val verMC = "1.20.6" // Minecraft (Modrinth)
 val verAPI = "1.20" // API (plugin-yml)
-val verPaper = "1.20.4-R0.1-SNAPSHOT" // Paper (Paper)
+val verPaper = "1.20.6-R0.1-SNAPSHOT" // Paper (Paper)
 
 dependencies {
   compileOnly("io.papermc.paper:paper-api:$verPaper")
@@ -145,12 +145,12 @@ modrinth {
 tasks {
   compileJava {
     options.encoding = Charsets.UTF_8.name()
-    options.release.set(17)
+    options.release.set(21)
   }
 
   java {
-    sourceCompatibility = JavaVersion.VERSION_17
-    targetCompatibility = JavaVersion.VERSION_17
+    sourceCompatibility = JavaVersion.VERSION_21
+    targetCompatibility = JavaVersion.VERSION_21
   }
 
   withType<JavaCompile> {
