@@ -50,9 +50,9 @@ public class WitherSkeletonBow implements Listener {
     if (mobInventory == null) return;
     ItemStack bow = new ItemStack(Material.BOW);
     ItemMeta bowMeta = bow.getItemMeta();
-    bowMeta.addEnchant(Enchantment.ARROW_DAMAGE, bowDamageLevel, true);
-    bowMeta.addEnchant(Enchantment.ARROW_FIRE, 1, true);
-    bowMeta.addEnchant(Enchantment.ARROW_KNOCKBACK, bowKnockbackLevel, true);
+    bowMeta.addEnchant(Enchantment.POWER, bowDamageLevel, true);
+    bowMeta.addEnchant(Enchantment.FLAME, 1, true);
+    bowMeta.addEnchant(Enchantment.PUNCH, bowKnockbackLevel, true);
     bow.setItemMeta(bowMeta);
     mobInventory.setItemInMainHand(bow);
     mobInventory.setItemInMainHandDropChance(0);

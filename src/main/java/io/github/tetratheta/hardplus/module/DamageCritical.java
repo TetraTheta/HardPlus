@@ -17,7 +17,6 @@ public class DamageCritical implements Listener {
     this.plugin = plugin;
   }
 
-  @SuppressWarnings("UnstableApiUsage")
   @EventHandler
   public void onPlayerInflictCriticalDamage(EntityDamageByEntityEvent e) {
     // TODO: Find a cleaner way of doing this. For example, using DamageSource instead...
@@ -30,13 +29,5 @@ public class DamageCritical implements Listener {
       // Can't cancel critical status. This will reduce damage, but leave critical particle.
       e.setDamage(e.getDamage() / 3 * 2);
     }
-    /*
-    if (e.isCancelled()) return;
-    if (e.isCritical() && e.getDamager() instanceof Player p) {
-      if (!PlayerUtil.checkPermGameMode(p, Perm.DAMAGE_CRITICAL.value)) return;
-      Bukkit.getScheduler().runTaskLater(plugin, () -> ((Damageable)e.getEntity()).damage(e.getDamage() / 3 * 2, e.getDamageSource()), 1L);
-      e.setCancelled(true);
-    }
-    */
   }
 }

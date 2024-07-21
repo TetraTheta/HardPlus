@@ -223,7 +223,7 @@ public abstract class BaseConfig {
    * <p>
    * This will create the path with given default value if the path doesn't exist.
    * <p>
-   * If the value of the path is outside of the boundary, it will be force-set to nearest boundary value.
+   * If the value of the path is outside the boundary, it will be force-set to nearest boundary value.
    *
    * @param path Config path to get value from
    * @param def  Default value if the path doesn't exist.
@@ -268,7 +268,7 @@ public abstract class BaseConfig {
    * <p>
    * This will create the path with given default value if the path doesn't exist.
    * <p>
-   * If the value of the path is outside of the boundary, it will be force-set to nearest boundary value.
+   * If the value of the path is outside the boundary, it will be force-set to nearest boundary value.
    *
    * @param path Config path to get value from
    * @param def  Default value if the path doesn't exist.

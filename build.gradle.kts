@@ -2,15 +2,20 @@
 
 import net.minecrell.pluginyml.bukkit.BukkitPluginDescription
 
+// Required EnvVar:
+// MODRINTH_TOKEN : Token for Modrinth Publish
+// HANGAR_TOKEN : Token for Hangar Publish
+
 plugins {
   `java-library`
   id("net.minecrell.plugin-yml.bukkit") version "0.6.0"
   id("co.uzzu.dotenv.gradle") version "4.0.0"
   id("com.modrinth.minotaur") version "2.+"
+  id("io.papermc.hangar-publish-plugin") version "0.1.2"
 }
 
 group = "io.github.tetratheta"
-version = "2.5.2"
+version = "2.5.3"
 
 repositories {
   mavenCentral()
@@ -18,9 +23,9 @@ repositories {
   maven("https://oss.sonatype.org/content/groups/public/")
 }
 
-val verMC = "1.20.6" // Minecraft (Modrinth)
-val verAPI = "1.20" // API (plugin-yml)
-val verPaper = "1.20.6-R0.1-SNAPSHOT" // Paper (Paper)
+val verMC = "1.21" // Minecraft (Modrinth, Hangar)
+val verAPI = "1.21" // API (plugin-yml)
+val verPaper = "1.21-R0.1-SNAPSHOT" // Paper (Paper)
 
 dependencies {
   compileOnly("io.papermc.paper:paper-api:$verPaper")
@@ -140,6 +145,21 @@ modrinth {
   gameVersions.add(verMC)
   loaders.add("paper")
   syncBodyFrom.set(rootProject.file("README.md").readText(Charsets.UTF_8))
+}
+
+hangarPublish {
+  publications.register("HardPlus") {
+    version = project.version as String
+    id = "HardPlus"
+    channel = "Release"
+    apiKey = env.HANGAR_TOKEN.value
+    platforms {
+      paper {
+        jar = tasks.jar.flatMap { it.archiveFile }
+        platformVersions = listOf(verMC)
+      }
+    }
+  }
 }
 
 tasks {
