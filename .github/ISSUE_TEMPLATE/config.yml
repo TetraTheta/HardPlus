@@ -1,0 +1,8 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Feature Request
+    url: https://github.com/TetraTheta/HardPlus/discussions/categories/ideas
+    about: Please use GitHub Discussion for suggesting new feature.
+  - name: Questions
+    url: https://github.com/TetraTheta/HardPlus/discussions/categories/q-a
+    about: Please use GitHub Discussion for asking questions.

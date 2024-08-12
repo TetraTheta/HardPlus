@@ -1,0 +1,44 @@
+name: Bug Report
+description: Create a report to help us improve
+title: "[BUG] "
+labels: need triage
+assignees: TetraTheta
+body:
+- type: textarea
+  id: description
+  attributes:
+    label: Description
+    description: Please describe the bug you've experienced as detailed as possible
+    placeholder: Please describe the bug you've experienced as detailed as possible
+  validations:
+    required: true
+- type: textarea
+  id: repro
+  attributes:
+    label: Reproduction
+    description: Describe how to reproduce the problem
+    placeholder: Describe how to reproduce the problem
+  validations:
+    required: true
+- type: textarea
+  id: expected
+  attributes:
+    label: Expected Behavior
+    description: A clear and concise description of what you expected to happen
+    placeholder: A clear and concise description of what you expected to happen
+  validations:
+    required: true
+- type: textarea
+  id: actual
+  attributes:
+    label: Actual Behavior
+    description: A clear and concise description of what have happened instead
+    placeholder: A clear and concise description of what have happened instead
+  validations:
+    required: true
+- type: textarea
+  id: scv
+  attributes:
+    label: Screenshot/Video
+    description: Optional screenshot or video to help the author to diagnose the problem
+    placeholder: Optional screenshot or video to help the author to diagnose the problem
