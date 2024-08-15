@@ -14,6 +14,7 @@ public enum Perm {
   LAVA_DEATH("hardplus.lava-death"),
   MOB_TARGET("hardplus.mob-target"),
   NO_FIRE_RESISTANCE("hardplus.no-fire-resistance"),
+  NO_PASSIVE_HEALTH_REGEN("hardplus.no-passive-health-regen"),
   NO_SWEEP("hardplus.no-sweep"),
   NO_WATER("hardplus.no-water"),
   SHARP_CUT("hardplus.sharp-cut"),

@@ -15,7 +15,7 @@ plugins {
 }
 
 group = "io.github.tetratheta"
-version = "2.5.3"
+version = "2.6.0"
 
 repositories {
   mavenCentral()
@@ -23,9 +23,9 @@ repositories {
   maven("https://oss.sonatype.org/content/groups/public/")
 }
 
-val verMC = "1.21" // Minecraft (Modrinth, Hangar)
-val verAPI = "1.21" // API (plugin-yml)
-val verPaper = "1.21-R0.1-SNAPSHOT" // Paper (Paper)
+val verMC = "1.21.1" // Minecraft (Modrinth, Hangar)
+val verAPI = "1.21.1" // API (plugin-yml)
+val verPaper = "1.21.1-R0.1-SNAPSHOT" // Paper (Paper)
 
 dependencies {
   compileOnly("io.papermc.paper:paper-api:$verPaper")
@@ -55,6 +55,7 @@ bukkit {
           "hardplus.lava-death",
           "hardplus.mob-target",
           "hardplus.no-fire-resistance",
+          "hardplus.no-passive-health-regen",
           "hardplus.no-sweep",
           "hardplus.no-water",
           "hardplus.sharp-cut",
@@ -112,6 +113,10 @@ bukkit {
     }
     register("hardplus.no-fire-resistance") {
       description = "Enable No Fire Resistance module of HardPlus"
+      default = BukkitPluginDescription.Permission.Default.FALSE
+    }
+    register("hardplus.no-passive-health-regen") {
+      description = "Enable No Passive Health Regen module of HardPlus"
       default = BukkitPluginDescription.Permission.Default.FALSE
     }
     register("hardplus.no-sweep") {

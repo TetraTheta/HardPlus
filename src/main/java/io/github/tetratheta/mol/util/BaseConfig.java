@@ -9,7 +9,9 @@ import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.logging.Logger;
 
@@ -53,7 +55,7 @@ public abstract class BaseConfig {
   /**
    * Initialize your configuration. This is DIY(Do It Yourself) method you have to implement.
    * <p>
-   * This should involves with registering event listeners, creating new {@code BukkitTask}s etc.
+   * This should involve with registering event listeners, creating new {@code BukkitTask}s etc.
    */
   public abstract void initialize();
 
@@ -68,43 +70,6 @@ public abstract class BaseConfig {
     for (BukkitTask task : tasks) {
       task.cancel();
     }
-  }
-
-  /**
-   * Saves current plugin configuration to file. Call this method inside of your plugin's {@code onDisable()}.
-   */
-  public void saveConfig() {
-    try {
-      config.save(configPath);
-      config = plugin.getConfig();
-    } catch (IOException e) {
-      logger.severe("Failed to save configuration file! - " + e.getLocalizedMessage());
-    }
-  }
-
-  /**
-   * Registers all event listeners of single class provided.
-   *
-   * @param listener a class which implements {@code Listener}
-   */
-  public void registerListeners(@NotNull Listener listener) {
-    plugin.getServer().getPluginManager().registerEvents(listener, plugin);
-  }
-
-  /**
-   * Unregisters all event listeners of single class provided.
-   *
-   * @param listener a class which implements {@code Listener}
-   */
-  public void unregisterListeners(@NotNull Listener listener) {
-    HandlerList.unregisterAll(listener);
-  }
-
-  /**
-   * Unregisters all event listeners of this plugin
-   */
-  public void unregisterAllListeners() {
-    HandlerList.unregisterAll(plugin);
   }
 
   /**
@@ -126,29 +91,11 @@ public abstract class BaseConfig {
   }
 
   /**
-   * Get config value as {@code String} from given path or default value if the path does not present.
-   * <p>
-   * This will create the path with given default value if the path doesn't exist.
-   *
-   * @param path Config path to get value from
-   * @param def  Default value if the path doesn't exist.
-   * @return Config value as {@code String}
-   */
-  public String getString(String path, String def) {
-    if (config.isSet(path)) {
-      return config.getString(path, def);
-    } else {
-      config.set(path, def);
-      return def;
-    }
-  }
-
-  /**
    * Get config value as {@code double} from given path or default value if the path does not present, with minimum/maximum value.
    * <p>
    * This will create the path with given default value if the path doesn't exist.
    * <p>
-   * You can set minimum value and maximum value of the value. If the value of the path is outside of the boundary,
+   * You can set minimum value and maximum value of the value. If the value of the path is outside the boundary,
    * it will be force-set to nearest boundary value.
    *
    * @param path Config path to get value from
@@ -178,7 +125,7 @@ public abstract class BaseConfig {
    * <p>
    * This will create the path with given default value if the path doesn't exist.
    * <p>
-   * If the value of the path is outside of the boundary, it will be force-set to nearest boundary value.
+   * If the value of the path is outside the boundary, it will be force-set to nearest boundary value.
    *
    * @param path Config path to get value from
    * @param def  Default value if the path doesn't exist.
@@ -186,6 +133,69 @@ public abstract class BaseConfig {
    */
   public double getDouble(String path, double def) {
     return getDouble(path, def, 0, 100);
+  }
+
+  /**
+   * Get config value as {@code int} from given path with default value if the path does not present, with minimum/maximum value.
+   * <p>
+   * This will create the path with given default value if the path doesn't exist.
+   * <p>
+   * You can set minimum value and maximum value of the value. If the value of the path is outside the boundary,
+   * it will be force-set to nearest boundary value.
+   *
+   * @param path Config path to get value from
+   * @param def  Default value if the path doesn't exist.
+   * @param min  Minimum value
+   * @param max  Maximum value
+   * @return Config value as {@code int}
+   */
+  public int getInt(String path, int def, int min, int max) {
+    if (config.isSet(path)) {
+      int value = config.getInt(path, def);
+      if (value >= max || value <= min) {
+        config.set(path, def);
+        return def;
+      } else {
+        return value;
+      }
+    } else {
+      config.set(path, def);
+      return def;
+    }
+  }
+
+  /**
+   * Get config value as {@code int} from given path with default if the path does not present,
+   * with default minimum value as {@code 0} and maximum value as {@code 100}.
+   * <p>
+   * This will create the path with given default value if the path doesn't exist.
+   * <p>
+   * If the value of the path is outside the boundary, it will be force-set to nearest boundary value.
+   *
+   * @param path Config path to get value from
+   * @param def  Default value if the path doesn't exist.
+   * @return Config value as {@code int}
+   */
+  public int getInt(String path, int def) {
+    return getInt(path, def, 0, 100);
+  }
+
+  /**
+   * Get config value as {@code List} from given path with default if the path does not present.
+   * <p>
+   * This will create the path with given default value if the path doesn't exist.
+   *
+   * @param path Config path to get value from
+   * @param def Default value if the path doesn't exist
+   * @return Config value as {@code List}
+   */
+  public List<String> getStringList(String path, List<String> def) {
+    if (config.isSet(path)) {
+      return config.getStringList(path);
+    } else {
+      config.set(path, def);
+      return def;
+    }
   }
 
   /**
@@ -234,28 +244,17 @@ public abstract class BaseConfig {
   }
 
   /**
-   * Get config value as {@code int} from given path with default value if the path does not present, with minimum/maximum value.
+   * Get config value as {@code String} from given path or default value if the path does not present.
    * <p>
    * This will create the path with given default value if the path doesn't exist.
-   * <p>
-   * You can set minimum value and maximum value of the value. If the value of the path is outside of the boundary,
-   * it will be force-set to nearest boundary value.
    *
    * @param path Config path to get value from
    * @param def  Default value if the path doesn't exist.
-   * @param min  Minimum value
-   * @param max  Maximum value
-   * @return Config value as {@code int}
+   * @return Config value as {@code String}
    */
-  public int getInt(String path, int def, int min, int max) {
+  public String getString(String path, String def) {
     if (config.isSet(path)) {
-      int value = config.getInt(path, def);
-      if (value >= max || value <= min) {
-        config.set(path, def);
-        return def;
-      } else {
-        return value;
-      }
+      return config.getString(path, def);
     } else {
       config.set(path, def);
       return def;
@@ -263,18 +262,39 @@ public abstract class BaseConfig {
   }
 
   /**
-   * Get config value as {@code int} from given path with default if the path does not present,
-   * with default minimum value as {@code 0} and maximum value as {@code 100}.
-   * <p>
-   * This will create the path with given default value if the path doesn't exist.
-   * <p>
-   * If the value of the path is outside the boundary, it will be force-set to nearest boundary value.
+   * Registers all event listeners of single class provided.
    *
-   * @param path Config path to get value from
-   * @param def  Default value if the path doesn't exist.
-   * @return Config value as {@code int}
+   * @param listener a class which implements {@code Listener}
    */
-  public int getInt(String path, int def) {
-    return getInt(path, def, 0, 100);
+  public void registerListeners(@NotNull Listener listener) {
+    plugin.getServer().getPluginManager().registerEvents(listener, plugin);
+  }
+
+  /**
+   * Unregisters all event listeners of single class provided.
+   *
+   * @param listener a class which implements {@code Listener}
+   */
+  public void unregisterListeners(@NotNull Listener listener) {
+    HandlerList.unregisterAll(listener);
+  }
+
+  /**
+   * Unregisters all event listeners of this plugin
+   */
+  public void unregisterAllListeners() {
+    HandlerList.unregisterAll(plugin);
+  }
+
+  /**
+   * Saves current plugin configuration to file. Call this method inside of your plugin's {@code onDisable()}.
+   */
+  public void saveConfig() {
+    try {
+      config.save(configPath);
+      config = plugin.getConfig();
+    } catch (IOException e) {
+      logger.severe("Failed to save configuration file! - " + e.getLocalizedMessage());
+    }
   }
 }

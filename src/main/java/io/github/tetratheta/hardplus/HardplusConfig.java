@@ -4,6 +4,9 @@ import io.github.tetratheta.hardplus.module.*;
 import io.github.tetratheta.hardplus.util.DmgMod;
 import io.github.tetratheta.mol.util.BaseConfig;
 
+import java.util.Collections;
+import java.util.List;
+
 public class HardplusConfig extends BaseConfig {
   final Hardplus plugin;
 
@@ -20,6 +23,7 @@ public class HardplusConfig extends BaseConfig {
   final String strLavaDeath = "module.lava-death.";
   final String strMobTarget = "module.mob-target.";
   final String strNoFireResistance = "module.no-fire-resistance.";
+  final String strNoPassiveHealthRegen = "module.no-passive-health-regen.";
   final String strNoSweep = "module.no-sweep.";
   final String strNoWater = "module.no-water.";
   final String strSharpCut = "module.sharp-cut.";
@@ -123,6 +127,11 @@ public class HardplusConfig extends BaseConfig {
     // No Fire Resistance
     if (getBoolean(strNoFireResistance + "enable", true)) {
       registerListeners(new NoFireResistance());
+    }
+    // No Passive Health Regen
+    if (getBoolean(strNoPassiveHealthRegen + "enable", true)) {
+      List<String> list = getStringList(strNoPassiveHealthRegen + "blocked-reason", List.of("SATIATED"));
+      registerListeners(new NoPassiveHealthRegen(list));
     }
     // No Sweep
     if (getBoolean(strNoSweep + "enable", true)) {
