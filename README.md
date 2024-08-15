@@ -5,9 +5,10 @@
 # HardPlus
 **HardPlus adds extra difficulty to Paper server**
 
-[![Modrinth Version](https://img.shields.io/modrinth/v/hardplus?style=for-the-badge)](https://modrinth.com/plugin/hardplus) 
-![Modrinth Game Versions](https://img.shields.io/modrinth/game-versions/hardplus?style=for-the-badge) 
-![Modrinth Downloads](https://img.shields.io/modrinth/dt/hardplus?style=for-the-badge)
+![Version](https://img.shields.io/modrinth/v/hardplus?style=for-the-badge&label=Plugin%20Version) 
+![Game Version](https://img.shields.io/modrinth/game-versions/hardplus?style=for-the-badge&label=Minecraft%20Version)  
+[![Modrinth Downloads](https://img.shields.io/modrinth/dt/hardplus?style=for-the-badge&label=Modrinth%20Downloads)](https://modrinth.com/plugin/hardplus) 
+[![Hangar Downloads](https://img.shields.io/hangar/dt/HardPlus?style=for-the-badge&label=Hangar%20Downloads)](https://hangar.papermc.io/tetratheta/HardPlus)
 
 ## Introduction
 Many skilled Minecraft players think that Hard, the highest level of difficulty in Minecraft, is also easy.  
