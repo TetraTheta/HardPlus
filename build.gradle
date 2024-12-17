@@ -17,7 +17,7 @@ version = "2.6.1"
 def verMC = "1.21.4" // Minecraft (Modrinth, Hangar)
 def verAPI = "1.21.4" // API (dependencies & plugin.yml)
 def verPaper = "1.21.4-R0.1-SNAPSHOT" // Paper (Paper)
-def releaseChannel = "beta" // Release Channel (Modrinth & Hangar)
+def releaseChannel = "release" // Release Channel (Modrinth & Hangar)
 
 repositories {
   mavenCentral()
@@ -62,7 +62,7 @@ processResources {
 
 // Publish
 modrinth {
-  token = System.getenv("MODRINTH_TOKEN")
+  token = env.fetch("MODRINTH_TOKEN") //System.getenv("MODRINTH_TOKEN")
   projectId = "hardplus"
   versionType = releaseChannel
   uploadFile = jar
@@ -76,7 +76,7 @@ hangarPublish {
     version = version as String
     id = "HardPlus"
     channel = releaseChannel
-    apiKey = System.getenv("HANGAR_TOKEN")
+    apiKey = env.fetch("HANGAR_TOKEN") // System.getenv("HANGAR_TOKEN")
     platforms {
       paper {
         jar = tasks.jar.archiveFile
