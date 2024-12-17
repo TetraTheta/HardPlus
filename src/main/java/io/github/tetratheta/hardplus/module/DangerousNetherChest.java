@@ -12,12 +12,11 @@ import org.bukkit.event.inventory.InventoryOpenEvent;
 import org.bukkit.inventory.BlockInventoryHolder;
 import org.bukkit.inventory.InventoryHolder;
 
-import java.util.EnumSet;
 import java.util.Set;
 
 @SuppressWarnings("unused")
 public class DangerousNetherChest implements Listener {
-  final Set<Biome> netherBiomes = EnumSet.of(
+  final Set<Biome> netherBiomes = Set.of(
       Biome.NETHER_WASTES,
       Biome.CRIMSON_FOREST,
       Biome.WARPED_FOREST,

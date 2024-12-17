@@ -1,0 +1,87 @@
+main: io.github.tetratheta.hardplus.Hardplus
+api-version: ${api_version}
+load: POSTWORLD
+name: HardPlus
+authors: [ "TetraTheta" ]
+version: ${version}
+permissions:
+  hardplus.*:
+    description: Enable All modules of HardPlus
+    default: false
+    children:
+      hardplus.cold-damage: true
+      hardplus.creeper-charge: true
+      hardplus.creeper-explode: true
+      hardplus.damage-critical: true
+      hardplus.damage-give: true
+      hardplus.damage-take: true
+      hardplus.dangerous-nether-chest: true
+      hardplus.fast-air: true
+      hardplus.fire-forever: true
+      hardplus.hunger-debuff: true
+      hardplus.lava-death: true
+      hardplus.mob-target: true
+      hardplus.no-fire-resistance: true
+      hardplus.no-passive-health-regen: true
+      hardplus.no-sweep: true
+      hardplus.no-water: true
+      hardplus.sharp-cut: true
+      hardplus.uncooked-poison: true
+      hardplus.wither-skeleton-bow: true
+  hardplus.cold-damage:
+    description: Enable 'Cold Damage' module of HardPlus
+    default: false
+  hardplus.creeper-charge:
+    description: Enable 'Creeper Charge' module of HardPlus
+    default: false
+  hardplus.creeper-explode:
+    description: Enable 'Creeper Explode' module of HardPlus
+    default: false
+  hardplus.damage-critical:
+    description: Enable 'Damage Critical' module of HardPlus
+    default: false
+  hardplus.damage-give:
+    description: Enable 'Damage Give' module of HardPlus
+    default: false
+  hardplus.damage-take:
+    description: Enable 'Damage Take' module of HardPlus
+    default: false
+  hardplus.dangerous-nether-chest:
+    description: Enable 'Dangerous Nether Chest' module of HardPlus
+    default: false
+  hardplus.fast-air:
+    description: Enable 'Fast Air' module of HardPlus
+    default: false
+  hardplus.fire-forever:
+    description: Enable 'Fire Forever' module of HardPlus
+    default: false
+  hardplus.hunger-debuff:
+    description: Enable 'Hunger Debuff' module of HardPlus
+    default: false
+  hardplus.lava-death:
+    description: Enable 'Lava Death' module of HardPlus
+    default: false
+  hardplus.mob-target:
+    description: Enable 'Mob Target' module of HardPlus
+    default: false
+  hardplus.no-fire-resistance:
+    description: Enable 'No Fire Resistance' module of HardPlus
+    default: false
+  hardplus.no-passive-health-regen:
+    description: Enable 'No Passive Health Regen' module of HardPlus
+    default: false
+  hardplus.no-sweep:
+    description: Enable 'No Sweep' module of HardPlus
+    default: false
+  hardplus.no-water:
+    description: Enable 'No Water' module of HardPlus
+    default: false
+  hardplus.sharp-cut:
+    description: Enable 'Sharp Cut' module of HardPlus
+    default: false
+  hardplus.uncooked-poison:
+    description: Enable 'Uncooked Poison' module of HardPlus
+    default: false
+  hardplus.wither-skeleton-bow:
+    description: Enable 'Wither Skeleton Bow' module of HardPlus
+    default: false

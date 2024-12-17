@@ -9,7 +9,6 @@ import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -186,7 +185,7 @@ public abstract class BaseConfig {
    * This will create the path with given default value if the path doesn't exist.
    *
    * @param path Config path to get value from
-   * @param def Default value if the path doesn't exist
+   * @param def  Default value if the path doesn't exist
    * @return Config value as {@code List}
    */
   public List<String> getStringList(String path, List<String> def) {

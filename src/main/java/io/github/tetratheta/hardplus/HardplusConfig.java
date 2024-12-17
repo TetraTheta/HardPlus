@@ -4,7 +4,6 @@ import io.github.tetratheta.hardplus.module.*;
 import io.github.tetratheta.hardplus.util.DmgMod;
 import io.github.tetratheta.mol.util.BaseConfig;
 
-import java.util.Collections;
 import java.util.List;
 
 public class HardplusConfig extends BaseConfig {
@@ -169,8 +168,7 @@ public class HardplusConfig extends BaseConfig {
       int bowKnockbackLevel = getInt(strWitherSkeletonBow + "bow.knockback-level", 2);
       int arrowWitherLevel = getInt(strWitherSkeletonBow + "arrow.wither-level", 0);
 
-      registerListeners(new WitherSkeletonBow(bowChance, bowDamageLevel, bowKnockbackLevel,
-          arrowWitherLevel));
+      registerListeners(new WitherSkeletonBow(bowChance, bowDamageLevel, bowKnockbackLevel, arrowWitherLevel));
     }
   }
 }

@@ -18,20 +18,19 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import java.util.EnumSet;
 import java.util.HashSet;
 import java.util.Set;
 
 @SuppressWarnings("unused")
 public class NoWater implements Listener, Task {
-  final Set<Biome> netherBiomes = EnumSet.of(
+  final Set<Biome> netherBiomes = Set.of(
       Biome.NETHER_WASTES,
       Biome.CRIMSON_FOREST,
       Biome.WARPED_FOREST,
       Biome.SOUL_SAND_VALLEY,
       Biome.BASALT_DELTAS
   );
-  final Set<Biome> theEndBiomes = EnumSet.of(
+  final Set<Biome> theEndBiomes = Set.of(
       Biome.THE_END,
       Biome.SMALL_END_ISLANDS,
       Biome.END_MIDLANDS,
