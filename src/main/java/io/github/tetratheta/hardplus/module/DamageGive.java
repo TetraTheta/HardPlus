@@ -20,10 +20,10 @@ public class DamageGive implements Listener {
   public void onPlayerInflictDamage(EntityDamageByEntityEvent e) {
     if (e.getDamager() instanceof AbstractArrow arrow) {
       if (!(arrow.getShooter() instanceof Player p)) return;
-      if (!PlayerUtil.checkPermGameMode(p, Perm.DAMAGE_GIVE.value)) return;
+      if (!PlayerUtil.checkPermGameMode(p, Perm.DAMAGE_GIVE)) return;
       e.setDamage(e.getDamage() * modifier);
     } else if (e.getDamager() instanceof Player p) {
-      if (!PlayerUtil.checkPermGameMode(p, Perm.DAMAGE_GIVE.value)) return;
+      if (!PlayerUtil.checkPermGameMode(p, Perm.DAMAGE_GIVE)) return;
       e.setDamage(e.getDamage() * modifier);
     }
   }

@@ -12,7 +12,7 @@ public class FireForever implements Listener {
   @EventHandler
   public void onPlayerOnFire(EntityDamageEvent e) {
     if (e.getEntity() instanceof Player p) {
-      if (!PlayerUtil.checkPermGameMode(p, Perm.FIRE_FOREVER.value)) return;
+      if (!PlayerUtil.checkPermGameMode(p, Perm.FIRE_FOREVER)) return;
       if (e.getCause().equals(EntityDamageEvent.DamageCause.FIRE_TICK)) {
         if (p.getFireTicks() < 50) p.setFireTicks(1000);
       }

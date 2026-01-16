@@ -50,7 +50,7 @@ public class NoWater implements Listener, Task {
   public void onPlayerEmptyBucketInTheNether(CauldronLevelChangeEvent e) {
     // The Nether
     if (!(e.getEntity() instanceof Player p)) return;
-    if (!PlayerUtil.checkPermGameMode(p, Perm.NO_WATER.value)) return;
+    if (!PlayerUtil.checkPermGameMode(p, Perm.NO_WATER)) return;
     if (!e.getReason().equals(CauldronLevelChangeEvent.ChangeReason.BUCKET_EMPTY)) return;
 
     if (netherBiomes.contains(e.getBlock().getBiome())) {
@@ -64,7 +64,7 @@ public class NoWater implements Listener, Task {
   @EventHandler
   public void onPlayerEmptyBucketInTheEnd(PlayerBucketEmptyEvent e) {
     // The End
-    if (!PlayerUtil.checkPermGameMode(e.getPlayer(), Perm.NO_WATER.value)) return;
+    if (!PlayerUtil.checkPermGameMode(e.getPlayer(), Perm.NO_WATER)) return;
     if (theEndBiomes.contains(e.getBlockClicked().getBiome())) {
       Bukkit.getScheduler().runTask(plugin, () -> {
         PlayerInventory inventory = e.getPlayer().getInventory();

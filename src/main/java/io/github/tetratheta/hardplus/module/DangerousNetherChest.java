@@ -32,7 +32,7 @@ public class DangerousNetherChest implements Listener {
   @EventHandler
   public void onPlayerOpenChest(InventoryOpenEvent e) {
     if (!(e.getPlayer() instanceof Player p)) return; // Return if it is not player
-    if (!PlayerUtil.checkPermGameMode(p, Perm.DANGEROUS_NETHER_CHEST.value)) return; // Return if no permission
+    if (!PlayerUtil.checkPermGameMode(p, Perm.DANGEROUS_NETHER_CHEST)) return; // Return if no permission
     InventoryHolder holder = e.getInventory().getHolder();
     if (!(holder instanceof Chest) && !(holder instanceof Barrel)) return; // Return if not is Chest or Barrel
     if (!netherBiomes.contains(((BlockInventoryHolder) holder).getBlock().getBiome()))

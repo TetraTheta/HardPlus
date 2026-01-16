@@ -1,6 +1,7 @@
 package io.github.tetratheta.hardplus.module;
 
 import io.github.tetratheta.hardplus.util.Perm;
+import io.github.tetratheta.hardplus.util.PlayerUtil;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.enchantments.Enchantment;
@@ -71,8 +72,9 @@ public class WitherSkeletonBow implements Listener {
   @EventHandler
   public void onNonHPPlayerHit(EntityDamageByEntityEvent e) {
     // We can't use HPPlayer#checkPermGameMode here
+    // Why not? Does work fine.
     if (!(e.getDamager() instanceof Arrow arrow)) return;
-    if (e.getEntity() instanceof Player player && !player.hasPermission(Perm.WITHER_SKELETON_BOW.value)) {
+    if (e.getEntity() instanceof Player player && !PlayerUtil.checkPermGameMode(player, Perm.WITHER_SKELETON_BOW)) {
       Byte value = arrow.getPersistentDataContainer().get(key, PersistentDataType.BYTE);
       if (Objects.isNull(value)) return;
       if (value.equals((byte) 1)) {

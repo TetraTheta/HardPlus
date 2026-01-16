@@ -24,11 +24,11 @@ public class CreeperExplode implements Task {
       @Override
       public void run() {
         for (Player p : Bukkit.getOnlinePlayers()) {
-          if (!PlayerUtil.checkPermGameMode(p, Perm.CREEPER_EXPLODE.value)) continue;
+          if (!PlayerUtil.checkPermGameMode(p, Perm.CREEPER_EXPLODE)) continue;
           for (Entity e : p.getNearbyEntities(radius, radius, radius)) {
             if (e instanceof Creeper creeper) {
-              if (creeper.getTarget() == null) continue;
-              if (creeper.getTarget().hasPermission(Perm.CREEPER_EXPLODE.value)) {
+              if (creeper.getTarget() == null && !(creeper.getTarget() instanceof Player)) continue;
+              if (PlayerUtil.checkPermGameMode((Player) creeper.getTarget(), Perm.CREEPER_CHARGE)) {
                 creeper.explode();
               }
             }

@@ -23,7 +23,7 @@ public class DamageTake implements Listener {
   @EventHandler
   public void onPlayerTakeDamage(EntityDamageEvent e) {
     if (!(e.getEntity() instanceof Player p)) return;
-    if (!PlayerUtil.checkPermGameMode(p, Perm.DAMAGE_TAKE.value)) return;
+    if (!PlayerUtil.checkPermGameMode(p, Perm.DAMAGE_TAKE)) return;
     // Start a hell of if else
     if (e instanceof EntityDamageByEntityEvent ee) {
       // Attacker is entity

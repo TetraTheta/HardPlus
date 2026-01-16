@@ -20,7 +20,7 @@ public class HungerDebuff implements Listener {
   @EventHandler
   public void onFoodLevelChange(FoodLevelChangeEvent e) {
     if (!(e.getEntity() instanceof Player p)) return;
-    if (!PlayerUtil.checkPermGameMode(p, Perm.HUNGER_DEBUFF.value)) return;
+    if (!PlayerUtil.checkPermGameMode(p, Perm.HUNGER_DEBUFF)) return;
 
     if (e.getFoodLevel() < foodLevel) {
       PotionEffect slowness = new PotionEffect(PotionEffectType.SLOWNESS, 3600, 0, true, false);

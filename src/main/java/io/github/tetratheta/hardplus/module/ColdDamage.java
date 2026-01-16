@@ -41,7 +41,7 @@ public class ColdDamage implements Listener, Task {
       @Override
       public void run() {
         for (Player p : Bukkit.getOnlinePlayers()) {
-          if (PlayerUtil.checkPermGameMode(p, Perm.COLD_DAMAGE.value) && hasItem(p)) {
+          if (PlayerUtil.checkPermGameMode(p, Perm.COLD_DAMAGE) && hasItem(p)) {
             DamageSource source = DamageSource.builder(DamageType.FREEZE).build();
             p.damage(1, source);
           }

@@ -24,7 +24,7 @@ public class MobTarget implements Task {
       @Override
       public void run() {
         for (Player p : Bukkit.getOnlinePlayers()) {
-          if (!PlayerUtil.checkPermGameMode(p, Perm.MOB_TARGET.value)) continue;
+          if (!PlayerUtil.checkPermGameMode(p, Perm.MOB_TARGET)) continue;
           if (canBypass(p)) continue;
           for (Entity e : p.getNearbyEntities(range, range, range)) {
             if (e instanceof Monster monster) {

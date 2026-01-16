@@ -33,7 +33,7 @@ public class UncookedPoison implements Listener {
 
   @EventHandler
   public void onPlayerEat(PlayerItemConsumeEvent e) {
-    if (!PlayerUtil.checkPermGameMode(e.getPlayer(), Perm.UNCOOKED_POISON.value)) return;
+    if (!PlayerUtil.checkPermGameMode(e.getPlayer(), Perm.UNCOOKED_POISON)) return;
 
     if (uncookedFood.contains(e.getItem().getType())) {
       PotionEffect effect = new PotionEffect(PotionEffectType.POISON, duration, 0, true, false);
