@@ -7,9 +7,6 @@
 plugins {
   id("java")
   id("co.uzzu.dotenv.gradle") version "4.0.0"
-
-  id("xyz.jpenilla.run-paper") version "2.3.1"
-
   id("com.modrinth.minotaur") version "2.+"
   // No Hangar publish. I'm fed up with their not supporting Groovy DSL.
 }
@@ -20,6 +17,7 @@ version = "2.6.2"
 def verMC = "1.21.11" // Minecraft (Modrinth, Hangar)
 def verAPI = "1.21.11" // API (dependencies & plugin.yml)
 def verPaper = "1.21.11-R0.1-SNAPSHOT" // Paper (Paper)
+def verWorldGuard = "7.0.15" // WorldGuard
 def releaseChannel = "release" // Release Channel (Modrinth & Hangar)
 
 repositories {
@@ -38,13 +36,7 @@ repositories {
 dependencies {
   compileOnly("io.papermc.paper:paper-api:$verPaper")
 
-  compileOnly("com.sk89q.worldguard:worldguard-bukkit:7.0.15")
-}
-
-tasks {
-  runServer {
-    minecraftVersion("1.21.11")
-  }
+  compileOnly("com.sk89q.worldguard:worldguard-bukkit:$verWorldGuard")
 }
 
 def targetJavaVersion = 21
