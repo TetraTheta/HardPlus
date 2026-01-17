@@ -18,14 +18,17 @@ public final class Hardplus extends JavaPlugin {
 
   @Override
   public void onLoad() {
-    FlagRegistry registry = WorldGuard.getInstance().getFlagRegistry();
     try {
+      FlagRegistry registry = WorldGuard.getInstance().getFlagRegistry();
       for (Perm perm : Perm.values()) {
         StateFlag flag = new StateFlag(perm.flagName(), false);
         registry.register(flag);
         worldGuardFlags.put(perm.flagName(), flag);
       }
     } catch (FlagConflictException ignored) {
+      // TODO maybe tell in log? there is no other logging in this plugin, so i dont know
+    } catch (NoClassDefFoundError ignored) {
+      // WorldGuard not loaded. Ignore.
     }
   }
 
