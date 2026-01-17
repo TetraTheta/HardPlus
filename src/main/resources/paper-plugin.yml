@@ -8,7 +8,7 @@ dependencies:
   server:
     WorldGuard:
       load: BEFORE
-      required: true
+      required: false
 permissions:
   hardplus.*:
     description: Enable All modules of HardPlus
