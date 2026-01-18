@@ -2,7 +2,6 @@
 
 // Required Environment Variables:
 // MODRINTH_TOKEN : Token for Modrinth Publish
-// HANGAR_TOKEN : Token for Hangar Publish
 
 plugins {
   id("java")
@@ -12,7 +11,7 @@ plugins {
 }
 
 group = "io.github.tetratheta"
-version = "2.6.2"
+version = "3.0.0"
 
 def verMC = "1.21.11" // Minecraft (Modrinth, Hangar)
 def verAPI = "1.21.11" // API (dependencies & plugin.yml)
@@ -34,8 +33,8 @@ repositories {
 }
 
 dependencies {
+  //noinspection VulnerableLibrariesLocal
   compileOnly("io.papermc.paper:paper-api:$verPaper")
-
   compileOnly("com.sk89q.worldguard:worldguard-bukkit:$verWorldGuard")
 }
 
