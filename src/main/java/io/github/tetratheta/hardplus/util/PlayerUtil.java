@@ -16,13 +16,8 @@ public class PlayerUtil {
     if (!(player.getGameMode() == GameMode.SURVIVAL) && !(player.getGameMode() == GameMode.ADVENTURE)) return false;
 
     boolean test = player.hasPermission(permission.value);
-    if (Bukkit.getServer().getPluginManager().isPluginEnabled("WorldGuard")) {
-      LocalPlayer localPlayer = WorldGuardPlugin.inst().wrapPlayer(player);
-      RegionContainer container = WorldGuard.getInstance().getPlatform().getRegionContainer();
-      RegionQuery query = container.createQuery();
-
-      StateFlag flag = Hardplus.worldGuardFlags.get(permission.flagName());
-      test |= query.testState(localPlayer.getLocation(), localPlayer, flag);
+    if (Hardplus.worldGuardHook != null) {
+      test |= Hardplus.worldGuardHook.checkFlag(player, permission.flagName());
     }
 
     return test;
