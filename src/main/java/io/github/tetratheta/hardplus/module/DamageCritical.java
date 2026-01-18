@@ -22,10 +22,10 @@ public class DamageCritical implements Listener {
     // TODO: Find a cleaner way of doing this. For example, using DamageSource instead...
     if (e.getDamager() instanceof AbstractArrow arrow) {
       if (!(arrow.getShooter() instanceof Player p)) return;
-      if (!PlayerUtil.checkPermGameMode(p, Perm.DAMAGE_CRITICAL.value)) return;
+      if (!PlayerUtil.checkPermGameMode(p, Perm.DAMAGE_CRITICAL)) return;
       arrow.setCritical(false);
     } else if (e.getDamager() instanceof Player p) {
-      if (!PlayerUtil.checkPermGameMode(p, Perm.DAMAGE_CRITICAL.value)) return;
+      if (!PlayerUtil.checkPermGameMode(p, Perm.DAMAGE_CRITICAL)) return;
       // Can't cancel critical status. This will reduce damage, but leave critical particle.
       e.setDamage(e.getDamage() / 3 * 2);
     }

@@ -2,7 +2,6 @@
 
 // Required Environment Variables:
 // MODRINTH_TOKEN : Token for Modrinth Publish
-// HANGAR_TOKEN : Token for Hangar Publish
 
 plugins {
   id("java")
@@ -12,11 +11,12 @@ plugins {
 }
 
 group = "io.github.tetratheta"
-version = "2.6.2"
+version = "3.0.0"
 
-def verMC = "1.21.5" // Minecraft (Modrinth, Hangar)
-def verAPI = "1.21.5" // API (dependencies & plugin.yml)
-def verPaper = "1.21.5-R0.1-SNAPSHOT" // Paper (Paper)
+def verMC = "1.21.11" // Minecraft (Modrinth, Hangar)
+def verAPI = "1.21.11" // API (dependencies & plugin.yml)
+def verPaper = "1.21.11-R0.1-SNAPSHOT" // Paper (Paper)
+def verWorldGuard = "7.0.15" // WorldGuard
 def releaseChannel = "release" // Release Channel (Modrinth & Hangar)
 
 repositories {
@@ -27,10 +27,15 @@ repositories {
   maven {
     url = uri("https://oss.sonatype.org/content/groups/public/")
   }
+  maven {
+    url = uri("https://maven.enginehub.org/repo/")
+  }
 }
 
 dependencies {
+  //noinspection VulnerableLibrariesLocal
   compileOnly("io.papermc.paper:paper-api:$verPaper")
+  compileOnly("com.sk89q.worldguard:worldguard-bukkit:$verWorldGuard")
 }
 
 def targetJavaVersion = 21

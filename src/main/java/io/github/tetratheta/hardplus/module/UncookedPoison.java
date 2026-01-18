@@ -13,6 +13,7 @@ import java.util.Set;
 
 @SuppressWarnings("unused")
 public class UncookedPoison implements Listener {
+  final int duration;
   final Set<Material> uncookedFood = Set.of(
       Material.POTATO,
       Material.BEEF,
@@ -24,8 +25,6 @@ public class UncookedPoison implements Listener {
       Material.SALMON
   );
 
-  final int duration;
-
   public UncookedPoison(int duration) {
     // Duration is in second
     this.duration = duration * 20;
@@ -33,7 +32,7 @@ public class UncookedPoison implements Listener {
 
   @EventHandler
   public void onPlayerEat(PlayerItemConsumeEvent e) {
-    if (!PlayerUtil.checkPermGameMode(e.getPlayer(), Perm.UNCOOKED_POISON.value)) return;
+    if (!PlayerUtil.checkPermGameMode(e.getPlayer(), Perm.UNCOOKED_POISON)) return;
 
     if (uncookedFood.contains(e.getItem().getType())) {
       PotionEffect effect = new PotionEffect(PotionEffectType.POISON, duration, 0, true, false);

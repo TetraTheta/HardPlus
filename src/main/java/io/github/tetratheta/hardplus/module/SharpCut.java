@@ -15,13 +15,6 @@ import java.util.Set;
 
 @SuppressWarnings("unused")
 public class SharpCut implements Listener {
-  final Set<Material> sword = Set.of(
-      Material.WOODEN_SWORD,
-      Material.STONE_SWORD,
-      Material.IRON_SWORD,
-      Material.DIAMOND_SWORD,
-      Material.NETHERITE_SWORD
-  );
   final Set<Material> axe = Set.of(
       Material.WOODEN_AXE,
       Material.STONE_AXE,
@@ -29,12 +22,18 @@ public class SharpCut implements Listener {
       Material.DIAMOND_AXE,
       Material.NETHERITE_AXE
   );
-
+  final boolean checkAxe;
   final boolean checkJump;
   final boolean checkRun;
-  final boolean checkSword;
-  final boolean checkAxe;
   final boolean checkShear;
+  final boolean checkSword;
+  final Set<Material> sword = Set.of(
+      Material.WOODEN_SWORD,
+      Material.STONE_SWORD,
+      Material.IRON_SWORD,
+      Material.DIAMOND_SWORD,
+      Material.NETHERITE_SWORD
+  );
 
   public SharpCut(boolean checkJump, boolean checkRun, boolean checkSword, boolean checkAxe, boolean checkShear) {
     this.checkJump = checkJump;
@@ -47,17 +46,7 @@ public class SharpCut implements Listener {
   @EventHandler
   public void onPlayerJump(PlayerJumpEvent e) {
     if (!checkJump) return;
-    if (!PlayerUtil.checkPermGameMode(e.getPlayer(), Perm.SHARP_CUT.value)) return;
-
-    if (checkPlayer(e.getPlayer())) {
-      e.setCancelled(true);
-    }
-  }
-
-  @EventHandler
-  public void onPlayerRun(PlayerToggleSprintEvent e) {
-    if (!checkRun || !e.isSprinting()) return;
-    if (!PlayerUtil.checkPermGameMode(e.getPlayer(), Perm.SHARP_CUT.value)) return;
+    if (!PlayerUtil.checkPermGameMode(e.getPlayer(), Perm.SHARP_CUT)) return;
 
     if (checkPlayer(e.getPlayer())) {
       e.setCancelled(true);
@@ -90,5 +79,15 @@ public class SharpCut implements Listener {
       }
     }
     return false;
+  }
+
+  @EventHandler
+  public void onPlayerRun(PlayerToggleSprintEvent e) {
+    if (!checkRun || !e.isSprinting()) return;
+    if (!PlayerUtil.checkPermGameMode(e.getPlayer(), Perm.SHARP_CUT)) return;
+
+    if (checkPlayer(e.getPlayer())) {
+      e.setCancelled(true);
+    }
   }
 }

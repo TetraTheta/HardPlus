@@ -23,6 +23,21 @@ public class ColdDamage implements Listener, Task {
       Material.SNOWBALL
   );
 
+  @Override
+  public BukkitRunnable getTask() {
+    return new BukkitRunnable() {
+      @Override
+      public void run() {
+        for (Player p : Bukkit.getOnlinePlayers()) {
+          if (PlayerUtil.checkPermGameMode(p, Perm.COLD_DAMAGE) && hasItem(p)) {
+            DamageSource source = DamageSource.builder(DamageType.FREEZE).build();
+            p.damage(1, source);
+          }
+        }
+      }
+    };
+  }
+
   private boolean hasItem(Player p) {
     boolean hasItem = false;
     for (Material material : coldItemSet) {
@@ -32,21 +47,5 @@ public class ColdDamage implements Listener, Task {
       }
     }
     return hasItem;
-  }
-
-  @Override
-  public BukkitRunnable getTask() {
-    return new BukkitRunnable() {
-      @SuppressWarnings("UnstableApiUsage")
-      @Override
-      public void run() {
-        for (Player p : Bukkit.getOnlinePlayers()) {
-          if (PlayerUtil.checkPermGameMode(p, Perm.COLD_DAMAGE.value) && hasItem(p)) {
-            DamageSource source = DamageSource.builder(DamageType.FREEZE).build();
-            p.damage(1, source);
-          }
-        }
-      }
-    };
   }
 }

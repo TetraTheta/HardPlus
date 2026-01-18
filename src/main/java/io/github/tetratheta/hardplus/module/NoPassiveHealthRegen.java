@@ -28,7 +28,7 @@ public class NoPassiveHealthRegen implements Listener {
   @EventHandler
   public void onPlayerEffectChange(EntityPotionEffectEvent e) {
     if (!(e.getEntity() instanceof Player p)) return;
-    if (!PlayerUtil.checkPermGameMode(p, Perm.NO_PASSIVE_HEALTH_REGEN.value)) return;
+    if (!PlayerUtil.checkPermGameMode(p, Perm.NO_PASSIVE_HEALTH_REGEN)) return;
 
     if (e.getModifiedType() == PotionEffectType.REGENERATION) {
       Action action = e.getAction();
@@ -43,7 +43,7 @@ public class NoPassiveHealthRegen implements Listener {
   @EventHandler
   public void onPlayerHealthRegen(EntityRegainHealthEvent e) {
     if (!(e.getEntity() instanceof Player p)) return;
-    if (!PlayerUtil.checkPermGameMode(p, Perm.NO_PASSIVE_HEALTH_REGEN.value)) return;
+    if (!PlayerUtil.checkPermGameMode(p, Perm.NO_PASSIVE_HEALTH_REGEN)) return;
     RegainReason reason = e.getRegainReason();
     denyList.forEach(i -> {
       try {

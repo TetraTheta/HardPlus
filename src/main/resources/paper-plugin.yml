@@ -4,6 +4,11 @@ load: POSTWORLD
 name: HardPlus
 authors: [ "TetraTheta" ]
 version: ${version}
+dependencies:
+  server:
+    WorldGuard:
+      load: BEFORE
+      required: false
 permissions:
   hardplus.*:
     description: Enable All modules of HardPlus
