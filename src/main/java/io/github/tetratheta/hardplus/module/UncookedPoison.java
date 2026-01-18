@@ -13,6 +13,7 @@ import java.util.Set;
 
 @SuppressWarnings("unused")
 public class UncookedPoison implements Listener {
+  final int duration;
   final Set<Material> uncookedFood = Set.of(
       Material.POTATO,
       Material.BEEF,
@@ -23,8 +24,6 @@ public class UncookedPoison implements Listener {
       Material.RABBIT,
       Material.SALMON
   );
-
-  final int duration;
 
   public UncookedPoison(int duration) {
     // Duration is in second

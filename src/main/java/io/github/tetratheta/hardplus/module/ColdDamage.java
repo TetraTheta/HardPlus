@@ -23,21 +23,9 @@ public class ColdDamage implements Listener, Task {
       Material.SNOWBALL
   );
 
-  private boolean hasItem(Player p) {
-    boolean hasItem = false;
-    for (Material material : coldItemSet) {
-      if (p.getInventory().contains(material) || p.getInventory().getItemInOffHand().getType().equals(material)) {
-        hasItem = true;
-        break;
-      }
-    }
-    return hasItem;
-  }
-
   @Override
   public BukkitRunnable getTask() {
     return new BukkitRunnable() {
-      @SuppressWarnings("UnstableApiUsage")
       @Override
       public void run() {
         for (Player p : Bukkit.getOnlinePlayers()) {
@@ -48,5 +36,16 @@ public class ColdDamage implements Listener, Task {
         }
       }
     };
+  }
+
+  private boolean hasItem(Player p) {
+    boolean hasItem = false;
+    for (Material material : coldItemSet) {
+      if (p.getInventory().contains(material) || p.getInventory().getItemInOffHand().getType().equals(material)) {
+        hasItem = true;
+        break;
+      }
+    }
+    return hasItem;
   }
 }

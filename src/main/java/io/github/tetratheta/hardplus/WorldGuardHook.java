@@ -8,7 +8,7 @@ import com.sk89q.worldguard.protection.flags.registry.FlagRegistry;
 import com.sk89q.worldguard.protection.regions.RegionContainer;
 import com.sk89q.worldguard.protection.regions.RegionQuery;
 import io.github.tetratheta.hardplus.util.Perm;
-import org.bukkit.Bukkit;
+import net.kyori.adventure.text.Component;
 import org.bukkit.entity.Player;
 
 import java.util.HashMap;
@@ -26,7 +26,7 @@ public class WorldGuardHook {
         worldGuardFlags.put(perm.flagName(), flag);
       }
     } catch (Exception ignored) {
-      // TODO maybe tell in log? there is no other logging in this plugin, so i dont know
+      Hardplus.logger.info(Component.text("Failed to register WorldGuard flags."));
     }
   }
 

@@ -25,13 +25,12 @@ import java.util.Random;
 
 @SuppressWarnings("unused")
 public class WitherSkeletonBow implements Listener {
-  final double bowWSSpawnChance;
+  final int arrowWitherLevel;
   final int bowDamageLevel;
   final int bowKnockbackLevel;
-  final int arrowWitherLevel;
-  final Random random = new Random();
-
+  final double bowWSSpawnChance;
   final NamespacedKey key = new NamespacedKey("hardplus", "wither-skeleton-arrow");
+  final Random random = new Random();
 
   public WitherSkeletonBow(double bowSpawnChance, int arrowDamageLevel, int arrowKnockbackLevel,
                            int arrowWitherLevel) {
@@ -40,33 +39,6 @@ public class WitherSkeletonBow implements Listener {
     this.bowKnockbackLevel = arrowKnockbackLevel;
 
     this.arrowWitherLevel = arrowWitherLevel;
-  }
-
-  @EventHandler
-  public void onWitherSkeletonSpawn(CreatureSpawnEvent e) {
-    if (!(e.getEntity() instanceof WitherSkeleton)) return;
-    if (random.nextDouble() * 100 >= bowWSSpawnChance) return;
-
-    EntityEquipment mobInventory = e.getEntity().getEquipment();
-    if (mobInventory == null) return;
-    ItemStack bow = new ItemStack(Material.BOW);
-    ItemMeta bowMeta = bow.getItemMeta();
-    bowMeta.addEnchant(Enchantment.POWER, bowDamageLevel, true);
-    bowMeta.addEnchant(Enchantment.FLAME, 1, true);
-    bowMeta.addEnchant(Enchantment.PUNCH, bowKnockbackLevel, true);
-    bow.setItemMeta(bowMeta);
-    mobInventory.setItemInMainHand(bow);
-    mobInventory.setItemInMainHandDropChance(0);
-  }
-
-  @EventHandler
-  public void onWitherSkeletonShoot(EntityShootBowEvent e) {
-    if (!(e.getEntity() instanceof WitherSkeleton)) return;
-    if (!(e.getProjectile() instanceof Arrow arrow)) return;
-
-    arrow.addCustomEffect(new PotionEffect(PotionEffectType.WITHER, 800, arrowWitherLevel), true);
-    arrow.getPersistentDataContainer().set(key, PersistentDataType.BYTE, (byte) 1);
-    e.setProjectile(arrow);
   }
 
   @EventHandler
@@ -87,5 +59,32 @@ public class WitherSkeletonBow implements Listener {
         // Since Wither Skeleton shoots flamed arrow, we do not catch fire of non-HP player.
       }
     }
+  }
+
+  @EventHandler
+  public void onWitherSkeletonShoot(EntityShootBowEvent e) {
+    if (!(e.getEntity() instanceof WitherSkeleton)) return;
+    if (!(e.getProjectile() instanceof Arrow arrow)) return;
+
+    arrow.addCustomEffect(new PotionEffect(PotionEffectType.WITHER, 800, arrowWitherLevel), true);
+    arrow.getPersistentDataContainer().set(key, PersistentDataType.BYTE, (byte) 1);
+    e.setProjectile(arrow);
+  }
+
+  @EventHandler
+  public void onWitherSkeletonSpawn(CreatureSpawnEvent e) {
+    if (!(e.getEntity() instanceof WitherSkeleton)) return;
+    if (random.nextDouble() * 100 >= bowWSSpawnChance) return;
+
+    EntityEquipment mobInventory = e.getEntity().getEquipment();
+    if (mobInventory == null) return;
+    ItemStack bow = new ItemStack(Material.BOW);
+    ItemMeta bowMeta = bow.getItemMeta();
+    bowMeta.addEnchant(Enchantment.POWER, bowDamageLevel, true);
+    bowMeta.addEnchant(Enchantment.FLAME, 1, true);
+    bowMeta.addEnchant(Enchantment.PUNCH, bowKnockbackLevel, true);
+    bow.setItemMeta(bowMeta);
+    mobInventory.setItemInMainHand(bow);
+    mobInventory.setItemInMainHandDropChance(0);
   }
 }

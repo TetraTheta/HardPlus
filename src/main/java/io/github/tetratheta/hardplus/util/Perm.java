@@ -20,12 +20,14 @@ public enum Perm {
   SHARP_CUT("hardplus.sharp-cut"),
   UNCOOKED_POISON("hardplus.uncooked-poison"),
   WITHER_SKELETON_BOW("hardplus.wither-skeleton-bow");
+
   public final String value;
-  public String flagName() {
-    return this.value.replace(".", "-");
-  }
 
   Perm(String value) {
     this.value = value;
+  }
+
+  public String flagName() {
+    return this.value.replace(".", "-");
   }
 }
