@@ -11,12 +11,12 @@ plugins {
 }
 
 group = "io.github.tetratheta"
-version = "3.0.0"
+version = "3.0.1"
 
-def verMC = "1.21.11" // Minecraft (Modrinth, Hangar)
-def verAPI = "1.21.11" // API (dependencies & plugin.yml)
-def verPaper = "1.21.11-R0.1-SNAPSHOT" // Paper (Paper)
-def verWorldGuard = "7.0.15" // WorldGuard
+def verMC = "26.1.2" // Minecraft (Modrinth, Hangar)
+def verAPI = "26.1.2" // API (dependencies & plugin.yml)
+def verPaper = "26.1.2.build.+" // Paper (Paper)
+def verWorldGuard = "7.0.17" // WorldGuard
 def releaseChannel = "release" // Release Channel (Modrinth & Hangar)
 
 repositories {
@@ -38,7 +38,7 @@ dependencies {
   compileOnly("com.sk89q.worldguard:worldguard-bukkit:$verWorldGuard")
 }
 
-def targetJavaVersion = 21
+def targetJavaVersion = 25
 
 java {
   def javaVersion = JavaVersion.toVersion(targetJavaVersion)
