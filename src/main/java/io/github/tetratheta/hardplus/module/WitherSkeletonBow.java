@@ -2,6 +2,8 @@ package io.github.tetratheta.hardplus.module;
 
 import io.github.tetratheta.hardplus.util.Perm;
 import io.github.tetratheta.hardplus.util.PlayerUtil;
+import java.util.Objects;
+import java.util.Random;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.enchantments.Enchantment;
@@ -20,9 +22,6 @@ import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
-import java.util.Objects;
-import java.util.Random;
-
 @SuppressWarnings("unused")
 public class WitherSkeletonBow implements Listener {
   final int arrowWitherLevel;
@@ -32,8 +31,8 @@ public class WitherSkeletonBow implements Listener {
   final NamespacedKey key = new NamespacedKey("hardplus", "wither-skeleton-arrow");
   final Random random = new Random();
 
-  public WitherSkeletonBow(double bowSpawnChance, int arrowDamageLevel, int arrowKnockbackLevel,
-                           int arrowWitherLevel) {
+  public WitherSkeletonBow(
+      double bowSpawnChance, int arrowDamageLevel, int arrowKnockbackLevel, int arrowWitherLevel) {
     this.bowWSSpawnChance = bowSpawnChance;
     this.bowDamageLevel = arrowDamageLevel;
     this.bowKnockbackLevel = arrowKnockbackLevel;
@@ -46,7 +45,8 @@ public class WitherSkeletonBow implements Listener {
     // We can't use HPPlayer#checkPermGameMode here
     // Why not? Does work fine.
     if (!(e.getDamager() instanceof Arrow arrow)) return;
-    if (e.getEntity() instanceof Player player && !PlayerUtil.checkPermGameMode(player, Perm.WITHER_SKELETON_BOW)) {
+    if (e.getEntity() instanceof Player player
+        && !PlayerUtil.checkPermGameMode(player, Perm.WITHER_SKELETON_BOW)) {
       Byte value = arrow.getPersistentDataContainer().get(key, PersistentDataType.BYTE);
       if (Objects.isNull(value)) return;
       if (value.equals((byte) 1)) {

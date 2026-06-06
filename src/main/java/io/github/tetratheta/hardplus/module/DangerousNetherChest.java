@@ -2,6 +2,7 @@ package io.github.tetratheta.hardplus.module;
 
 import io.github.tetratheta.hardplus.util.Perm;
 import io.github.tetratheta.hardplus.util.PlayerUtil;
+import java.util.Set;
 import org.bukkit.block.Barrel;
 import org.bukkit.block.Biome;
 import org.bukkit.block.Chest;
@@ -12,17 +13,15 @@ import org.bukkit.event.inventory.InventoryOpenEvent;
 import org.bukkit.inventory.BlockInventoryHolder;
 import org.bukkit.inventory.InventoryHolder;
 
-import java.util.Set;
-
 @SuppressWarnings("unused")
 public class DangerousNetherChest implements Listener {
-  final Set<Biome> netherBiomes = Set.of(
-      Biome.NETHER_WASTES,
-      Biome.CRIMSON_FOREST,
-      Biome.WARPED_FOREST,
-      Biome.SOUL_SAND_VALLEY,
-      Biome.BASALT_DELTAS
-  );
+  final Set<Biome> netherBiomes =
+      Set.of(
+          Biome.NETHER_WASTES,
+          Biome.CRIMSON_FOREST,
+          Biome.WARPED_FOREST,
+          Biome.SOUL_SAND_VALLEY,
+          Biome.BASALT_DELTAS);
   final double radius;
 
   public DangerousNetherChest(double radius) {
@@ -32,9 +31,11 @@ public class DangerousNetherChest implements Listener {
   @EventHandler
   public void onPlayerOpenChest(InventoryOpenEvent e) {
     if (!(e.getPlayer() instanceof Player p)) return; // Return if it is not player
-    if (!PlayerUtil.checkPermGameMode(p, Perm.DANGEROUS_NETHER_CHEST)) return; // Return if no permission
+    if (!PlayerUtil.checkPermGameMode(p, Perm.DANGEROUS_NETHER_CHEST))
+      return; // Return if no permission
     InventoryHolder holder = e.getInventory().getHolder();
-    if (!(holder instanceof Chest) && !(holder instanceof Barrel)) return; // Return if not is Chest or Barrel
+    if (!(holder instanceof Chest) && !(holder instanceof Barrel))
+      return; // Return if not is Chest or Barrel
     if (!netherBiomes.contains(((BlockInventoryHolder) holder).getBlock().getBiome()))
       return; // Return if not in The Nether biomes
 

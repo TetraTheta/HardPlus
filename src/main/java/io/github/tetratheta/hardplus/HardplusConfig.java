@@ -3,7 +3,6 @@ package io.github.tetratheta.hardplus;
 import io.github.tetratheta.hardplus.module.*;
 import io.github.tetratheta.hardplus.util.DmgMod;
 import io.github.tetratheta.mol.util.BaseConfig;
-
 import java.util.List;
 
 public class HardplusConfig extends BaseConfig {
@@ -80,12 +79,18 @@ public class HardplusConfig extends BaseConfig {
       dmgMod.MELEE = getDouble(strDamageTake + "modifier.melee", dmgMod.DEFAULT, 1, 100);
       dmgMod.FALL = getDouble(strDamageTake + "modifier.fall", dmgMod.DEFAULT, 1, 100);
       dmgMod.MAGIC = getDouble(strDamageTake + "modifier.magic", dmgMod.DEFAULT, 1, 100);
-      dmgMod.ENVIRONMENT = getDouble(strDamageTake + "modifier.environment", dmgMod.DEFAULT, 1, 100);
-      dmgMod.MOB_PASSIVE = getDouble(strDamageTake + "modifier.mob.passive", dmgMod.DEFAULT, 1, 100);
-      dmgMod.MOB_HOSTILE = getDouble(strDamageTake + "modifier.mob.hostile.default", dmgMod.DEFAULT, 1, 100);
-      dmgMod.ZOMBIE = getDouble(strDamageTake + "modifier.mob.hostile.zombie", dmgMod.DEFAULT, 1, 100);
-      dmgMod.SKELETON = getDouble(strDamageTake + "modifier.mob.hostile.skeleton", dmgMod.DEFAULT, 1, 100);
-      dmgMod.ENDERMAN = getDouble(strDamageTake + "modifier.mob.hostile.enderman", dmgMod.DEFAULT, 1, 100);
+      dmgMod.ENVIRONMENT =
+          getDouble(strDamageTake + "modifier.environment", dmgMod.DEFAULT, 1, 100);
+      dmgMod.MOB_PASSIVE =
+          getDouble(strDamageTake + "modifier.mob.passive", dmgMod.DEFAULT, 1, 100);
+      dmgMod.MOB_HOSTILE =
+          getDouble(strDamageTake + "modifier.mob.hostile.default", dmgMod.DEFAULT, 1, 100);
+      dmgMod.ZOMBIE =
+          getDouble(strDamageTake + "modifier.mob.hostile.zombie", dmgMod.DEFAULT, 1, 100);
+      dmgMod.SKELETON =
+          getDouble(strDamageTake + "modifier.mob.hostile.skeleton", dmgMod.DEFAULT, 1, 100);
+      dmgMod.ENDERMAN =
+          getDouble(strDamageTake + "modifier.mob.hostile.enderman", dmgMod.DEFAULT, 1, 100);
 
       registerListeners(new DamageTake(dmgMod));
     }
@@ -129,7 +134,8 @@ public class HardplusConfig extends BaseConfig {
     }
     // No Passive Health Regen
     if (getBoolean(strNoPassiveHealthRegen + "enable", true)) {
-      List<String> list = getStringList(strNoPassiveHealthRegen + "blocked-reason", List.of("SATIATED"));
+      List<String> list =
+          getStringList(strNoPassiveHealthRegen + "blocked-reason", List.of("SATIATED"));
       registerListeners(new NoPassiveHealthRegen(list));
     }
     // No Sweep
@@ -168,7 +174,8 @@ public class HardplusConfig extends BaseConfig {
       int bowKnockbackLevel = getInt(strWitherSkeletonBow + "bow.knockback-level", 2);
       int arrowWitherLevel = getInt(strWitherSkeletonBow + "arrow.wither-level", 0);
 
-      registerListeners(new WitherSkeletonBow(bowChance, bowDamageLevel, bowKnockbackLevel, arrowWitherLevel));
+      registerListeners(
+          new WitherSkeletonBow(bowChance, bowDamageLevel, bowKnockbackLevel, arrowWitherLevel));
     }
   }
 }

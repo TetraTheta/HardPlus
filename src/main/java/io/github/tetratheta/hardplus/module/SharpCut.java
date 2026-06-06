@@ -3,6 +3,7 @@ package io.github.tetratheta.hardplus.module;
 import com.destroystokyo.paper.event.player.PlayerJumpEvent;
 import io.github.tetratheta.hardplus.util.Perm;
 import io.github.tetratheta.hardplus.util.PlayerUtil;
+import java.util.Set;
 import org.bukkit.Material;
 import org.bukkit.damage.DamageSource;
 import org.bukkit.damage.DamageType;
@@ -11,31 +12,34 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerToggleSprintEvent;
 
-import java.util.Set;
-
 @SuppressWarnings("unused")
 public class SharpCut implements Listener {
-  final Set<Material> axe = Set.of(
-      Material.WOODEN_AXE,
-      Material.STONE_AXE,
-      Material.IRON_AXE,
-      Material.DIAMOND_AXE,
-      Material.NETHERITE_AXE
-  );
+  final Set<Material> axe =
+      Set.of(
+          Material.WOODEN_AXE,
+          Material.STONE_AXE,
+          Material.IRON_AXE,
+          Material.DIAMOND_AXE,
+          Material.NETHERITE_AXE);
   final boolean checkAxe;
   final boolean checkJump;
   final boolean checkRun;
   final boolean checkShear;
   final boolean checkSword;
-  final Set<Material> sword = Set.of(
-      Material.WOODEN_SWORD,
-      Material.STONE_SWORD,
-      Material.IRON_SWORD,
-      Material.DIAMOND_SWORD,
-      Material.NETHERITE_SWORD
-  );
+  final Set<Material> sword =
+      Set.of(
+          Material.WOODEN_SWORD,
+          Material.STONE_SWORD,
+          Material.IRON_SWORD,
+          Material.DIAMOND_SWORD,
+          Material.NETHERITE_SWORD);
 
-  public SharpCut(boolean checkJump, boolean checkRun, boolean checkSword, boolean checkAxe, boolean checkShear) {
+  public SharpCut(
+      boolean checkJump,
+      boolean checkRun,
+      boolean checkSword,
+      boolean checkAxe,
+      boolean checkShear) {
     this.checkJump = checkJump;
     this.checkRun = checkRun;
     this.checkSword = checkSword;
@@ -53,7 +57,6 @@ public class SharpCut implements Listener {
     }
   }
 
-  @SuppressWarnings("UnstableApiUsage")
   private boolean checkPlayer(Player p) {
     Material mainHand = p.getInventory().getItemInMainHand().getType();
     Material offHand = p.getInventory().getItemInOffHand().getType();

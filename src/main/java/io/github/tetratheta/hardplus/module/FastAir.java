@@ -2,13 +2,12 @@ package io.github.tetratheta.hardplus.module;
 
 import io.github.tetratheta.hardplus.util.Perm;
 import io.github.tetratheta.hardplus.util.PlayerUtil;
+import java.util.HashMap;
+import java.util.Map;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityAirChangeEvent;
-
-import java.util.HashMap;
-import java.util.Map;
 
 @SuppressWarnings("unused")
 public class FastAir implements Listener {

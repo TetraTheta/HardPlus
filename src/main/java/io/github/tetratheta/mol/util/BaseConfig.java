@@ -1,5 +1,11 @@
 package io.github.tetratheta.mol.util;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+import java.util.logging.Logger;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.event.HandlerList;
 import org.bukkit.event.Listener;
@@ -7,15 +13,8 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitTask;
 import org.jetbrains.annotations.NotNull;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-import java.util.logging.Logger;
-
-/// Provides base configuration methods, with useful methods which automatically creates corresponding config path
-/// if the path is not present.
+/// Provides base configuration methods, with useful methods which automatically creates
+/// corresponding config path if the path is not present.
 @SuppressWarnings("unused")
 public abstract class BaseConfig {
   /// List of `BukkitTask` which are registered by your plugin
@@ -77,12 +76,12 @@ public abstract class BaseConfig {
     }
   }
 
-  /// Get config value as `double` from given path or default value if the path does not present, with minimum/maximum value.
-  ///
+  /// Get config value as `double` from given path or default value if the path does not present,
+  /// with minimum/maximum value.
   /// This will create the path with given default value if the path doesn't exist.
   ///
-  /// You can set minimum value and maximum value of the value. If the value of the path is outside the boundary,
-  /// it will be force-set to nearest boundary value.
+  /// You can set minimum value and maximum value of the value. If the value of the path is outside
+  /// the boundary, it will be force-set to nearest boundary value.
   ///
   /// @param path Config path to get value from
   /// @param def  Default value if the path doesn't exist.
@@ -109,7 +108,8 @@ public abstract class BaseConfig {
   ///
   /// This will create the path with given default value if the path doesn't exist.
   ///
-  /// If the value of the path is outside the boundary, it will be force-set to nearest boundary value.
+  /// If the value of the path is outside the boundary, it will be force-set to nearest boundary
+  /// value.
   ///
   /// @param path Config path to get value from
   /// @param def  Default value if the path doesn't exist.
@@ -118,12 +118,13 @@ public abstract class BaseConfig {
     return getDouble(path, def, 0, 100);
   }
 
-  /// Get config value as `int` from given path with default value if the path does not present, with minimum/maximum value.
+  /// Get config value as `int` from given path with default value if the path does not present,
+  /// with minimum/maximum value.
   ///
   /// This will create the path with given default value if the path doesn't exist.
   ///
-  /// You can set minimum value and maximum value of the value. If the value of the path is outside the boundary,
-  /// it will be force-set to nearest boundary value.
+  /// You can set minimum value and maximum value of the value. If the value of the path is outside
+  /// the boundary, it will be force-set to nearest boundary value.
   ///
   /// @param path Config path to get value from
   /// @param def  Default value if the path doesn't exist.
@@ -150,7 +151,8 @@ public abstract class BaseConfig {
   ///
   /// This will create the path with given default value if the path doesn't exist.
   ///
-  /// If the value of the path is outside the boundary, it will be force-set to nearest boundary value.
+  /// If the value of the path is outside the boundary, it will be force-set to nearest boundary
+  /// value.
   ///
   /// @param path Config path to get value from
   /// @param def  Default value if the path doesn't exist.
@@ -175,12 +177,13 @@ public abstract class BaseConfig {
     }
   }
 
-  /// Get config value as `long` from given path with default if the path does not present, with minimum/maximum value.
+  /// Get config value as `long` from given path with default if the path does not present, with
+  /// minimum/maximum value.
   ///
   /// This will create the path with given default value if the path doesn't exist.
   ///
-  /// You can set minimum value and maximum value of the value. If the value of the path is outside of the boundary,
-  /// it will be force-set to nearest boundary value.
+  /// You can set minimum value and maximum value of the value. If the value of the path is outside
+  /// of the boundary, it will be force-set to nearest boundary value.
   ///
   /// @param path Config path to get value from
   /// @param def  Default value if the path doesn't exist.
@@ -207,7 +210,8 @@ public abstract class BaseConfig {
   ///
   /// This will create the path with given default value if the path doesn't exist.
   ///
-  /// If the value of the path is outside the boundary, it will be force-set to nearest boundary value.
+  /// If the value of the path is outside the boundary, it will be force-set to nearest boundary
+  /// value.
   ///
   /// @param path Config path to get value from
   /// @param def  Default value if the path doesn't exist.
@@ -251,7 +255,8 @@ public abstract class BaseConfig {
     HandlerList.unregisterAll(plugin);
   }
 
-  /// Saves current plugin configuration to file. Call this method inside of your plugin's `onDisable()`.
+  /// Saves current plugin configuration to file. Call this method inside of your plugin's
+  /// `onDisable()`.
   public void saveConfig() {
     try {
       config.save(configPath);

@@ -24,7 +24,8 @@ public class HungerDebuff implements Listener {
 
     if (e.getFoodLevel() < foodLevel) {
       PotionEffect slowness = new PotionEffect(PotionEffectType.SLOWNESS, 3600, 0, true, false);
-      PotionEffect miningFatigue = new PotionEffect(PotionEffectType.MINING_FATIGUE, 3600, 1, true, false);
+      PotionEffect miningFatigue =
+          new PotionEffect(PotionEffectType.MINING_FATIGUE, 3600, 1, true, false);
       PotionEffect weakness = new PotionEffect(PotionEffectType.WEAKNESS, 3600, 1, true, false);
       p.addPotionEffect(slowness);
       p.addPotionEffect(miningFatigue);

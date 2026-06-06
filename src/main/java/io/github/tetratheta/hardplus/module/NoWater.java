@@ -4,6 +4,8 @@ import io.github.tetratheta.hardplus.Hardplus;
 import io.github.tetratheta.hardplus.util.Perm;
 import io.github.tetratheta.hardplus.util.PlayerUtil;
 import io.github.tetratheta.mol.util.Task;
+import java.util.HashSet;
+import java.util.Set;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.block.Biome;
@@ -18,27 +20,24 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import java.util.HashSet;
-import java.util.Set;
-
 @SuppressWarnings("unused")
 public class NoWater implements Listener, Task {
   final Set<Block> cauldrons = new HashSet<>();
-  final Set<Biome> netherBiomes = Set.of(
-      Biome.NETHER_WASTES,
-      Biome.CRIMSON_FOREST,
-      Biome.WARPED_FOREST,
-      Biome.SOUL_SAND_VALLEY,
-      Biome.BASALT_DELTAS
-  );
+  final Set<Biome> netherBiomes =
+      Set.of(
+          Biome.NETHER_WASTES,
+          Biome.CRIMSON_FOREST,
+          Biome.WARPED_FOREST,
+          Biome.SOUL_SAND_VALLEY,
+          Biome.BASALT_DELTAS);
   final Hardplus plugin;
-  final Set<Biome> theEndBiomes = Set.of(
-      Biome.THE_END,
-      Biome.SMALL_END_ISLANDS,
-      Biome.END_MIDLANDS,
-      Biome.END_HIGHLANDS,
-      Biome.END_BARRENS
-  );
+  final Set<Biome> theEndBiomes =
+      Set.of(
+          Biome.THE_END,
+          Biome.SMALL_END_ISLANDS,
+          Biome.END_MIDLANDS,
+          Biome.END_HIGHLANDS,
+          Biome.END_BARRENS);
 
   public NoWater(Hardplus hardplus) {
     this.plugin = hardplus;
@@ -73,18 +72,21 @@ public class NoWater implements Listener, Task {
     // The End
     if (!PlayerUtil.checkPermGameMode(e.getPlayer(), Perm.NO_WATER)) return;
     if (theEndBiomes.contains(e.getBlockClicked().getBiome())) {
-      Bukkit.getScheduler().runTask(plugin, () -> {
-        PlayerInventory inventory = e.getPlayer().getInventory();
-        ItemStack mainHand = inventory.getItemInMainHand();
-        ItemStack offHand = inventory.getItemInOffHand();
-        if (mainHand.getType().equals(Material.WATER_BUCKET)) {
-          inventory.setItemInMainHand(new ItemStack(Material.BUCKET));
-          e.setCancelled(true);
-        } else if (offHand.getType().equals(Material.WATER_BUCKET)) {
-          inventory.setItemInOffHand(new ItemStack(Material.BUCKET));
-          e.setCancelled(true);
-        }
-      });
+      Bukkit.getScheduler()
+          .runTask(
+              plugin,
+              () -> {
+                PlayerInventory inventory = e.getPlayer().getInventory();
+                ItemStack mainHand = inventory.getItemInMainHand();
+                ItemStack offHand = inventory.getItemInOffHand();
+                if (mainHand.getType().equals(Material.WATER_BUCKET)) {
+                  inventory.setItemInMainHand(new ItemStack(Material.BUCKET));
+                  e.setCancelled(true);
+                } else if (offHand.getType().equals(Material.WATER_BUCKET)) {
+                  inventory.setItemInOffHand(new ItemStack(Material.BUCKET));
+                  e.setCancelled(true);
+                }
+              });
     }
   }
 

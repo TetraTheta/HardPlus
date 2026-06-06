@@ -8,11 +8,10 @@ import com.sk89q.worldguard.protection.flags.registry.FlagRegistry;
 import com.sk89q.worldguard.protection.regions.RegionContainer;
 import com.sk89q.worldguard.protection.regions.RegionQuery;
 import io.github.tetratheta.hardplus.util.Perm;
-import net.kyori.adventure.text.Component;
-import org.bukkit.entity.Player;
-
 import java.util.HashMap;
 import java.util.Map;
+import net.kyori.adventure.text.Component;
+import org.bukkit.entity.Player;
 
 public class WorldGuardHook {
   private final Map<String, StateFlag> worldGuardFlags = new HashMap<>();
