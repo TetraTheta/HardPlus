@@ -1,6 +1,6 @@
-<div style="text-align: center">
+<p align="center">
 <img src="https://raw.githubusercontent.com/TetraTheta/HardPlus/main/.etc/hardplus_info.png" style="width: 100%" alt="HardPlus Logo">
-</div>
+</p>
 
 # HardPlus
 **HardPlus adds extra difficulty to Paper server**
