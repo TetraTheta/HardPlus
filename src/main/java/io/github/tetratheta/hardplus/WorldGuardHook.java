@@ -33,7 +33,6 @@ public class WorldGuardHook {
     LocalPlayer localPlayer = WorldGuardPlugin.inst().wrapPlayer(player);
     RegionContainer container = WorldGuard.getInstance().getPlatform().getRegionContainer();
     RegionQuery query = container.createQuery();
-
     StateFlag stateFlag = worldGuardFlags.get(flagName);
     return query.testState(localPlayer.getLocation(), localPlayer, stateFlag);
   }

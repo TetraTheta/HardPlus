@@ -14,13 +14,13 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 @SuppressWarnings("unused")
 public class ColdDamage implements Listener, Task {
-  final Set<Material> coldItemSet =
-      Set.of(
-          Material.ICE,
-          Material.PACKED_ICE,
-          Material.BLUE_ICE,
-          Material.SNOW_BLOCK,
-          Material.SNOWBALL);
+  final Set<Material> coldItemSet = Set.of(
+    Material.BLUE_ICE,
+    Material.ICE,
+    Material.PACKED_ICE,
+    Material.SNOW_BLOCK,
+    Material.SNOWBALL
+  );
 
   @Override
   public BukkitRunnable getTask() {
@@ -40,8 +40,7 @@ public class ColdDamage implements Listener, Task {
   private boolean hasItem(Player p) {
     boolean hasItem = false;
     for (Material material : coldItemSet) {
-      if (p.getInventory().contains(material)
-          || p.getInventory().getItemInOffHand().getType().equals(material)) {
+      if (p.getInventory().contains(material) || p.getInventory().getItemInOffHand().getType().equals(material)) {
         hasItem = true;
         break;
       }

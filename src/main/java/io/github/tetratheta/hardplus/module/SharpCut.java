@@ -14,32 +14,27 @@ import org.bukkit.event.player.PlayerToggleSprintEvent;
 
 @SuppressWarnings("unused")
 public class SharpCut implements Listener {
-  final Set<Material> axe =
-      Set.of(
-          Material.WOODEN_AXE,
-          Material.STONE_AXE,
-          Material.IRON_AXE,
-          Material.DIAMOND_AXE,
-          Material.NETHERITE_AXE);
+  final Set<Material> axe = Set.of(
+    Material.WOODEN_AXE,
+    Material.STONE_AXE,
+    Material.IRON_AXE,
+    Material.DIAMOND_AXE,
+    Material.NETHERITE_AXE
+  );
   final boolean checkAxe;
   final boolean checkJump;
   final boolean checkRun;
   final boolean checkShear;
   final boolean checkSword;
-  final Set<Material> sword =
-      Set.of(
-          Material.WOODEN_SWORD,
-          Material.STONE_SWORD,
-          Material.IRON_SWORD,
-          Material.DIAMOND_SWORD,
-          Material.NETHERITE_SWORD);
+  final Set<Material> sword = Set.of(
+    Material.WOODEN_SWORD,
+    Material.STONE_SWORD,
+    Material.IRON_SWORD,
+    Material.DIAMOND_SWORD,
+    Material.NETHERITE_SWORD
+  );
 
-  public SharpCut(
-      boolean checkJump,
-      boolean checkRun,
-      boolean checkSword,
-      boolean checkAxe,
-      boolean checkShear) {
+  public SharpCut(boolean checkJump, boolean checkRun, boolean checkSword, boolean checkAxe, boolean checkShear) {
     this.checkJump = checkJump;
     this.checkRun = checkRun;
     this.checkSword = checkSword;
@@ -51,7 +46,6 @@ public class SharpCut implements Listener {
   public void onPlayerJump(PlayerJumpEvent e) {
     if (!checkJump) return;
     if (!PlayerUtil.checkPermGameMode(e.getPlayer(), Perm.SHARP_CUT)) return;
-
     if (checkPlayer(e.getPlayer())) {
       e.setCancelled(true);
     }
@@ -60,9 +54,7 @@ public class SharpCut implements Listener {
   private boolean checkPlayer(Player p) {
     Material mainHand = p.getInventory().getItemInMainHand().getType();
     Material offHand = p.getInventory().getItemInOffHand().getType();
-
     DamageSource source = DamageSource.builder(DamageType.CACTUS).build();
-
     if (checkSword) {
       if (sword.contains(mainHand) || sword.contains(offHand)) {
         p.damage(1, source);
@@ -88,7 +80,6 @@ public class SharpCut implements Listener {
   public void onPlayerRun(PlayerToggleSprintEvent e) {
     if (!checkRun || !e.isSprinting()) return;
     if (!PlayerUtil.checkPermGameMode(e.getPlayer(), Perm.SHARP_CUT)) return;
-
     if (checkPlayer(e.getPlayer())) {
       e.setCancelled(true);
     }

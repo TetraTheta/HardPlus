@@ -1,13 +1,30 @@
 package io.github.tetratheta.hardplus;
 
-import io.github.tetratheta.hardplus.module.*;
+import io.github.tetratheta.hardplus.module.ColdDamage;
+import io.github.tetratheta.hardplus.module.CreeperCharge;
+import io.github.tetratheta.hardplus.module.CreeperExplode;
+import io.github.tetratheta.hardplus.module.DamageCritical;
+import io.github.tetratheta.hardplus.module.DamageGive;
+import io.github.tetratheta.hardplus.module.DamageTake;
+import io.github.tetratheta.hardplus.module.DangerousNetherChest;
+import io.github.tetratheta.hardplus.module.FastAir;
+import io.github.tetratheta.hardplus.module.FireForever;
+import io.github.tetratheta.hardplus.module.HungerDebuff;
+import io.github.tetratheta.hardplus.module.LavaDeath;
+import io.github.tetratheta.hardplus.module.MobTarget;
+import io.github.tetratheta.hardplus.module.NoFireResistance;
+import io.github.tetratheta.hardplus.module.NoPassiveHealthRegen;
+import io.github.tetratheta.hardplus.module.NoSweep;
+import io.github.tetratheta.hardplus.module.NoWater;
+import io.github.tetratheta.hardplus.module.SharpCut;
+import io.github.tetratheta.hardplus.module.UncookedPoison;
+import io.github.tetratheta.hardplus.module.WitherSkeletonBow;
 import io.github.tetratheta.hardplus.util.DmgMod;
 import io.github.tetratheta.mol.util.BaseConfig;
 import java.util.List;
 
 public class HardplusConfig extends BaseConfig {
   final Hardplus plugin;
-
   final String strColdDamage = "module.cold-damage.";
   final String strCreeperCharge = "module.creeper-charge.";
   final String strCreeperExplode = "module.creeper-explode.";
@@ -39,7 +56,6 @@ public class HardplusConfig extends BaseConfig {
     if (getBoolean(strColdDamage + "enable", true)) {
       long delay = getLong(strColdDamage + "timer.delay", 10);
       long period = getLong(strColdDamage + "timer.period", 10);
-
       ColdDamage coldDamage = new ColdDamage();
       registerListeners(coldDamage);
       tasks.add(coldDamage.getTask().runTaskTimer(plugin, delay, period));
@@ -49,7 +65,6 @@ public class HardplusConfig extends BaseConfig {
       double radius = getDouble(strCreeperCharge + "radius", 16);
       long delay = getLong(strCreeperCharge + "timer.delay", 10);
       long period = getLong(strCreeperCharge + "timer.period", 10);
-
       tasks.add(new CreeperCharge(radius).getTask().runTaskTimer(plugin, delay, period));
     }
     // Creeper Explode
@@ -57,7 +72,6 @@ public class HardplusConfig extends BaseConfig {
       double radius = getDouble(strCreeperExplode + "radius", 2.5);
       long delay = getLong(strCreeperExplode + "timer.delay", 10);
       long period = getLong(strCreeperExplode + "timer.period", 10);
-
       tasks.add(new CreeperExplode(radius).getTask().runTaskTimer(plugin, delay, period));
     }
     // Damage Critical
@@ -67,7 +81,6 @@ public class HardplusConfig extends BaseConfig {
     // Damage Give
     if (getBoolean(strDamageGive + "enable", true)) {
       double modifier = getDouble(strDamageGive + "modifier", 0.4, 0, 1);
-
       registerListeners(new DamageGive(modifier));
     }
     // Damage Take
@@ -79,31 +92,22 @@ public class HardplusConfig extends BaseConfig {
       dmgMod.MELEE = getDouble(strDamageTake + "modifier.melee", dmgMod.DEFAULT, 1, 100);
       dmgMod.FALL = getDouble(strDamageTake + "modifier.fall", dmgMod.DEFAULT, 1, 100);
       dmgMod.MAGIC = getDouble(strDamageTake + "modifier.magic", dmgMod.DEFAULT, 1, 100);
-      dmgMod.ENVIRONMENT =
-          getDouble(strDamageTake + "modifier.environment", dmgMod.DEFAULT, 1, 100);
-      dmgMod.MOB_PASSIVE =
-          getDouble(strDamageTake + "modifier.mob.passive", dmgMod.DEFAULT, 1, 100);
-      dmgMod.MOB_HOSTILE =
-          getDouble(strDamageTake + "modifier.mob.hostile.default", dmgMod.DEFAULT, 1, 100);
-      dmgMod.ZOMBIE =
-          getDouble(strDamageTake + "modifier.mob.hostile.zombie", dmgMod.DEFAULT, 1, 100);
-      dmgMod.SKELETON =
-          getDouble(strDamageTake + "modifier.mob.hostile.skeleton", dmgMod.DEFAULT, 1, 100);
-      dmgMod.ENDERMAN =
-          getDouble(strDamageTake + "modifier.mob.hostile.enderman", dmgMod.DEFAULT, 1, 100);
-
+      dmgMod.ENVIRONMENT = getDouble(strDamageTake + "modifier.environment", dmgMod.DEFAULT, 1, 100);
+      dmgMod.MOB_PASSIVE = getDouble(strDamageTake + "modifier.mob.passive", dmgMod.DEFAULT, 1, 100);
+      dmgMod.MOB_HOSTILE = getDouble(strDamageTake + "modifier.mob.hostile.default", dmgMod.DEFAULT, 1, 100);
+      dmgMod.ZOMBIE = getDouble(strDamageTake + "modifier.mob.hostile.zombie", dmgMod.DEFAULT, 1, 100);
+      dmgMod.SKELETON = getDouble(strDamageTake + "modifier.mob.hostile.skeleton", dmgMod.DEFAULT, 1, 100);
+      dmgMod.ENDERMAN = getDouble(strDamageTake + "modifier.mob.hostile.enderman", dmgMod.DEFAULT, 1, 100);
       registerListeners(new DamageTake(dmgMod));
     }
     // Dangerous Nether Chest
     if (getBoolean(strDangerousNetherChest + "enable", true)) {
       double radius = getDouble(strDangerousNetherChest + "radius", 32);
-
       registerListeners(new DangerousNetherChest(radius));
     }
     // Fast Air
     if (getBoolean(strFastAir + "enable", true)) {
       int modifier = getInt(strFastAir + "modifier", 40);
-
       registerListeners(new FastAir(modifier));
     }
     // Fire Forever
@@ -113,7 +117,6 @@ public class HardplusConfig extends BaseConfig {
     // Hunger Debuff
     if (getBoolean(strHungerDebuff + "enable", true)) {
       int foodLevel = getInt(strHungerDebuff + "food-level", 6, 0, 20);
-
       registerListeners(new HungerDebuff(foodLevel));
     }
     // Lava Death
@@ -125,7 +128,6 @@ public class HardplusConfig extends BaseConfig {
       double range = getDouble(strMobTarget + "range", 16);
       long delay = getLong(strMobTarget + "timer.delay", 10);
       long period = getLong(strMobTarget + "timer.period", 10);
-
       tasks.add(new MobTarget(range).getTask().runTaskTimer(plugin, delay, period));
     }
     // No Fire Resistance
@@ -134,8 +136,7 @@ public class HardplusConfig extends BaseConfig {
     }
     // No Passive Health Regen
     if (getBoolean(strNoPassiveHealthRegen + "enable", true)) {
-      List<String> list =
-          getStringList(strNoPassiveHealthRegen + "blocked-reason", List.of("SATIATED"));
+      List<String> list = getStringList(strNoPassiveHealthRegen + "blocked-reason", List.of("SATIATED"));
       registerListeners(new NoPassiveHealthRegen(list));
     }
     // No Sweep
@@ -146,7 +147,6 @@ public class HardplusConfig extends BaseConfig {
     if (getBoolean(strNoWater + "enable", true)) {
       long delay = getLong(strNoWater + "timer.delay", 10);
       long period = getLong(strNoWater + "timer.period", 10);
-
       NoWater noWater = new NoWater(plugin);
       registerListeners(noWater);
       tasks.add(noWater.getTask().runTaskTimer(plugin, delay, period));
@@ -158,13 +158,11 @@ public class HardplusConfig extends BaseConfig {
       boolean checkSword = getBoolean(strSharpCut + "check.sword", true);
       boolean checkAxe = getBoolean(strSharpCut + "check.axe", true);
       boolean checkShear = getBoolean(strSharpCut + "check.shear", true);
-
       registerListeners(new SharpCut(checkJump, checkRun, checkSword, checkAxe, checkShear));
     }
     // Uncooked Poison
     if (getBoolean(strUncookedPoison + "enable", true)) {
       int duration = getInt(strUncookedPoison + "duration", 30);
-
       registerListeners(new UncookedPoison(duration));
     }
     // Wither Skeleton Bow
@@ -173,9 +171,7 @@ public class HardplusConfig extends BaseConfig {
       int bowDamageLevel = getInt(strWitherSkeletonBow + "bow.damage-level", 3);
       int bowKnockbackLevel = getInt(strWitherSkeletonBow + "bow.knockback-level", 2);
       int arrowWitherLevel = getInt(strWitherSkeletonBow + "arrow.wither-level", 0);
-
-      registerListeners(
-          new WitherSkeletonBow(bowChance, bowDamageLevel, bowKnockbackLevel, arrowWitherLevel));
+      registerListeners(new WitherSkeletonBow(bowChance, bowDamageLevel, bowKnockbackLevel, arrowWitherLevel));
     }
   }
 }

@@ -6,7 +6,15 @@ import java.util.Set;
 import org.bukkit.block.Barrel;
 import org.bukkit.block.Biome;
 import org.bukkit.block.Chest;
-import org.bukkit.entity.*;
+import org.bukkit.entity.Enderman;
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.Hoglin;
+import org.bukkit.entity.PigZombie;
+import org.bukkit.entity.Piglin;
+import org.bukkit.entity.PiglinBrute;
+import org.bukkit.entity.Player;
+import org.bukkit.entity.Skeleton;
+import org.bukkit.entity.Zoglin;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryOpenEvent;
@@ -15,13 +23,13 @@ import org.bukkit.inventory.InventoryHolder;
 
 @SuppressWarnings("unused")
 public class DangerousNetherChest implements Listener {
-  final Set<Biome> netherBiomes =
-      Set.of(
-          Biome.NETHER_WASTES,
-          Biome.CRIMSON_FOREST,
-          Biome.WARPED_FOREST,
-          Biome.SOUL_SAND_VALLEY,
-          Biome.BASALT_DELTAS);
+  final Set<Biome> netherBiomes = Set.of(
+    Biome.BASALT_DELTAS,
+    Biome.CRIMSON_FOREST,
+    Biome.NETHER_WASTES,
+    Biome.SOUL_SAND_VALLEY,
+    Biome.WARPED_FOREST
+  );
   final double radius;
 
   public DangerousNetherChest(double radius) {
@@ -31,14 +39,10 @@ public class DangerousNetherChest implements Listener {
   @EventHandler
   public void onPlayerOpenChest(InventoryOpenEvent e) {
     if (!(e.getPlayer() instanceof Player p)) return; // Return if it is not player
-    if (!PlayerUtil.checkPermGameMode(p, Perm.DANGEROUS_NETHER_CHEST))
-      return; // Return if no permission
+    if (!PlayerUtil.checkPermGameMode(p, Perm.DANGEROUS_NETHER_CHEST)) return; // Return if no permission
     InventoryHolder holder = e.getInventory().getHolder();
-    if (!(holder instanceof Chest) && !(holder instanceof Barrel))
-      return; // Return if not is Chest or Barrel
-    if (!netherBiomes.contains(((BlockInventoryHolder) holder).getBlock().getBiome()))
-      return; // Return if not in The Nether biomes
-
+    if (!(holder instanceof Chest) && !(holder instanceof Barrel)) return; // Return if not is Chest or Barrel
+    if (!netherBiomes.contains(((BlockInventoryHolder) holder).getBlock().getBiome())) return; // Return if not in The Nether biomes
     for (Entity entity : p.getNearbyEntities(radius, radius, radius)) {
       // I know this is dumb, but multiple instanceof or didn't work
       if (entity instanceof Piglin piglin) { // Piglin

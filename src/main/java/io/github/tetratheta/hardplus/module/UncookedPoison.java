@@ -13,16 +13,16 @@ import org.bukkit.potion.PotionEffectType;
 @SuppressWarnings("unused")
 public class UncookedPoison implements Listener {
   final int duration;
-  final Set<Material> uncookedFood =
-      Set.of(
-          Material.POTATO,
-          Material.BEEF,
-          Material.CHICKEN,
-          Material.COD,
-          Material.MUTTON,
-          Material.PORKCHOP,
-          Material.RABBIT,
-          Material.SALMON);
+  final Set<Material> uncookedFood = Set.of(
+    Material.BEEF,
+    Material.CHICKEN,
+    Material.COD,
+    Material.MUTTON,
+    Material.PORKCHOP,
+    Material.POTATO,
+    Material.RABBIT,
+    Material.SALMON
+    );
 
   public UncookedPoison(int duration) {
     // Duration is in second
@@ -32,7 +32,6 @@ public class UncookedPoison implements Listener {
   @EventHandler
   public void onPlayerEat(PlayerItemConsumeEvent e) {
     if (!PlayerUtil.checkPermGameMode(e.getPlayer(), Perm.UNCOOKED_POISON)) return;
-
     if (uncookedFood.contains(e.getItem().getType())) {
       PotionEffect effect = new PotionEffect(PotionEffectType.POISON, duration, 0, true, false);
       e.getPlayer().addPotionEffect(effect);

@@ -22,7 +22,6 @@ public class FastAir implements Listener {
   public void onPlayerAirDrops(EntityAirChangeEvent e) {
     if (!(e.getEntity() instanceof Player p)) return;
     if (!PlayerUtil.checkPermGameMode(p, Perm.FAST_AIR)) return;
-
     if (previousValue.get(p) != null) {
       if (e.getAmount() < previousValue.get(p)) {
         int newAir = e.getAmount() - modifier;

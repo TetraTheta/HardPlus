@@ -21,7 +21,6 @@ public class LavaDeath implements Listener {
   public void onLava(EntityDamageEvent e) {
     if (!(e.getEntity() instanceof Player p)) return;
     if (!PlayerUtil.checkPermGameMode(p, Perm.LAVA_DEATH)) return;
-
     if (e.getCause().equals(EntityDamageEvent.DamageCause.LAVA)) {
       Bukkit.getScheduler().runTask(plugin, () -> p.setNoDamageTicks(0));
     }

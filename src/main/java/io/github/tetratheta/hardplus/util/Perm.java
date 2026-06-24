@@ -20,7 +20,7 @@ public enum Perm {
   SHARP_CUT("hardplus.sharp-cut"),
   UNCOOKED_POISON("hardplus.uncooked-poison"),
   WITHER_SKELETON_BOW("hardplus.wither-skeleton-bow");
-
+  //
   public final String value;
 
   Perm(String value) {

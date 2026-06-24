@@ -28,7 +28,6 @@ public class NoPassiveHealthRegen implements Listener {
   public void onPlayerEffectChange(EntityPotionEffectEvent e) {
     if (!(e.getEntity() instanceof Player p)) return;
     if (!PlayerUtil.checkPermGameMode(p, Perm.NO_PASSIVE_HEALTH_REGEN)) return;
-
     if (e.getModifiedType() == PotionEffectType.REGENERATION) {
       Action action = e.getAction();
       if (e.getCause() == Cause.BEACON && (action == Action.ADDED || action == Action.CHANGED)) {
@@ -44,63 +43,57 @@ public class NoPassiveHealthRegen implements Listener {
     if (!(e.getEntity() instanceof Player p)) return;
     if (!PlayerUtil.checkPermGameMode(p, Perm.NO_PASSIVE_HEALTH_REGEN)) return;
     RegainReason reason = e.getRegainReason();
-    denyList.forEach(
-        i -> {
-          try {
-            // Valid values: BEACON, MAGIC, MAGIC_REGEN, REGEN, SATIATED
-            String upper = i.toUpperCase();
-            switch (upper) {
-              case "BEACON":
-                {
-                  // BEACON: When a player is healed over time by a beacon's Regeneration effect
-                  if (reason == RegainReason.MAGIC_REGEN && playerList.contains(p)) {
-                    e.setAmount(0);
-                    e.setCancelled(true);
-                  }
-                  break;
-                }
-              case "MAGIC":
-                {
-                  // MAGIC: When a player is healed by a potion or spell
-                  if (reason == RegainReason.MAGIC) {
-                    e.setAmount(0);
-                    e.setCancelled(true);
-                  }
-                  break;
-                }
-              case "MAGIC_REGEN":
-                {
-                  // MAGIC_REGEN: When a player is healed over time by a potion or spell
-                  if (reason == RegainReason.MAGIC_REGEN) {
-                    e.setAmount(0);
-                    e.setCancelled(true);
-                  }
-                  break;
-                }
-              case "REGEN":
-                {
-                  // REGEN: When a player regains health from regenerating due to Peaceful mode
-                  // (difficulty=0)
-                  // Should I block it?
-                  if (reason == RegainReason.REGEN) {
-                    e.setAmount(0);
-                    e.setCancelled(true);
-                  }
-                  break;
-                }
-              case "SATIATED":
-                {
-                  // When a player regains health from regenerating due to their hunger being
-                  // satisfied
-                  if (reason == RegainReason.SATIATED) {
-                    e.setAmount(0);
-                    e.setCancelled(true);
-                  }
-                  break;
-                }
+    denyList.forEach(i -> {
+      try {
+        // Valid values: BEACON, MAGIC, MAGIC_REGEN, REGEN, SATIATED
+        String upper = i.toUpperCase();
+        switch (upper) {
+          case "BEACON": {
+            // BEACON: When a player is healed over time by a beacon's Regeneration effect
+            if (reason == RegainReason.MAGIC_REGEN && playerList.contains(p)) {
+              e.setAmount(0);
+              e.setCancelled(true);
             }
-          } catch (IllegalArgumentException ignored) {
+            break;
           }
-        });
+          case "MAGIC": {
+            // MAGIC: When a player is healed by a potion or spell
+            if (reason == RegainReason.MAGIC) {
+              e.setAmount(0);
+              e.setCancelled(true);
+            }
+            break;
+          }
+          case "MAGIC_REGEN": {
+            // MAGIC_REGEN: When a player is healed over time by a potion or spell
+            if (reason == RegainReason.MAGIC_REGEN) {
+              e.setAmount(0);
+              e.setCancelled(true);
+            }
+            break;
+          }
+          case "REGEN": {
+            // REGEN: When a player regains health from regenerating due to Peaceful mode
+            // (difficulty=0)
+            // Should I block it?
+            if (reason == RegainReason.REGEN) {
+              e.setAmount(0);
+              e.setCancelled(true);
+            }
+            break;
+          }
+          case "SATIATED": {
+            // When a player regains health from regenerating due to their hunger being
+            // satisfied
+            if (reason == RegainReason.SATIATED) {
+              e.setAmount(0);
+              e.setCancelled(true);
+            }
+            break;
+          }
+        }
+      } catch (IllegalArgumentException ignored) {
+      }
+    });
   }
 }

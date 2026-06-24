@@ -14,7 +14,6 @@ public class NoSweep implements Listener {
   public void onPlayerSweep(EntityDamageByEntityEvent e) {
     if (!(e.getDamager() instanceof Player p)) return;
     if (!PlayerUtil.checkPermGameMode(p, Perm.NO_SWEEP)) return;
-
     if (e.getCause().equals(EntityDamageEvent.DamageCause.ENTITY_SWEEP_ATTACK)) {
       e.setCancelled(true);
     }

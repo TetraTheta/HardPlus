@@ -11,7 +11,6 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 @SuppressWarnings("unused")
 public class CreeperExplode implements Task {
-
   final double radius;
 
   public CreeperExplode(double radius) {

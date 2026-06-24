@@ -43,9 +43,7 @@ public class MobTarget implements Task {
 
   private boolean hasArmor(Player p) {
     //noinspection ConstantValue
-    return !(p.getInventory().getHelmet() == null
-        && p.getInventory().getChestplate() == null
-        && p.getInventory().getLeggings() == null
-        && p.getInventory().getBoots() == null);
+    return !(p.getInventory().getHelmet() == null && p.getInventory().getChestplate() == null && p.getInventory().getLeggings() == null && p
+      .getInventory().getBoots() == null);
   }
 }

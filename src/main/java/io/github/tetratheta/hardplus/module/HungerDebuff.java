@@ -21,11 +21,10 @@ public class HungerDebuff implements Listener {
   public void onFoodLevelChange(FoodLevelChangeEvent e) {
     if (!(e.getEntity() instanceof Player p)) return;
     if (!PlayerUtil.checkPermGameMode(p, Perm.HUNGER_DEBUFF)) return;
-
     if (e.getFoodLevel() < foodLevel) {
       PotionEffect slowness = new PotionEffect(PotionEffectType.SLOWNESS, 3600, 0, true, false);
       PotionEffect miningFatigue =
-          new PotionEffect(PotionEffectType.MINING_FATIGUE, 3600, 1, true, false);
+        new PotionEffect(PotionEffectType.MINING_FATIGUE, 3600, 1, true, false);
       PotionEffect weakness = new PotionEffect(PotionEffectType.WEAKNESS, 3600, 1, true, false);
       p.addPotionEffect(slowness);
       p.addPotionEffect(miningFatigue);

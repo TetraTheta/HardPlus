@@ -31,12 +31,10 @@ public class WitherSkeletonBow implements Listener {
   final NamespacedKey key = new NamespacedKey("hardplus", "wither-skeleton-arrow");
   final Random random = new Random();
 
-  public WitherSkeletonBow(
-      double bowSpawnChance, int arrowDamageLevel, int arrowKnockbackLevel, int arrowWitherLevel) {
+  public WitherSkeletonBow(double bowSpawnChance, int arrowDamageLevel, int arrowKnockbackLevel, int arrowWitherLevel) {
     this.bowWSSpawnChance = bowSpawnChance;
     this.bowDamageLevel = arrowDamageLevel;
     this.bowKnockbackLevel = arrowKnockbackLevel;
-
     this.arrowWitherLevel = arrowWitherLevel;
   }
 
@@ -45,8 +43,7 @@ public class WitherSkeletonBow implements Listener {
     // We can't use HPPlayer#checkPermGameMode here
     // Why not? Does work fine.
     if (!(e.getDamager() instanceof Arrow arrow)) return;
-    if (e.getEntity() instanceof Player player
-        && !PlayerUtil.checkPermGameMode(player, Perm.WITHER_SKELETON_BOW)) {
+    if (e.getEntity() instanceof Player player && !PlayerUtil.checkPermGameMode(player, Perm.WITHER_SKELETON_BOW)) {
       Byte value = arrow.getPersistentDataContainer().get(key, PersistentDataType.BYTE);
       if (Objects.isNull(value)) return;
       if (value.equals((byte) 1)) {
@@ -65,7 +62,6 @@ public class WitherSkeletonBow implements Listener {
   public void onWitherSkeletonShoot(EntityShootBowEvent e) {
     if (!(e.getEntity() instanceof WitherSkeleton)) return;
     if (!(e.getProjectile() instanceof Arrow arrow)) return;
-
     arrow.addCustomEffect(new PotionEffect(PotionEffectType.WITHER, 800, arrowWitherLevel), true);
     arrow.getPersistentDataContainer().set(key, PersistentDataType.BYTE, (byte) 1);
     e.setProjectile(arrow);
@@ -75,7 +71,6 @@ public class WitherSkeletonBow implements Listener {
   public void onWitherSkeletonSpawn(CreatureSpawnEvent e) {
     if (!(e.getEntity() instanceof WitherSkeleton)) return;
     if (random.nextDouble() * 100 >= bowWSSpawnChance) return;
-
     EntityEquipment mobInventory = e.getEntity().getEquipment();
     if (mobInventory == null) return;
     ItemStack bow = new ItemStack(Material.BOW);

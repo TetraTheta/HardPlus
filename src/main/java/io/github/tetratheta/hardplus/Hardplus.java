@@ -15,9 +15,7 @@ public final class Hardplus extends JavaPlugin {
     try {
       worldGuardHook = new WorldGuardHook();
     } catch (NoClassDefFoundError ignored) {
-      logger.info(
-          Component.text(
-              "Optional dependency [WorldGuard] is not found. You can ignore this message."));
+      logger.info(Component.text("Optional dependency [WorldGuard] is not found. You can ignore this message."));
     }
   }
 
