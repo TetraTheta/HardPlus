@@ -23,6 +23,7 @@ permissions:
       hardplus.dangerous-nether-chest: true
       hardplus.fast-air: true
       hardplus.fire-forever: true
+      hardplus.hard-water: true
       hardplus.hunger-debuff: true
       hardplus.lava-death: true
       hardplus.mob-target: true
@@ -59,6 +60,9 @@ permissions:
     default: false
   hardplus.fire-forever:
     description: Enable 'Fire Forever' module of HardPlus
+    default: false
+  hardplus.hard-water:
+    description: Enable 'Hard Water' module of HardPlus
     default: false
   hardplus.hunger-debuff:
     description: Enable 'Hunger Debuff' module of HardPlus

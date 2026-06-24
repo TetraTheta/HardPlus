@@ -10,6 +10,7 @@ public enum Perm {
   DANGEROUS_NETHER_CHEST("hardplus.dangerous-nether-chest"),
   FAST_AIR("hardplus.fast-air"),
   FIRE_FOREVER("hardplus.fire-forever"),
+  HARD_WATER("hardplus.hard-water"),
   HUNGER_DEBUFF("hardplus.hunger-debuff"),
   LAVA_DEATH("hardplus.lava-death"),
   MOB_TARGET("hardplus.mob-target"),

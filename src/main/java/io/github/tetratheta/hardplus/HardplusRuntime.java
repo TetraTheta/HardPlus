@@ -9,6 +9,7 @@ import io.github.tetratheta.hardplus.module.DamageTake;
 import io.github.tetratheta.hardplus.module.DangerousNetherChest;
 import io.github.tetratheta.hardplus.module.FastAir;
 import io.github.tetratheta.hardplus.module.FireForever;
+import io.github.tetratheta.hardplus.module.HardWater;
 import io.github.tetratheta.hardplus.module.HungerDebuff;
 import io.github.tetratheta.hardplus.module.LavaDeath;
 import io.github.tetratheta.hardplus.module.MobTarget;
@@ -36,6 +37,7 @@ public final class HardplusRuntime extends PluginRuntime {
   private static final String DANGEROUS_NETHER_CHEST = "module.dangerous-nether-chest.";
   private static final String FAST_AIR = "module.fast-air.";
   private static final String FIRE_FOREVER = "module.fire-forever.";
+  private static final String HARD_WATER = "module.hard-water.";
   private static final String HUNGER_DEBUFF = "module.hunger-debuff.";
   private static final String LAVA_DEATH = "module.lava-death.";
   private static final String MOB_TARGET = "module.mob-target.";
@@ -114,6 +116,12 @@ public final class HardplusRuntime extends PluginRuntime {
     }
     // Fire Forever
     if (config.getBoolean(FIRE_FOREVER + "enable", true)) registerListener(new FireForever());
+    // Hard Water
+    if (config.getBoolean(HARD_WATER + "enable", true)) {
+      float minimumFallDistance = config.getLong(HARD_WATER + "minimum-fall-distance", 8, 4, 100);
+      double modifier = config.getDouble(HARD_WATER + "modifier", 1, 0, 20);
+      registerListener(new HardWater(minimumFallDistance, modifier));
+    }
     // Hunger Debuff
     if (config.getBoolean(HUNGER_DEBUFF + "enable", true)) {
       int foodLevel = config.getInt(HUNGER_DEBUFF + "food-level", 6, 0, 20);
