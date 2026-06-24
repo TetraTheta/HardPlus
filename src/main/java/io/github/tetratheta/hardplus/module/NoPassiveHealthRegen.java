@@ -30,11 +30,8 @@ public class NoPassiveHealthRegen implements Listener {
     if (!PlayerUtil.checkPermGameMode(p, Perm.NO_PASSIVE_HEALTH_REGEN)) return;
     if (e.getModifiedType() == PotionEffectType.REGENERATION) {
       Action action = e.getAction();
-      if (e.getCause() == Cause.BEACON && (action == Action.ADDED || action == Action.CHANGED)) {
-        playerList.add(p);
-      } else {
-        playerList.remove(p);
-      }
+      if (e.getCause() == Cause.BEACON && (action == Action.ADDED || action == Action.CHANGED)) playerList.add(p);
+      else playerList.remove(p);
     }
   }
 
@@ -73,8 +70,7 @@ public class NoPassiveHealthRegen implements Listener {
             break;
           }
           case "REGEN": {
-            // REGEN: When a player regains health from regenerating due to Peaceful mode
-            // (difficulty=0)
+            // REGEN: When a player regains health from regenerating due to Peaceful mode (difficulty=0)
             // Should I block it?
             if (reason == RegainReason.REGEN) {
               e.setAmount(0);
@@ -83,8 +79,7 @@ public class NoPassiveHealthRegen implements Listener {
             break;
           }
           case "SATIATED": {
-            // When a player regains health from regenerating due to their hunger being
-            // satisfied
+            // When a player regains health from regenerating due to their hunger being satisfied
             if (reason == RegainReason.SATIATED) {
               e.setAmount(0);
               e.setCancelled(true);
@@ -92,8 +87,7 @@ public class NoPassiveHealthRegen implements Listener {
             break;
           }
         }
-      } catch (IllegalArgumentException ignored) {
-      }
+      } catch (IllegalArgumentException ignored) {}
     });
   }
 }

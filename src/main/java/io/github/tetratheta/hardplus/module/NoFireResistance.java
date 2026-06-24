@@ -15,9 +15,7 @@ public class NoFireResistance implements Listener {
     if (!(e.getEntity() instanceof Player p)) return;
     if (!PlayerUtil.checkPermGameMode(p, Perm.NO_FIRE_RESISTANCE)) return;
     if (e.getAction().equals(EntityPotionEffectEvent.Action.ADDED)) {
-      if (e.getNewEffect() != null && e.getNewEffect().getType().equals(PotionEffectType.FIRE_RESISTANCE)) {
-        e.setCancelled(true);
-      }
+      if (e.getNewEffect() != null && e.getNewEffect().getType().equals(PotionEffectType.FIRE_RESISTANCE)) e.setCancelled(true);
     }
   }
 }

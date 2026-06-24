@@ -14,15 +14,9 @@ import org.bukkit.potion.PotionEffectType;
 public class UncookedPoison implements Listener {
   final int duration;
   final Set<Material> uncookedFood = Set.of(
-    Material.BEEF,
-    Material.CHICKEN,
-    Material.COD,
-    Material.MUTTON,
-    Material.PORKCHOP,
-    Material.POTATO,
-    Material.RABBIT,
-    Material.SALMON
-    );
+    Material.BEEF, Material.CHICKEN, Material.COD, Material.MUTTON, Material.PORKCHOP, Material.POTATO,
+    Material.RABBIT, Material.SALMON
+  );
 
   public UncookedPoison(int duration) {
     // Duration is in second

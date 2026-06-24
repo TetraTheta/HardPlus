@@ -1,12 +1,10 @@
 package io.github.tetratheta.hardplus.module;
 
-import io.github.tetratheta.hardplus.Hardplus;
 import io.github.tetratheta.hardplus.util.Perm;
 import io.github.tetratheta.hardplus.util.PlayerUtil;
-import io.github.tetratheta.mol.util.Task;
 import java.util.HashSet;
 import java.util.Set;
-import org.bukkit.Bukkit;
+import java.util.function.Consumer;
 import org.bukkit.Material;
 import org.bukkit.block.Biome;
 import org.bukkit.block.Block;
@@ -21,14 +19,14 @@ import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.scheduler.BukkitRunnable;
 
 @SuppressWarnings("unused")
-public class NoWater implements Listener, Task {
+public class NoWater implements Listener, ScheduledModule {
   final Set<Block> cauldrons = new HashSet<>();
   final Set<Biome> netherBiomes = Set.of(Biome.NETHER_WASTES, Biome.CRIMSON_FOREST, Biome.WARPED_FOREST, Biome.SOUL_SAND_VALLEY, Biome.BASALT_DELTAS);
-  final Hardplus plugin;
+  final Consumer<Runnable> runTask;
   final Set<Biome> theEndBiomes = Set.of(Biome.THE_END, Biome.SMALL_END_ISLANDS, Biome.END_MIDLANDS, Biome.END_HIGHLANDS, Biome.END_BARRENS);
 
-  public NoWater(Hardplus hardplus) {
-    this.plugin = hardplus;
+  public NoWater(Consumer<Runnable> runTask) {
+    this.runTask = runTask;
   }
 
   @Override
@@ -47,9 +45,7 @@ public class NoWater implements Listener, Task {
             levelled.setLevel(newLevel);
             b.setBlockData(levelled);
           }
-          if (b.getType().equals(Material.CAULDRON)) {
-            cauldrons.remove(b);
-          }
+          if (b.getType().equals(Material.CAULDRON)) cauldrons.remove(b);
         }
       }
     };
@@ -60,20 +56,18 @@ public class NoWater implements Listener, Task {
     // The End
     if (!PlayerUtil.checkPermGameMode(e.getPlayer(), Perm.NO_WATER)) return;
     if (theEndBiomes.contains(e.getBlockClicked().getBiome())) {
-      Bukkit.getScheduler().runTask(
-        plugin, () -> {
-          PlayerInventory inventory = e.getPlayer().getInventory();
-          ItemStack mainHand = inventory.getItemInMainHand();
-          ItemStack offHand = inventory.getItemInOffHand();
-          if (mainHand.getType().equals(Material.WATER_BUCKET)) {
-            inventory.setItemInMainHand(new ItemStack(Material.BUCKET));
-            e.setCancelled(true);
-          } else if (offHand.getType().equals(Material.WATER_BUCKET)) {
-            inventory.setItemInOffHand(new ItemStack(Material.BUCKET));
-            e.setCancelled(true);
-          }
+      runTask.accept(() -> {
+        PlayerInventory inventory = e.getPlayer().getInventory();
+        ItemStack mainHand = inventory.getItemInMainHand();
+        ItemStack offHand = inventory.getItemInOffHand();
+        if (mainHand.getType().equals(Material.WATER_BUCKET)) {
+          inventory.setItemInMainHand(new ItemStack(Material.BUCKET));
+          e.setCancelled(true);
+        } else if (offHand.getType().equals(Material.WATER_BUCKET)) {
+          inventory.setItemInOffHand(new ItemStack(Material.BUCKET));
+          e.setCancelled(true);
         }
-      );
+      });
     }
   }
 
@@ -84,10 +78,8 @@ public class NoWater implements Listener, Task {
     if (!PlayerUtil.checkPermGameMode(p, Perm.NO_WATER)) return;
     if (!e.getReason().equals(CauldronLevelChangeEvent.ChangeReason.BUCKET_EMPTY)) return;
     if (netherBiomes.contains(e.getBlock().getBiome())) {
-      if (e.getBlock().getType().equals(Material.CAULDRON)) {
-        // Only water cauldron has levelled data
-        cauldrons.add(e.getBlock());
-      }
+      // Only water cauldron has levelled data
+      if (e.getBlock().getType().equals(Material.CAULDRON)) cauldrons.add(e.getBlock());
     }
   }
 }

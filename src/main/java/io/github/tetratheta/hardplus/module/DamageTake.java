@@ -39,15 +39,16 @@ public class DamageTake implements Listener {
           e.setDamage(e.getDamage() * dmgMod.PLAYER);
         case AbstractArrow eeArrow -> {
           // Attacker is an arrow
-          if (eeArrow.getShooter() instanceof Player) {
-            // Attacker is player with arrow
-            e.setDamage(e.getDamage() * dmgMod.PLAYER);
-          } else if (eeArrow.getShooter() instanceof AbstractSkeleton) {
-            // Attacker is skeleton with arrow
-            e.setDamage(e.getDamage() * dmgMod.SKELETON);
-          } else {
-            // Consider leftover as ranged attack
-            e.setDamage(e.getDamage() * dmgMod.MELEE);
+          switch (eeArrow.getShooter()) {
+            case Player player ->
+              // Attacker is player with arrow
+              e.setDamage(e.getDamage() * dmgMod.PLAYER);
+            case AbstractSkeleton abstractSkeleton ->
+              // Attacker is skeleton with arrow
+              e.setDamage(e.getDamage() * dmgMod.SKELETON);
+            case null, default ->
+              // Consider leftover as ranged attack
+              e.setDamage(e.getDamage() * dmgMod.MELEE);
           }
         }
         case Mob mob -> {

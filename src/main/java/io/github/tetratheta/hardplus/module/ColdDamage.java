@@ -2,7 +2,6 @@ package io.github.tetratheta.hardplus.module;
 
 import io.github.tetratheta.hardplus.util.Perm;
 import io.github.tetratheta.hardplus.util.PlayerUtil;
-import io.github.tetratheta.mol.util.Task;
 import java.util.Set;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -13,7 +12,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.scheduler.BukkitRunnable;
 
 @SuppressWarnings("unused")
-public class ColdDamage implements Listener, Task {
+public class ColdDamage implements Listener, ScheduledModule {
   final Set<Material> coldItemSet = Set.of(
     Material.BLUE_ICE,
     Material.ICE,

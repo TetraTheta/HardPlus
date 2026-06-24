@@ -15,24 +15,14 @@ import org.bukkit.event.player.PlayerToggleSprintEvent;
 @SuppressWarnings("unused")
 public class SharpCut implements Listener {
   final Set<Material> axe = Set.of(
-    Material.WOODEN_AXE,
-    Material.STONE_AXE,
-    Material.IRON_AXE,
-    Material.DIAMOND_AXE,
-    Material.NETHERITE_AXE
-  );
+    Material.WOODEN_AXE, Material.STONE_AXE, Material.COPPER_AXE, Material.IRON_AXE, Material.DIAMOND_AXE, Material.NETHERITE_AXE);
   final boolean checkAxe;
   final boolean checkJump;
   final boolean checkRun;
   final boolean checkShear;
   final boolean checkSword;
   final Set<Material> sword = Set.of(
-    Material.WOODEN_SWORD,
-    Material.STONE_SWORD,
-    Material.IRON_SWORD,
-    Material.DIAMOND_SWORD,
-    Material.NETHERITE_SWORD
-  );
+    Material.WOODEN_SWORD, Material.STONE_SWORD, Material.COPPER_SWORD, Material.IRON_SWORD, Material.DIAMOND_SWORD, Material.NETHERITE_SWORD);
 
   public SharpCut(boolean checkJump, boolean checkRun, boolean checkSword, boolean checkAxe, boolean checkShear) {
     this.checkJump = checkJump;
@@ -46,9 +36,7 @@ public class SharpCut implements Listener {
   public void onPlayerJump(PlayerJumpEvent e) {
     if (!checkJump) return;
     if (!PlayerUtil.checkPermGameMode(e.getPlayer(), Perm.SHARP_CUT)) return;
-    if (checkPlayer(e.getPlayer())) {
-      e.setCancelled(true);
-    }
+    if (checkPlayer(e.getPlayer())) e.setCancelled(true);
   }
 
   private boolean checkPlayer(Player p) {
@@ -80,8 +68,6 @@ public class SharpCut implements Listener {
   public void onPlayerRun(PlayerToggleSprintEvent e) {
     if (!checkRun || !e.isSprinting()) return;
     if (!PlayerUtil.checkPermGameMode(e.getPlayer(), Perm.SHARP_CUT)) return;
-    if (checkPlayer(e.getPlayer())) {
-      e.setCancelled(true);
-    }
+    if (checkPlayer(e.getPlayer())) e.setCancelled(true);
   }
 }

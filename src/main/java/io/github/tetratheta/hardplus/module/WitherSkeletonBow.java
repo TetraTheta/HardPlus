@@ -40,8 +40,6 @@ public class WitherSkeletonBow implements Listener {
 
   @EventHandler
   public void onNonHPPlayerHit(EntityDamageByEntityEvent e) {
-    // We can't use HPPlayer#checkPermGameMode here
-    // Why not? Does work fine.
     if (!(e.getDamager() instanceof Arrow arrow)) return;
     if (e.getEntity() instanceof Player player && !PlayerUtil.checkPermGameMode(player, Perm.WITHER_SKELETON_BOW)) {
       Byte value = arrow.getPersistentDataContainer().get(key, PersistentDataType.BYTE);

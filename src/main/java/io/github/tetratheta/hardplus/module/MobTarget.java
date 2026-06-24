@@ -2,7 +2,6 @@ package io.github.tetratheta.hardplus.module;
 
 import io.github.tetratheta.hardplus.util.Perm;
 import io.github.tetratheta.hardplus.util.PlayerUtil;
-import io.github.tetratheta.mol.util.Task;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Monster;
@@ -11,7 +10,7 @@ import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
 
 @SuppressWarnings("unused")
-public class MobTarget implements Task {
+public class MobTarget implements ScheduledModule {
   final double range;
 
   public MobTarget(double range) {

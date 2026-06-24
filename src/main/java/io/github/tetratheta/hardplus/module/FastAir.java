@@ -25,9 +25,7 @@ public class FastAir implements Listener {
     if (previousValue.get(p) != null) {
       if (e.getAmount() < previousValue.get(p)) {
         int newAir = e.getAmount() - modifier;
-        if (newAir > 0) {
-          e.setAmount(newAir);
-        }
+        if (newAir > 0) e.setAmount(newAir);
       }
       previousValue.remove(p);
     } else {

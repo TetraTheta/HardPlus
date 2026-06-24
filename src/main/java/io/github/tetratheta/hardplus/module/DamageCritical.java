@@ -7,16 +7,9 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
-import org.bukkit.plugin.java.JavaPlugin;
 
 @SuppressWarnings("unused")
 public class DamageCritical implements Listener {
-  JavaPlugin plugin;
-
-  public DamageCritical(JavaPlugin plugin) {
-    this.plugin = plugin;
-  }
-
   @EventHandler
   public void onPlayerInflictCriticalDamage(EntityDamageByEntityEvent e) {
     // TODO: Find a cleaner way of doing this. For example, using DamageSource instead...

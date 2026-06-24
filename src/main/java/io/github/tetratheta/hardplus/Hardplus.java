@@ -1,13 +1,12 @@
 package io.github.tetratheta.hardplus;
 
+import io.github.tetratheta.mol.plugin.BasePlugin;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.logger.slf4j.ComponentLogger;
-import org.bukkit.plugin.java.JavaPlugin;
 
-public final class Hardplus extends JavaPlugin {
+public final class Hardplus extends BasePlugin<HardplusRuntime> {
   public static ComponentLogger logger;
   public static WorldGuardHook worldGuardHook = null;
-  HardplusConfig config;
 
   @Override
   public void onLoad() {
@@ -20,15 +19,7 @@ public final class Hardplus extends JavaPlugin {
   }
 
   @Override
-  public void onDisable() {
-    // Plugin shutdown logic
-    config.saveConfig();
-    config.terminate();
-  }
-
-  @Override
-  public void onEnable() {
-    // Config
-    config = new HardplusConfig(this);
+  protected HardplusRuntime createRuntime() {
+    return new HardplusRuntime(this);
   }
 }
