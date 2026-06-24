@@ -15,6 +15,7 @@ import org.bukkit.event.entity.EntityRegainHealthEvent;
 import org.bukkit.event.entity.EntityRegainHealthEvent.RegainReason;
 import org.bukkit.potion.PotionEffectType;
 
+/// Cancels configured passive healing reasons for affected players.
 public class NoPassiveHealthRegen implements Listener {
   final List<String> denyList;
   final Set<Player> playerList;

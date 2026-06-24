@@ -8,6 +8,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageEvent;
 
+/// Removes post-hit invulnerability after lava damage so affected players die almost immediately in lava.
 @SuppressWarnings("unused")
 public class LavaDeath implements Listener {
   final Consumer<Runnable> runTask;

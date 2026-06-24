@@ -8,6 +8,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 
+/// Cancels sweep attacks made by affected players so only the direct target can be damaged.
 @SuppressWarnings("unused")
 public class NoSweep implements Listener {
   @EventHandler

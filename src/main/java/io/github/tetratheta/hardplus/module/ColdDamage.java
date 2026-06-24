@@ -11,6 +11,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 import org.bukkit.scheduler.BukkitRunnable;
 
+/// Damages players carrying cold blocks or items with `FREEZE` damage.
 @SuppressWarnings("unused")
 public class ColdDamage implements Listener, ScheduledModule {
   final Set<Material> coldItemSet = Set.of(

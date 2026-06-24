@@ -8,6 +8,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 
+/// Scales down damage dealt by affected players, including arrows shot by them.
 @SuppressWarnings("unused")
 public class DamageGive implements Listener {
   final double modifier;

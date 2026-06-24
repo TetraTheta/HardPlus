@@ -8,6 +8,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 
+/// Prevents affected players from dealing critical damage with melee attacks or arrows.
 @SuppressWarnings("unused")
 public class DamageCritical implements Listener {
   @EventHandler

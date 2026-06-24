@@ -22,6 +22,7 @@ import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
+/// Spawns bow-armed Wither Skeletons and marks their arrows with the configured Wither effect.
 @SuppressWarnings("unused")
 public class WitherSkeletonBow implements Listener {
   final int arrowWitherLevel;

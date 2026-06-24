@@ -21,6 +21,7 @@ import org.bukkit.event.inventory.InventoryOpenEvent;
 import org.bukkit.inventory.BlockInventoryHolder;
 import org.bukkit.inventory.InventoryHolder;
 
+/// Makes Nether mobs target affected players who open chests or barrels in Nether biomes.
 @SuppressWarnings("unused")
 public class DangerousNetherChest implements Listener {
   final Set<Biome> netherBiomes = Set.of(Biome.BASALT_DELTAS, Biome.CRIMSON_FOREST, Biome.NETHER_WASTES, Biome.SOUL_SAND_VALLEY, Biome.WARPED_FOREST);

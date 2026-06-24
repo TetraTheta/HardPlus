@@ -9,6 +9,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
 
+/// Makes nearby hostile mobs target affected players unless invisibility and no armor allow a bypass.
 @SuppressWarnings("unused")
 public class MobTarget implements ScheduledModule {
   final double range;

@@ -18,6 +18,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.scheduler.BukkitRunnable;
 
+/// Removes player-placed water immediately in The End and drains Nether cauldrons quickly.
 @SuppressWarnings("unused")
 public class NoWater implements Listener, ScheduledModule {
   final Set<Block> cauldrons = new HashSet<>();

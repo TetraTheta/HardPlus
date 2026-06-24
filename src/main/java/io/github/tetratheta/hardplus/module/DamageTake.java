@@ -17,6 +17,7 @@ import org.bukkit.event.entity.EntityDamageByBlockEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 
+/// Multiplies incoming damage for affected players according to the damage source.
 @SuppressWarnings("unused")
 public class DamageTake implements Listener {
   DmgMod dmgMod;

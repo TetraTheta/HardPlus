@@ -8,6 +8,7 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
+/// Forces nearby creepers to explode immediately when they target affected players.
 @SuppressWarnings("unused")
 public class CreeperExplode implements ScheduledModule {
   final double radius;

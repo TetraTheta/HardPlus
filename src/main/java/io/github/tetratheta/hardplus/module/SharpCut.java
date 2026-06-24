@@ -12,6 +12,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerToggleSprintEvent;
 
+/// Damages and stops affected players who jump or sprint while holding configured sharp tools.
 @SuppressWarnings("unused")
 public class SharpCut implements Listener {
   final Set<Material> axe = Set.of(

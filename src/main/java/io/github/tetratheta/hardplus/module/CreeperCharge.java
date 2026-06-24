@@ -8,6 +8,7 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
+/// Charges creepers near affected players when those creepers are targeting affected players.
 @SuppressWarnings("unused")
 public class CreeperCharge implements ScheduledModule {
   final double radius;

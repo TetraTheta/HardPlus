@@ -9,6 +9,7 @@ import org.bukkit.event.entity.FoodLevelChangeEvent;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
+/// Applies movement, mining, and weakness debuffs when affected players fall below the configured food level.
 @SuppressWarnings("unused")
 public class HungerDebuff implements Listener {
   final int foodLevel;

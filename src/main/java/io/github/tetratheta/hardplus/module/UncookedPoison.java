@@ -10,6 +10,7 @@ import org.bukkit.event.player.PlayerItemConsumeEvent;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
+/// Poisons affected players when they eat configured uncooked foods.
 @SuppressWarnings("unused")
 public class UncookedPoison implements Listener {
   final int duration;

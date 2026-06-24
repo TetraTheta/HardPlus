@@ -9,6 +9,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityAirChangeEvent;
 
+/// Accelerates air loss for affected players while their remaining air is decreasing.
 @SuppressWarnings("unused")
 public class FastAir implements Listener {
   final int modifier;

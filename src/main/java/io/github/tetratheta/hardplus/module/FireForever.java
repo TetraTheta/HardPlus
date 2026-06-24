@@ -7,6 +7,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageEvent;
 
+/// Keeps affected players burning until an external action, such as water, extinguishes them.
 @SuppressWarnings("unused")
 public class FireForever implements Listener {
   @EventHandler

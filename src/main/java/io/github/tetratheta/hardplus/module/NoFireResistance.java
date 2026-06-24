@@ -8,6 +8,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityPotionEffectEvent;
 import org.bukkit.potion.PotionEffectType;
 
+/// Blocks newly added Fire Resistance effects from affected players.
 @SuppressWarnings("unused")
 public class NoFireResistance implements Listener {
   @EventHandler
