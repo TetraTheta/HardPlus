@@ -2,19 +2,20 @@ package io.github.tetratheta.hardplus.module;
 
 import io.github.tetratheta.hardplus.util.Perm;
 import io.github.tetratheta.hardplus.util.PlayerUtil;
-import java.util.Objects;
 import java.util.Random;
+import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Arrow;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.WitherSkeleton;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.CreatureSpawnEvent;
-import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityShootBowEvent;
+import org.bukkit.event.entity.EntityTargetLivingEntityEvent;
 import org.bukkit.inventory.EntityEquipment;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -22,14 +23,15 @@ import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
-/// Spawns bow-armed Wither Skeletons and marks their arrows with the configured Wither effect.
+/// Arms Wither Skeletons near HP players with bows, then swaps back to stone swords for other targets.
 @SuppressWarnings("unused")
 public class WitherSkeletonBow implements Listener {
+  private static final double HP_PLAYER_SPAWN_RADIUS = 16;
   final int arrowWitherLevel;
   final int bowDamageLevel;
   final int bowKnockbackLevel;
   final double bowWSSpawnChance;
-  final NamespacedKey key = new NamespacedKey("hardplus", "wither-skeleton-arrow");
+  final NamespacedKey mobKey = new NamespacedKey("hardplus", "wither-skeleton-bow");
   final Random random = new Random();
 
   public WitherSkeletonBow(double bowSpawnChance, int arrowDamageLevel, int arrowKnockbackLevel, int arrowWitherLevel) {
@@ -40,45 +42,66 @@ public class WitherSkeletonBow implements Listener {
   }
 
   @EventHandler
-  public void onNonHPPlayerHit(EntityDamageByEntityEvent e) {
-    if (!(e.getDamager() instanceof Arrow arrow)) return;
-    if (e.getEntity() instanceof Player player && !PlayerUtil.checkPermGameMode(player, Perm.WITHER_SKELETON_BOW)) {
-      Byte value = arrow.getPersistentDataContainer().get(key, PersistentDataType.BYTE);
-      if (Objects.isNull(value)) return;
-      if (value.equals((byte) 1)) {
-        // Remove Wither effect
-        arrow.clearCustomEffects();
-        // Decrease increased damage with Power
-        double originalDamage = e.getDamage();
-        double newDamage = originalDamage - (originalDamage * 0.25 * (bowDamageLevel + 1));
-        e.setDamage(newDamage);
-        // Since Wither Skeleton shoots flamed arrow, we do not catch fire of non-HP player.
-      }
-    }
+  public void onWitherSkeletonTarget(EntityTargetLivingEntityEvent e) {
+    if (!(e.getEntity() instanceof WitherSkeleton witherSkeleton)) return;
+    if (!isBowWitherSkeleton(witherSkeleton)) return;
+    setWeapon(witherSkeleton, isHPPlayer(e.getTarget()));
   }
 
   @EventHandler
   public void onWitherSkeletonShoot(EntityShootBowEvent e) {
-    if (!(e.getEntity() instanceof WitherSkeleton)) return;
+    if (!(e.getEntity() instanceof WitherSkeleton witherSkeleton)) return;
+    if (!isBowWitherSkeleton(witherSkeleton)) return;
+    if (!isHPPlayer(witherSkeleton.getTarget())) {
+      e.setCancelled(true);
+      setWeapon(witherSkeleton, false);
+      return;
+    }
     if (!(e.getProjectile() instanceof Arrow arrow)) return;
     arrow.addCustomEffect(new PotionEffect(PotionEffectType.WITHER, 800, arrowWitherLevel), true);
-    arrow.getPersistentDataContainer().set(key, PersistentDataType.BYTE, (byte) 1);
     e.setProjectile(arrow);
   }
 
   @EventHandler
   public void onWitherSkeletonSpawn(CreatureSpawnEvent e) {
-    if (!(e.getEntity() instanceof WitherSkeleton)) return;
+    if (!(e.getEntity() instanceof WitherSkeleton witherSkeleton)) return;
     if (random.nextDouble() * 100 >= bowWSSpawnChance) return;
-    EntityEquipment mobInventory = e.getEntity().getEquipment();
-    if (mobInventory == null) return;
+    if (!hasNearbyHPPlayer(witherSkeleton.getLocation())) return;
+    witherSkeleton.getPersistentDataContainer().set(mobKey, PersistentDataType.BYTE, (byte) 1);
+    setWeapon(witherSkeleton, true);
+  }
+
+  private ItemStack createBow() {
     ItemStack bow = new ItemStack(Material.BOW);
     ItemMeta bowMeta = bow.getItemMeta();
     bowMeta.addEnchant(Enchantment.POWER, bowDamageLevel, true);
     bowMeta.addEnchant(Enchantment.FLAME, 1, true);
     bowMeta.addEnchant(Enchantment.PUNCH, bowKnockbackLevel, true);
     bow.setItemMeta(bowMeta);
-    mobInventory.setItemInMainHand(bow);
-    mobInventory.setItemInMainHandDropChance(0);
+    return bow;
+  }
+
+  private boolean hasNearbyHPPlayer(Location location) {
+    for (Entity entity : location.getNearbyEntities(HP_PLAYER_SPAWN_RADIUS, HP_PLAYER_SPAWN_RADIUS, HP_PLAYER_SPAWN_RADIUS)) {
+      if (isHPPlayer(entity)) return true;
+    }
+    return false;
+  }
+
+  @SuppressWarnings("BooleanMethodIsAlwaysInverted")
+  private boolean isBowWitherSkeleton(WitherSkeleton witherSkeleton) {
+    Byte value = witherSkeleton.getPersistentDataContainer().get(mobKey, PersistentDataType.BYTE);
+    return value != null && value.equals((byte) 1);
+  }
+
+  private boolean isHPPlayer(Entity entity) {
+    return entity instanceof Player player && PlayerUtil.checkPermGameMode(player, Perm.WITHER_SKELETON_BOW);
+  }
+
+  private void setWeapon(WitherSkeleton witherSkeleton, boolean useBow) {
+    EntityEquipment equipment = witherSkeleton.getEquipment();
+    if (equipment.getItemInMainHand().isEmpty()) return;
+    equipment.setItemInMainHand(useBow ? createBow() : new ItemStack(Material.STONE_SWORD));
+    equipment.setItemInMainHandDropChance(0);
   }
 }
