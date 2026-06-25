@@ -23,7 +23,7 @@ import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
-/// Arms Wither Skeletons near HP players with bows, then swaps back to stone swords for other targets.
+/// Arms Wither Skeletons with bows for HP player targets, then swaps back to stone swords for other targets.
 @SuppressWarnings("unused")
 public class WitherSkeletonBow implements Listener {
   private static final double HP_PLAYER_SPAWN_RADIUS = 16;
@@ -44,8 +44,11 @@ public class WitherSkeletonBow implements Listener {
   @EventHandler
   public void onWitherSkeletonTarget(EntityTargetLivingEntityEvent e) {
     if (!(e.getEntity() instanceof WitherSkeleton witherSkeleton)) return;
-    if (!isBowWitherSkeleton(witherSkeleton)) return;
-    setWeapon(witherSkeleton, isHPPlayer(e.getTarget()));
+    if (isBowWitherSkeleton(witherSkeleton) && isHPPlayer(e.getTarget())) {
+      setWeapon(witherSkeleton, true);
+      return;
+    }
+    if (isBowWitherSkeleton(witherSkeleton)) setWeapon(witherSkeleton, false);
   }
 
   @EventHandler
@@ -65,9 +68,9 @@ public class WitherSkeletonBow implements Listener {
   @EventHandler
   public void onWitherSkeletonSpawn(CreatureSpawnEvent e) {
     if (!(e.getEntity() instanceof WitherSkeleton witherSkeleton)) return;
-    if (random.nextDouble() * 100 >= bowWSSpawnChance) return;
+    if (!shouldArmWithBow()) return;
+    markAsBowWitherSkeleton(witherSkeleton);
     if (!hasNearbyHPPlayer(witherSkeleton.getLocation())) return;
-    witherSkeleton.getPersistentDataContainer().set(mobKey, PersistentDataType.BYTE, (byte) 1);
     setWeapon(witherSkeleton, true);
   }
 
@@ -96,6 +99,14 @@ public class WitherSkeletonBow implements Listener {
 
   private boolean isHPPlayer(Entity entity) {
     return entity instanceof Player player && PlayerUtil.checkPermGameMode(player, Perm.WITHER_SKELETON_BOW);
+  }
+
+  private void markAsBowWitherSkeleton(WitherSkeleton witherSkeleton) {
+    witherSkeleton.getPersistentDataContainer().set(mobKey, PersistentDataType.BYTE, (byte) 1);
+  }
+
+  private boolean shouldArmWithBow() {
+    return random.nextDouble() * 100 < bowWSSpawnChance;
   }
 
   private void setWeapon(WitherSkeleton witherSkeleton, boolean useBow) {

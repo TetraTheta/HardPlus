@@ -104,7 +104,7 @@ module:
   uncooked-poison:
     enable: true
     duration: 30
-  # Arms Wither Skeletons near HP players with bows, then swaps back to stone swords for other targets.
+  # Arms Wither Skeletons with bows for affected targets, then swaps back to stone swords for other targets.
   wither-skeleton-bow:
     enable: true
     spawn-chance: 50.0
