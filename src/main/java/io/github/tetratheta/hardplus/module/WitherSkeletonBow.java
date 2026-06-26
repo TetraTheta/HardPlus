@@ -42,16 +42,6 @@ public class WitherSkeletonBow implements Listener {
   }
 
   @EventHandler
-  public void onWitherSkeletonTarget(EntityTargetLivingEntityEvent e) {
-    if (!(e.getEntity() instanceof WitherSkeleton witherSkeleton)) return;
-    if (isBowWitherSkeleton(witherSkeleton) && isHPPlayer(e.getTarget())) {
-      setWeapon(witherSkeleton, true);
-      return;
-    }
-    if (isBowWitherSkeleton(witherSkeleton)) setWeapon(witherSkeleton, false);
-  }
-
-  @EventHandler
   public void onWitherSkeletonShoot(EntityShootBowEvent e) {
     if (!(e.getEntity() instanceof WitherSkeleton witherSkeleton)) return;
     if (!isBowWitherSkeleton(witherSkeleton)) return;
@@ -74,21 +64,29 @@ public class WitherSkeletonBow implements Listener {
     setWeapon(witherSkeleton, true);
   }
 
-  private ItemStack createBow() {
-    ItemStack bow = new ItemStack(Material.BOW);
-    ItemMeta bowMeta = bow.getItemMeta();
-    bowMeta.addEnchant(Enchantment.POWER, bowDamageLevel, true);
-    bowMeta.addEnchant(Enchantment.FLAME, 1, true);
-    bowMeta.addEnchant(Enchantment.PUNCH, bowKnockbackLevel, true);
-    bow.setItemMeta(bowMeta);
-    return bow;
-  }
-
   private boolean hasNearbyHPPlayer(Location location) {
     for (Entity entity : location.getNearbyEntities(HP_PLAYER_SPAWN_RADIUS, HP_PLAYER_SPAWN_RADIUS, HP_PLAYER_SPAWN_RADIUS)) {
       if (isHPPlayer(entity)) return true;
     }
     return false;
+  }
+
+  private void markAsBowWitherSkeleton(WitherSkeleton witherSkeleton) {
+    witherSkeleton.getPersistentDataContainer().set(mobKey, PersistentDataType.BYTE, (byte) 1);
+  }
+
+  private boolean shouldArmWithBow() {
+    return random.nextDouble() * 100 < bowWSSpawnChance;
+  }
+
+  @EventHandler
+  public void onWitherSkeletonTarget(EntityTargetLivingEntityEvent e) {
+    if (!(e.getEntity() instanceof WitherSkeleton witherSkeleton)) return;
+    if (isBowWitherSkeleton(witherSkeleton) && isHPPlayer(e.getTarget())) {
+      setWeapon(witherSkeleton, true);
+      return;
+    }
+    if (isBowWitherSkeleton(witherSkeleton)) setWeapon(witherSkeleton, false);
   }
 
   @SuppressWarnings("BooleanMethodIsAlwaysInverted")
@@ -101,18 +99,20 @@ public class WitherSkeletonBow implements Listener {
     return entity instanceof Player player && PlayerUtil.checkPermGameMode(player, Perm.WITHER_SKELETON_BOW);
   }
 
-  private void markAsBowWitherSkeleton(WitherSkeleton witherSkeleton) {
-    witherSkeleton.getPersistentDataContainer().set(mobKey, PersistentDataType.BYTE, (byte) 1);
-  }
-
-  private boolean shouldArmWithBow() {
-    return random.nextDouble() * 100 < bowWSSpawnChance;
-  }
-
   private void setWeapon(WitherSkeleton witherSkeleton, boolean useBow) {
     EntityEquipment equipment = witherSkeleton.getEquipment();
     if (equipment.getItemInMainHand().isEmpty()) return;
     equipment.setItemInMainHand(useBow ? createBow() : new ItemStack(Material.STONE_SWORD));
     equipment.setItemInMainHandDropChance(0);
+  }
+
+  private ItemStack createBow() {
+    ItemStack bow = new ItemStack(Material.BOW);
+    ItemMeta bowMeta = bow.getItemMeta();
+    bowMeta.addEnchant(Enchantment.POWER, bowDamageLevel, true);
+    bowMeta.addEnchant(Enchantment.FLAME, 1, true);
+    bowMeta.addEnchant(Enchantment.PUNCH, bowKnockbackLevel, true);
+    bow.setItemMeta(bowMeta);
+    return bow;
   }
 }

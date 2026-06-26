@@ -13,11 +13,11 @@ plugins {
 group = "io.github.tetratheta"
 version = "3.1.0"
 
-def verMC = "26.1.2" // Minecraft (Modrinth, Hangar)
+def verMC = "26.1.2" // Minecraft (Modrinth)
 def verAPI = "26.1.2" // API (dependencies & plugin.yml)
 def verPaper = "26.1.2.build.+" // Paper (Paper)
 def verWorldGuard = "7.0.17" // WorldGuard
-def releaseChannel = "release" // Release Channel (Modrinth & Hangar)
+def releaseChannel = "release" // Release Channel (Modrinth)
 
 repositories {
   mavenCentral()

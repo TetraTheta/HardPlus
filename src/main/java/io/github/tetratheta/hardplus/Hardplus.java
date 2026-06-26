@@ -9,6 +9,11 @@ public final class Hardplus extends BasePlugin<HardplusRuntime> {
   public static WorldGuardHook worldGuardHook = null;
 
   @Override
+  protected HardplusRuntime createRuntime() {
+    return new HardplusRuntime(this);
+  }
+
+  @Override
   public void onLoad() {
     logger = getComponentLogger();
     try {
@@ -16,10 +21,5 @@ public final class Hardplus extends BasePlugin<HardplusRuntime> {
     } catch (NoClassDefFoundError ignored) {
       logger.info(Component.text("Optional dependency [WorldGuard] is not found. You can ignore this message."));
     }
-  }
-
-  @Override
-  protected HardplusRuntime createRuntime() {
-    return new HardplusRuntime(this);
   }
 }
