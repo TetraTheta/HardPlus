@@ -11,12 +11,12 @@ plugins {
 }
 
 group = "io.github.tetratheta"
-version = "3.1.0"
+version = "3.1.0-26.2"
 
-def verMC = "26.1.2" // Minecraft (Modrinth)
-def verAPI = "26.1.2" // API (dependencies & plugin.yml)
-def verPaper = "26.1.2.build.+" // Paper (Paper)
-def verWorldGuard = "7.0.17" // WorldGuard
+def verMC = "26.2" // Minecraft (Modrinth)
+def verAPI = "26.2" // API (dependencies & plugin.yml)
+def verPaper = "26.2.build.+" // Paper (Paper)
+def verWorldGuard = "7.0.18" // WorldGuard
 def releaseChannel = "release" // Release Channel (Modrinth)
 
 repositories {
@@ -31,6 +31,15 @@ dependencies {
   compileOnly("io.papermc.paper:paper-api:$verPaper")
   implementation("io.github.tetratheta:mol:0.0.1")
   compileOnly("com.sk89q.worldguard:worldguard-bukkit:$verWorldGuard")
+  // dependencies 충돌 해결 (26.2)
+  compileOnly("com.google.guava:guava") {
+    version { strictly("33.6.0-jre") }
+    because("Paper API - WorldGuard: Guava")
+  }
+  compileOnly("com.google.code.gson:gson") {
+    version { strictly("2.14.0") }
+    because("Paper API - WorldGuard: Gson")
+  }
 }
 
 def targetJavaVersion = 25
