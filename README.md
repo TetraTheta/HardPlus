@@ -9,8 +9,6 @@
 ![Game Version](https://img.shields.io/modrinth/game-versions/hardplus?style=for-the-badge&label=Minecraft%20Version)<br>
 [![Modrinth Downloads](https://img.shields.io/modrinth/dt/hardplus?style=for-the-badge&label=Modrinth%20Downloads)](https://modrinth.com/plugin/hardplus)
 
-[![Discord](https://img.shields.io/discord/1514516278226845726?style=for-the-badge)](https://discord.gg/eS8tCEkecp)
-
 ## Introduction
 
 HardPlus adds optional difficulty tweaks for Paper servers where vanilla Hard difficulty is no longer enough. Each module is controlled by configuration and by its own permission node, so server owners can apply extra difficulty only to selected players, groups, or WorldGuard regions.
