@@ -1,3 +1,7 @@
+# v3.1.0-26.3
+
+- Updated to Minecraft 26.3.
+
 # v3.1.0-26.2
 
 - Updated to Minecraft 26.2.
