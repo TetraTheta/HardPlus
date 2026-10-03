@@ -15,7 +15,7 @@ version = "3.1.0+26.3"
 
 def verMC = "26.3" // Minecraft (Modrinth)
 def verAPI = "26.3" // API (dependencies & plugin.yml)
-def verPaper = "26.3.build.+" // Paper (Paper)
+def verPaper = "26.3.pre.+" // Paper (Paper)
 def verWorldGuard = "7.0.19" // WorldGuard
 def releaseChannel = "release" // Release Channel (Modrinth)
 
